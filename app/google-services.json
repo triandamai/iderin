@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "298879867653",
+    "firebase_url": "https://sayur-flutter.firebaseio.com",
+    "project_id": "sayur-flutter",
+    "storage_bucket": "sayur-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298879867653:android:6d69d45655da98e3c6b56c",
+        "android_client_info": {
+          "package_name": "com.pmo.iderin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298879867653-uhmpmm46n69ja5vt7akmbsgbsn917o20.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pmo.iderin",
+            "certificate_hash": "5ce992c54564f7ed00280c063564767bdd732955"
+          }
+        },
+        {
+          "client_id": "298879867653-iaa25pv091grvumn8itbu3l25haj3g5f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI4dgYd_kuNrCX_t4MuTAhNgDcCWOKzFw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298879867653-iaa25pv091grvumn8itbu3l25haj3g5f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
