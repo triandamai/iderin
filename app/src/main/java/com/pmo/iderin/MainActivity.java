@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements OnItemReselectedL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        //cek ini komntar
         bottom.setOnItemReselectedListener(this);
         bottom.setOnItemSelectedListener(this);
 
