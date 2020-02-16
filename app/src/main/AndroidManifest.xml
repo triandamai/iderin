@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Auth"></activity>
+        <activity android:name=".Auth" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Splash">
             <intent-filter>
