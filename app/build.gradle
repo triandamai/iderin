@@ -49,6 +49,8 @@ dependencies {
     //TODO:: butterknife
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    //TODO:: shimmer
+    implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
 }
 //TODO:: butterknife
 //apply plugin: 'com.android.library'
