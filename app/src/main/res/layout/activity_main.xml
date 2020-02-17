@@ -28,7 +28,6 @@
         app:indicatorRadius="10dp"
         app:iconTint="#C8FFFFFF"
         app:iconTintActive="#FFFFFF"
-
         app:menu="@menu/bottom_nav_menu"
         />
 
