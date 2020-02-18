@@ -19,8 +19,6 @@ public class Auth extends AppCompatActivity {
 
     @BindView(R.id.et_email)
     EditText etEmail;
-    @BindView(R.id.et_password)
-    EditText etPassword;
     @BindView(R.id.btn_masuk)
     Button btnMasuk;
     @BindView(R.id.tv_toregister)

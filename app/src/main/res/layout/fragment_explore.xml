@@ -16,8 +16,38 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:text="Kategori"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:text="Lihat Semua"
+                    tools:ignore="RtlCompat" />
+            </LinearLayout>
+                <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/shimmer_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:shimmer_demo_child_count="10"
+                    app:shimmer_demo_layout_manager_type="linear_horizontal"
+                    app:shimmer_demo_angle="20"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -28,7 +58,7 @@
                         android:layout_gravity="left"
                         android:textStyle="bold"
                         android:layout_weight="1"
-                        android:text="Kategori"/>
+                        android:text="Paling banyak dicari"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -41,7 +71,37 @@
                 </LinearLayout>
                 <com.cooltechworks.views.shimmer.ShimmerRecyclerView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/shimmer_recycler_view"
+                    android:id="@+id/shimmer_recycler_view_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:shimmer_demo_child_count="10"
+                    app:shimmer_demo_layout_manager_type="linear_horizontal"
+                    app:shimmer_demo_angle="20"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:text="Terdekat"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textAlignment="textEnd"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:text="Lihat Semua"
+                        tools:ignore="RtlCompat" />
+                </LinearLayout>
+                <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/shimmer_recycler_view_item"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:shimmer_demo_child_count="10"
@@ -49,8 +109,6 @@
                     app:shimmer_demo_angle="20"
                     />
             </LinearLayout>
-
-
         </ScrollView>
     </LinearLayout>
 
