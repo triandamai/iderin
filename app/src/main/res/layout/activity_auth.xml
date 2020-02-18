@@ -40,8 +40,7 @@
             </LinearLayout>
 
         </FrameLayout>
-
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_alignParentBottom="true"
@@ -71,6 +70,7 @@
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:background="@drawable/bg_input_auth"
             android:hint="081916991257"/>
         <View
