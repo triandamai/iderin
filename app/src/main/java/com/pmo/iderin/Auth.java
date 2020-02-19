@@ -1,6 +1,7 @@
 package com.pmo.iderin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,24 +25,19 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.pmo.iderin.models.profil_model;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
 
 public class Auth extends AppCompatActivity {
-
-
-    private Context context = Auth.this;
-    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-    private String verificationid;
-
     @BindView(R.id.btn_masuk)
     Button btnMasuk;
     @BindView(R.id.tv_toregister)
@@ -57,12 +53,24 @@ public class Auth extends AppCompatActivity {
     @BindView(R.id.btn_kode)
     Button btnKode;
 
+    private boolean isLayoutNohp = true;
+
+
+    private Context context = Auth.this;
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+    private String verificationid;
+    private profil_model profil;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
         ButterKnife.bind(this);
       //  getTranparentStatusBar(this);
+        isLayoutNohp = true;
         lyNohp.setVisibility(View.VISIBLE);
         lyKode.setVisibility(View.GONE);
     }
@@ -83,17 +91,21 @@ public class Auth extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             Toast.makeText(context, "Berhasil", Toast.LENGTH_LONG).show();
-
+                            profil = new profil_model();
+                            profil.setNohp(etNohp.getText().toString());
+                            profil.setCreated_at(new Date().getDate());
+                            profil.setUpdated_at(new Date().getDate());
+                            profil.setNama("Pengguna baru");
                             databaseReference
                                     .child(getResources().getString(R.string.CHILD_AKUN))
                                     .child(firebaseAuth.getUid())
                                     .child("PROFIL")
-                                    .child("nohp")
-                                    .setValue(etNohp.getText().toString())
+                                    .setValue(profil)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-
+                                            startActivity(new Intent(context,MainActivity.class));
+                                            finish();
                                         }
                                     });
                         } else {
@@ -141,17 +153,38 @@ public class Auth extends AppCompatActivity {
                     lyKode.setVisibility(View.VISIBLE);
                     lyNohp.setVisibility(View.GONE);
                     sendAuthenticationCode(etNohp.getText().toString());
+                    isLayoutNohp = false;
+                }else {
+                    Toast.makeText(context,"Isi no hp!",Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.btn_kode:
-                if (!verificationid.isEmpty() || verificationid != null) {
-                    PhoneAuthCredential credential =
-                            PhoneAuthProvider.getCredential(verificationid, etKode.getText().toString());
-                    signInwithPhoneNumber(credential);
+                try {
+                    if (!verificationid.isEmpty()) {
+                        PhoneAuthCredential credential =
+                                PhoneAuthProvider.getCredential(verificationid, etKode.getText().toString());
+                        signInwithPhoneNumber(credential);
+                        isLayoutNohp = false;
+                    }
+                }catch (NullPointerException x){
+                    Toast.makeText(context,"Maaf gagal mengirim verifikasi",Toast.LENGTH_LONG).show();
+                    x.printStackTrace();
                 }
                 break;
             case R.id.tv_toregister:
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(isLayoutNohp){
+            finish();
+            super.onBackPressed();
+        }else {
+            lyNohp.setVisibility(View.VISIBLE);
+            lyKode.setVisibility(View.GONE);
+            isLayoutNohp = true;
         }
     }
 }
