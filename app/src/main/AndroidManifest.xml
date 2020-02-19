@@ -14,7 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity_checkout"></activity>
+        <activity android:name=".Profile.TokoSayaActivity"></activity>
+        <activity android:name=".Profile.ManageAlamatActivity" />
+        <activity android:name=".Explore.TokoActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".Activity_checkout" />
         <activity android:name=".Auth" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Splash">

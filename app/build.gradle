@@ -51,6 +51,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     //TODO:: shimmer
     implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
+    implementation 'androidx.cardview:cardview:1.0.0'
 }
 //TODO:: butterknife
 //apply plugin: 'com.android.library'

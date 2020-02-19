@@ -66,7 +66,7 @@
                        android:layout_height="wrap_content"
                        android:text="Pesananku"/>
                </LinearLayout>
-               <view
+               <View
                    android:layout_width="match_parent"
                    android:background="#6F6F6F"
                    android:layout_height="1dp"/>
@@ -86,7 +86,7 @@
                        android:layout_height="wrap_content"
                        android:text="Atur Alamat"/>
                </LinearLayout>
-               <view
+               <View
                    android:layout_width="match_parent"
                    android:background="#6F6F6F"
                    android:layout_height="1dp"/>
@@ -106,7 +106,7 @@
                        android:layout_height="wrap_content"
                        android:text="IderPay"/>
                </LinearLayout>
-               <view
+               <View
                    android:layout_width="match_parent"
                    android:background="#6F6F6F"
                    android:layout_height="1dp"/>
@@ -126,7 +126,7 @@
                        android:layout_height="wrap_content"
                        android:text="Bantuan"/>
                </LinearLayout>
-               <view
+               <View
                    android:layout_width="match_parent"
                    android:background="#6F6F6F"
                    android:layout_height="1dp"/>
@@ -146,7 +146,7 @@
                        android:layout_height="wrap_content"
                        android:text="Log Out"/>
                </LinearLayout>
-               <view
+               <View
                    android:layout_width="match_parent"
                    android:background="#6F6F6F"
                    android:layout_height="1dp"/>
