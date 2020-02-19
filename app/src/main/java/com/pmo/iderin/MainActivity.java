@@ -17,6 +17,8 @@ import me.ibrahimsn.lib.OnItemReselectedListener;
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
+import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
+
 public class MainActivity extends AppCompatActivity implements OnItemReselectedListener, OnItemSelectedListener {
     @BindView(R.id.bottom)
     SmoothBottomBar bottom;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements OnItemReselectedL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        getTranparentStatusBar(this);
         bottom.setOnItemReselectedListener(this);
         bottom.setOnItemSelectedListener(this);
 

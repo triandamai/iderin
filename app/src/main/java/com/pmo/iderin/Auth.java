@@ -31,6 +31,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
+
 public class Auth extends AppCompatActivity {
 
 
@@ -60,6 +62,7 @@ public class Auth extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
         ButterKnife.bind(this);
+      //  getTranparentStatusBar(this);
         lyNohp.setVisibility(View.VISIBLE);
         lyKode.setVisibility(View.GONE);
     }
@@ -78,9 +81,9 @@ public class Auth extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //jika berhasil
+
                             Toast.makeText(context, "Berhasil", Toast.LENGTH_LONG).show();
-                            //simpan ke database
+
                             databaseReference
                                     .child(getResources().getString(R.string.CHILD_AKUN))
                                     .child(firebaseAuth.getUid())

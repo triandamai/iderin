@@ -1,19 +1,43 @@
 package com.pmo.iderin.main;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import androidx.fragment.app.Fragment;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.pmo.iderin.Auth;
 import com.pmo.iderin.R;
+import com.pmo.iderin.Splash;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class fragment_profil extends Fragment {
+
+
+    @BindView(R.id.ly_btn_myorder)
+    LinearLayout lyBtnMyorder;
+    @BindView(R.id.ly_btn_manage_address)
+    LinearLayout lyBtnManageAddress;
+    @BindView(R.id.ly_btn_iderpay)
+    LinearLayout lyBtnIderpay;
+    @BindView(R.id.ly_btn_help)
+    LinearLayout lyBtnHelp;
+    @BindView(R.id.ly_btn_logout)
+    LinearLayout lyBtnLogout;
+
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
     public fragment_profil() {
@@ -37,8 +61,9 @@ public class fragment_profil extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profil, container, false);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_profil, container, false);
+        ButterKnife.bind(this,v);
+        return v;
     }
 
 
@@ -54,5 +79,23 @@ public class fragment_profil extends Fragment {
 
     }
 
-   
+
+    @OnClick({R.id.ly_btn_myorder, R.id.ly_btn_manage_address, R.id.ly_btn_iderpay, R.id.ly_btn_help, R.id.ly_btn_logout})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ly_btn_myorder:
+                break;
+            case R.id.ly_btn_manage_address:
+                break;
+            case R.id.ly_btn_iderpay:
+                break;
+            case R.id.ly_btn_help:
+                break;
+            case R.id.ly_btn_logout:
+                firebaseAuth.signOut();
+                startActivity(new Intent(getContext(), Splash.class));
+                getActivity().finish();
+                break;
+        }
+    }
 }

@@ -46,21 +46,23 @@
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_marginTop="30dp"
+               android:layout_marginTop="50dp"
                android:paddingStart="16dp"
                android:paddingEnd="16dp"
                android:orientation="vertical">
                <LinearLayout
+                   android:id="@+id/ly_btn_myorder"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:layout_marginBottom="10dp"
-                   android:layout_marginTop="10dp"
+                   android:layout_marginBottom="15dp"
+                   android:layout_marginTop="15dp"
                    android:gravity="center_vertical"
                    android:orientation="horizontal">
                    <ImageView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:src="@drawable/ic_profil"/>
+                       android:layout_marginEnd="20dp"
+                       android:src="@drawable/ic_profil_myorder"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
@@ -71,16 +73,18 @@
                    android:background="#6F6F6F"
                    android:layout_height="1dp"/>
                <LinearLayout
+                   android:id="@+id/ly_btn_manage_address"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:layout_marginTop="10dp"
+                   android:layout_marginTop="15dp"
                    android:gravity="center_vertical"
-                   android:layout_marginBottom="10dp"
+                   android:layout_marginBottom="15dp"
                    android:orientation="horizontal">
                    <ImageView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:src="@drawable/ic_profil"/>
+                       android:layout_marginEnd="20dp"
+                       android:src="@drawable/ic_profil_adress"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
@@ -91,16 +95,18 @@
                    android:background="#6F6F6F"
                    android:layout_height="1dp"/>
                <LinearLayout
+                   android:id="@+id/ly_btn_iderpay"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:layout_marginTop="10dp"
+                   android:layout_marginTop="15dp"
                    android:gravity="center_vertical"
-                   android:layout_marginBottom="10dp"
+                   android:layout_marginBottom="15dp"
                    android:orientation="horizontal">
                    <ImageView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:src="@drawable/ic_profil"/>
+                       android:layout_marginEnd="20dp"
+                       android:src="@drawable/ic_profil_ider_pay"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
@@ -111,16 +117,18 @@
                    android:background="#6F6F6F"
                    android:layout_height="1dp"/>
                <LinearLayout
+                   android:id="@+id/ly_btn_help"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:layout_marginTop="10dp"
+                   android:layout_marginTop="15dp"
                    android:gravity="center_vertical"
-                   android:layout_marginBottom="10dp"
+                   android:layout_marginBottom="15dp"
                    android:orientation="horizontal">
                    <ImageView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:src="@drawable/ic_profil"/>
+                       android:layout_marginEnd="20dp"
+                       android:src="@drawable/ic_profil_help"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
@@ -131,20 +139,23 @@
                    android:background="#6F6F6F"
                    android:layout_height="1dp"/>
                <LinearLayout
+                   android:id="@+id/ly_btn_logout"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:layout_marginTop="5dp"
+                   android:layout_marginTop="15dp"
                    android:gravity="center_vertical"
-                   android:layout_marginBottom="10dp"
+                   android:layout_marginBottom="15dp"
                    android:orientation="horizontal">
                    <ImageView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:src="@drawable/ic_profil"/>
+                       android:layout_marginEnd="20dp"
+                       android:src="@drawable/ic_profil_logout"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:text="Log Out"/>
+                       android:textSize="18sp"
+                       android:text="Keluar"/>
                </LinearLayout>
                <View
                    android:layout_width="match_parent"
