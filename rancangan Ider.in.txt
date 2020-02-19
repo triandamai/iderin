@@ -1,0 +1,77 @@
+- Grocery
+	- detail
+		- pushid
+			- nama
+			- idkategori
+			- idtoko
+			- harga
+			- deskripsi
+			- stokasli
+			- stoksementara
+			- harga
+	- gambar
+		- pushid(detail)
+			- url
+
+- Akun
+	- profil
+		- uid
+			- nama
+			- username
+			- nohp
+			- alamat
+			- foto
+			- jenis_kelamin
+	 - toko
+		- uid
+			- nama_toko
+			- banner_toko
+			- foto_profil
+			- alamat
+			- geo_location
+	- alamat 
+		-uid
+			- kota
+			- negara	
+			- lat
+			- lang
+			- lengkap
+	- I-money
+		- uid
+			- saldo
+			- saldosementara
+	- history
+		- uid
+			- tipe(tambah saldo,ubah profil,kirim saldo)
+			- nama_history
+			- pesan histori
+			- url_detail
+			- keterangan
+			
+
+- Order
+	- transaksi
+		- pushid
+			- idpembeli
+			- idpenjual
+			- jumlah
+			- harga
+			- total
+			- status
+			- metode_pembayaran
+			- waktu_order
+			- waktu_dirubah
+			- pelunasan_pada
+
+	- detail_order
+		- idtransaksi
+			- idbarang
+	
+	- virtual_payments
+		- idtransaksi
+			
+			
+		
+		
+			
+		
