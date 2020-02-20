@@ -7,13 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.pmo.iderin.Auth;
+import com.pmo.iderin.Profile.EditProfilActivity;
+import com.pmo.iderin.Profile.ManageAlamatActivity;
 import com.pmo.iderin.R;
 import com.pmo.iderin.Splash;
 
@@ -35,6 +36,8 @@ public class fragment_profil extends Fragment {
     LinearLayout lyBtnHelp;
     @BindView(R.id.ly_btn_logout)
     LinearLayout lyBtnLogout;
+    @BindView(R.id.tv_btn_edit_profil)
+    TextView tvBtnEditProfil;
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -62,7 +65,7 @@ public class fragment_profil extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_profil, container, false);
-        ButterKnife.bind(this,v);
+        ButterKnife.bind(this, v);
         return v;
     }
 
@@ -80,12 +83,13 @@ public class fragment_profil extends Fragment {
     }
 
 
-    @OnClick({R.id.ly_btn_myorder, R.id.ly_btn_manage_address, R.id.ly_btn_iderpay, R.id.ly_btn_help, R.id.ly_btn_logout})
+    @OnClick({R.id.ly_btn_myorder, R.id.ly_btn_manage_address, R.id.ly_btn_iderpay, R.id.ly_btn_help, R.id.ly_btn_logout,R.id.tv_btn_edit_profil})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_btn_myorder:
                 break;
             case R.id.ly_btn_manage_address:
+                startActivity(new Intent(getContext(), ManageAlamatActivity.class));
                 break;
             case R.id.ly_btn_iderpay:
                 break;
@@ -95,6 +99,9 @@ public class fragment_profil extends Fragment {
                 firebaseAuth.signOut();
                 startActivity(new Intent(getContext(), Splash.class));
                 getActivity().finish();
+                break;
+            case R.id.tv_btn_edit_profil:
+                startActivity(new Intent(getContext(), EditProfilActivity.class));
                 break;
         }
     }

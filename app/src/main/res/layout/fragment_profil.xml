@@ -25,6 +25,7 @@
                    android:textSize="24sp"
                    android:text="Trian Damai"/>
                <TextView
+                   android:id="@+id/tv_btn_edit_profil"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_alignParentRight="true"

@@ -12,15 +12,14 @@
         android:layout_height="wrap_content"
 
         android:orientation="vertical">
-        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/shimmer_recycler_view_terdekat"
+        <com.todkars.shimmer.ShimmerRecyclerView
+            android:id="@+id/shimmer_recycler_checkout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:shimmer_demo_child_count="10"
-            app:shimmer_demo_layout_manager_type="linear_vertical"
-            app:shimmer_demo_angle="20"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:shimmer_recycler_layout="@layout/item_placeholder_kategori"
+            app:shimmer_recycler_item_count="3" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.pmo.iderin.R;
 
-public class ManageAdress extends AppCompatActivity {
+public class MyOrderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_adress);
+        setContentView(R.layout.activity_my_order);
     }
 }

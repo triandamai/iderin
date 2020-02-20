@@ -2,18 +2,26 @@ package com.pmo.iderin.main;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pmo.iderin.R;
+import androidx.fragment.app.Fragment;
 
+import com.pmo.iderin.R;
+import com.todkars.shimmer.ShimmerRecyclerView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class fragment_explore extends Fragment {
+    @BindView(R.id.shimmer_recycler_kategori)
+    ShimmerRecyclerView shimmerRecyclerKategori;
+    @BindView(R.id.shimmer_recycler_terlaris)
+    ShimmerRecyclerView shimmerRecyclerTerlaris;
+    @BindView(R.id.shimmer_recycler_terdekat)
+    ShimmerRecyclerView shimmerRecyclerTerdekat;
     // TODO: Rename parameter arguments, choose names that match
 
 
@@ -35,7 +43,13 @@ public class fragment_explore extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_explore, container, false);
+
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_explore, container, false);
+        ButterKnife.bind(this,v);
+        shimmerRecyclerKategori.showShimmer();
+        shimmerRecyclerTerdekat.showShimmer();
+        shimmerRecyclerTerlaris.showShimmer();
+        return v;
     }
 
     @Override

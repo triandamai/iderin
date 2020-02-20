@@ -14,22 +14,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Profile.ManageAdress"></activity>
-        <activity android:name=".Profile.EditProfilActivity" />
-        <activity android:name=".Profile.TokoSayaActivity" />
-        <activity android:name=".Profile.ManageAlamatActivity" />
-        <activity android:name=".Explore.TokoActivity" />
+        <activity android:name=".Profile.MyOrderActivity"></activity>
+        <activity
+            android:name=".Profile.EditProfilActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity
+            android:name=".Profile.TokoSayaActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity
+            android:name=".Profile.ManageAlamatActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity
+            android:name=".Explore.TokoActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".Activity_checkout" />
         <activity android:name=".Auth" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Splash">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Splash"></activity>
     </application>
 
 </manifest>
