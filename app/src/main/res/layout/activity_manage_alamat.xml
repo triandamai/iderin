@@ -37,4 +37,19 @@
             android:textColor="#fff"
             android:text="TAMBAH ALAMAT"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ly_kosong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/splashscreen"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opps"/>
+    </LinearLayout>
 </RelativeLayout>
