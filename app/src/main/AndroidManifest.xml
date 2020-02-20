@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Profile.EditProfilActivity"></activity>
+        <activity android:name=".Profile.ManageAdress"></activity>
+        <activity android:name=".Profile.EditProfilActivity" />
         <activity android:name=".Profile.TokoSayaActivity" />
         <activity android:name=".Profile.ManageAlamatActivity" />
         <activity android:name=".Explore.TokoActivity" />

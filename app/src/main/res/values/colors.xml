@@ -7,4 +7,25 @@
     <color name="subhijau">#029B00</color>
     <color name="hitam">#000000</color>
     <color name="abu_abu_sub">#A3A3A3</color>
+
+    <color name="oren">#F79A48</color>
+    <color name="oren_dark">#DA8236</color>
+    <color name="oren_accent">#DF995C</color>
+
+    <color name="colortext">#100b20</color>
+    <color name="black">#000000</color>
+    <color name="colorhint">#a9aaac</color>
+    <color name="white">#ffffff</color>
+
+
+    <color name="red">#DB3434</color>
+    <color name="red_dark">#B92929</color>
+    <color name="red_accent">#EB5F5F</color>
+
+    <color name="background">#dddddd</color>
+    <color name="gray_muda">#BDBDBD</color>
+    <color name="gray_tua">#979797</color>
+
+    <color name="green">#23A352</color>
+    <color name="greenDark">#0E5A29</color>
 </resources>
