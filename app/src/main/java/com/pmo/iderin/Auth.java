@@ -98,8 +98,8 @@ public class Auth extends AppCompatActivity {
                             profil.setNama("Pengguna baru");
                             databaseReference
                                     .child(getResources().getString(R.string.CHILD_AKUN))
+                                    .child(getResources().getString(R.string.CHILD_PROFIL))
                                     .child(firebaseAuth.getUid())
-                                    .child("PROFIL")
                                     .setValue(profil)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
