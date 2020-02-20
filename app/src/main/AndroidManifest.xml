@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Profile.MyOrderActivity"></activity>
+        <activity android:name=".Profile.MyToko"></activity>
+        <activity android:name=".Profile.MyOrderActivity" />
         <activity
             android:name=".Profile.EditProfilActivity"
             tools:ignore="InnerclassSeparator" />
@@ -37,7 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Splash"></activity>
+        <activity android:name=".Splash" />
     </application>
 
 </manifest>
