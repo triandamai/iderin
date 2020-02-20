@@ -52,6 +52,9 @@ dependencies {
     //TODO:: shimmer
     implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
     implementation 'androidx.cardview:cardview:1.0.0'
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
 //TODO:: butterknife
 //apply plugin: 'com.android.library'
