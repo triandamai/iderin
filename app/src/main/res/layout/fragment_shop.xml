@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".main.fragment_shop">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_alamat"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    </androidx.appcompat.widget.Toolbar>
+    <com.todkars.shimmer.ShimmerRecyclerView
+        android:id="@+id/shimmer_recycler_shop"
+        android:layout_below="@+id/toolbar_alamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:shimmer_recycler_layout="@layout/item_placeholder_alamat"
+        app:shimmer_recycler_item_count="5" />
+
+    <LinearLayout
+        android:id="@+id/ly_kosong"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="shop" />
-
-</FrameLayout>
+        android:gravity="center"
+        android:visibility="gone"
+        android:background="#ffff"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/splashscreen"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dp_20"
+            android:textAlignment="center"
+            android:text="Opps"/>
+    </LinearLayout>
+</RelativeLayout>

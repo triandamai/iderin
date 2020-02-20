@@ -1,19 +1,30 @@
 package com.pmo.iderin.main;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.pmo.iderin.R;
+import com.todkars.shimmer.ShimmerRecyclerView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class fragment_shop extends Fragment {
+
+    @BindView(R.id.toolbar_alamat)
+    Toolbar toolbarAlamat;
+    @BindView(R.id.shimmer_recycler_shop)
+    ShimmerRecyclerView shimmerRecyclerShop;
+    @BindView(R.id.ly_kosong)
+    LinearLayout lyKosong;
 
     public fragment_shop() {
         // Required empty public constructor
@@ -38,7 +49,10 @@ public class fragment_shop extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop, container, false);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_shop, container, false);
+        ButterKnife.bind(this,v);
+        shimmerRecyclerShop.showShimmer();
+        return v;
     }
 
 

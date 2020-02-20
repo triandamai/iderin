@@ -32,6 +32,7 @@
                     android:layout_gravity="left"
                     android:textStyle="bold"
                     android:layout_weight="1"
+                    android:textSize="@dimen/dp_20"
                     android:text="Kategori"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,6 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:textStyle="bold"
+                        android:textSize="@dimen/dp_20"
                         android:layout_weight="1"
                         android:text="Paling banyak dicari"/>
                     <TextView
@@ -93,6 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:textStyle="bold"
+                        android:textSize="@dimen/dp_20"
                         android:layout_weight="1"
                         android:text="Terdekat"/>
                     <TextView

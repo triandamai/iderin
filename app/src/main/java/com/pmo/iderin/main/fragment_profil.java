@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pmo.iderin.Profile.EditProfilActivity;
 import com.pmo.iderin.Profile.ManageAlamatActivity;
+import com.pmo.iderin.Profile.MyOrderActivity;
 import com.pmo.iderin.R;
 import com.pmo.iderin.Splash;
 
@@ -87,6 +88,7 @@ public class fragment_profil extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_btn_myorder:
+                startActivity(new Intent(getContext(), MyOrderActivity.class));
                 break;
             case R.id.ly_btn_manage_address:
                 startActivity(new Intent(getContext(), ManageAlamatActivity.class));
