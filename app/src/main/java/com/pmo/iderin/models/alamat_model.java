@@ -1,16 +1,25 @@
 package com.pmo.iderin.models;
 
 public class alamat_model {
-    String namaalamat,alamatlengkap,lat,lng;
+    String namaalamat,alamatlengkap,lat,lng,id;
 
     public alamat_model() {
     }
+
 
     public alamat_model(String namaalamat, String alamatlengkap, String lat, String lng) {
         this.namaalamat = namaalamat;
         this.alamatlengkap = alamatlengkap;
         this.lat = lat;
         this.lng = lng;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNamaalamat() {

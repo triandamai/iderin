@@ -40,6 +40,8 @@ public class AddAlamat extends AppCompatActivity {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private String id = "";
+    private boolean isEditmode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,15 @@ public class AddAlamat extends AppCompatActivity {
         if(firebaseUser != null){
             Intent intent = getIntent();
             if (intent.getExtras() != null) {
-                isiVal();
+                id = intent.getStringExtra("id");
+                String namalamat = intent.getStringExtra("namaalamat");
+                String alamatlengkap = intent.getStringExtra("alamatlengkap");
+                etJudul.setText(namalamat);
+                etLengkap.setText(alamatlengkap);
+                isEditmode = true;
+            }else {
+                isEditmode = false;
+                id = databaseReference.push().getKey();
             }
         }else{
 
@@ -70,6 +80,7 @@ public class AddAlamat extends AppCompatActivity {
                     .child(getResources().getString(R.string.CHILD_AKUN))
                     .child(getResources().getString(R.string.CHILD_ALAMAT))
                     .child(firebaseUser.getUid())
+                    .child(id)
                     .setValue(alamatmodel).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {

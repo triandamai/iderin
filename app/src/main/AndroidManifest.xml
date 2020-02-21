@@ -14,7 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Profile.AddAlamat"></activity>
+        <activity android:name=".Init">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Profile.AddAlamat" />
         <activity android:name=".Profile.MyToko" />
         <activity android:name=".Profile.MyOrderActivity" />
         <activity
@@ -32,13 +39,9 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".Activity_checkout" />
         <activity android:name=".Auth" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

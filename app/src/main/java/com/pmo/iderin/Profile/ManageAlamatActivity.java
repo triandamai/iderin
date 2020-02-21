@@ -69,10 +69,20 @@ public class ManageAlamatActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
+                            lyKosong.setVisibility(View.GONE);
+                            alamat_modelList.clear();
                             shimmerRecyclerAlamat.hideShimmer();
                             for (DataSnapshot data : dataSnapshot.getChildren()){
-                                alamat_model alamat;
+                                alamat_model alamat = new alamat_model();
+//                                String namaalamat = data.child("namaalamat").getValue(String.class);
+//                                String alamatlengkap = data.child("alaatlengkap").getValue(String.class);
+//                                String lat = data.child("lat").getValue(String.class);
+//                                String lng = data.child("lng").getValue(String.class);
+//                                alamat.setAlamatlengkap(alamatlengkap);
+//                                alamat
                                 alamat = data.getValue(alamat_model.class);
+                                alamat.setId(data.getKey());
+
                                 assert alamat != null;
                                 alamat_modelList.add(alamat);
                             }

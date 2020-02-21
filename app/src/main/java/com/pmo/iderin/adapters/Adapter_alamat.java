@@ -1,6 +1,7 @@
 package com.pmo.iderin.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pmo.iderin.Profile.AddAlamat;
 import com.pmo.iderin.R;
 import com.pmo.iderin.models.alamat_model;
 
@@ -39,8 +41,21 @@ public class Adapter_alamat extends RecyclerView.Adapter<Adapter_alamat.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.tvJudulAlamat.setText(alamat_modelList.get(position).getNamaalamat());
-        holder.tvAlamatLengkap.setText(alamat_modelList.get(position).getAlamatlengkap());
+        alamat_model alamat = alamat_modelList.get(position);
+        holder.tvJudulAlamat.setText(alamat.getNamaalamat());
+        holder.tvAlamatLengkap.setText(alamat.getAlamatlengkap());
+
+        holder.btnUbah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, AddAlamat.class)
+                        .putExtra("namaalamat",alamat.getNamaalamat())
+                        .putExtra("alamatlengkap",alamat.getAlamatlengkap())
+                        .putExtra("lat",alamat.getLat())
+                        .putExtra("lng",alamat.getLng())
+                        .putExtra("id",alamat.getId()));
+            }
+        });
     }
 
     @Override
