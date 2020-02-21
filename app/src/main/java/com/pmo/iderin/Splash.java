@@ -44,6 +44,8 @@ public class Splash extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    databaseReference.child(getResources().getString(R.string.CHILD_AKUN))
+                            .child("nama").setValue(firebaseAuth.getCurrentUser().getUid());
                     startActivity(new Intent(context, MainActivity.class));
                     finish();
                 }

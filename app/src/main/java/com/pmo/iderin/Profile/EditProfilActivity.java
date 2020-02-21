@@ -124,7 +124,8 @@ public class EditProfilActivity extends AppCompatActivity {
                           profil.setFoto(donloadUri.toString());
                           profil.setAlamat("");
                           profil.setNama(etNama.getText().toString());
-                          profil.setUpdated_at(new Date().getDate());
+                          profil.setUpdated_at(new Date().getTime());
+                          profil.setCreated_at(new Date().getTime());
                           profil.setUsername(etUsername.getText().toString());
                           databaseReference
                                   .child(getResources().getString(R.string.CHILD_AKUN))
@@ -137,6 +138,7 @@ public class EditProfilActivity extends AppCompatActivity {
                                             new Handler().postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
+                                                    progressDialog.dismiss();
                                                     startActivity(new Intent(context, MainActivity.class));
                                                     finish();
                                                 }
