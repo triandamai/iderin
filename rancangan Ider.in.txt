@@ -31,6 +31,7 @@
 			- geo_location
 	- alamat 
 		-uid
+			- nama alamat
 			- kota
 			- negara	
 			- lat
