@@ -93,9 +93,10 @@ public class Auth extends AppCompatActivity {
                             Toast.makeText(context, "Berhasil", Toast.LENGTH_LONG).show();
                             profil = new profil_model();
                             profil.setNohp(etNohp.getText().toString());
-                            profil.setCreated_at(new Date().getDate());
-                            profil.setUpdated_at(new Date().getDate());
+                            profil.setCreated_at(new Date().getTime());
+                            profil.setUpdated_at(new Date().getTime());
                             profil.setNama("Pengguna baru");
+                            
                             databaseReference
                                     .child(getResources().getString(R.string.CHILD_AKUN))
                                     .child(getResources().getString(R.string.CHILD_PROFIL))
