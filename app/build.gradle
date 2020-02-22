@@ -64,6 +64,15 @@ dependencies {
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //TODO : https://github.com/janishar/ParaCamera
+    implementation 'com.mindorks:paracamera:0.2.2'
+    //TODO : https://github.com/Clans/FloatingActionButton
+    implementation 'com.github.clans:fab:1.6.4'
+    //TODO : https://github.com/Yalantis/uCrop
+    implementation 'com.github.yalantis:ucrop:2.2.2-native'
+
+
 }
 //TODO:: butterknife
 //apply plugin: 'com.android.library'
