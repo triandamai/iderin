@@ -28,7 +28,7 @@
             android:name=".Profile.EditProfilActivity"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Profile.TokoSayaActivity"
+            android:name=".Profile.AddToko"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Profile.ManageAlamatActivity"
