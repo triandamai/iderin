@@ -114,9 +114,6 @@ public class AddToko extends AppCompatActivity  implements BottomSheetTakePict.B
                 PICK_IMAGE_GALLERY_REQUEST);
     }
 
-    public void takeCamera() {
-
-    }
 
     public void upload() {
         if (filePath != null) {
@@ -189,8 +186,9 @@ public class AddToko extends AppCompatActivity  implements BottomSheetTakePict.B
     private boolean cekVal() {
         if (isEditMode) {
             return !TextUtils.isEmpty(etNamaToko.getText().toString()) || !TextUtils.isEmpty(etAlamat.getText().toString());
+        }else {
+            return !TextUtils.isEmpty(etAlamat.getText().toString()) || !TextUtils.isEmpty(etNamaToko.getText().toString()) || filePath != null;
         }
-        return !TextUtils.isEmpty(etAlamat.getText().toString()) || !TextUtils.isEmpty(etNamaToko.getText().toString()) || filePath != null;
     }
 
     @Override
@@ -301,7 +299,9 @@ public class AddToko extends AppCompatActivity  implements BottomSheetTakePict.B
         } else if (requestCode == Camera.REQUEST_TAKE_PHOTO) {
         Uri imageUri = getImageUri(context, camera.getCameraBitmap());
         if (imageUri != null) {
+            filePath = imageUri;
             startCrop(imageUri);
+
         } else {
            // new Bantuan(context).swal_error("Gagal mengambil gambar !");
         }
