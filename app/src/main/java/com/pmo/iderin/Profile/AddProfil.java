@@ -44,7 +44,7 @@ import butterknife.OnClick;
 
 import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
 
-public class EditProfilActivity extends AppCompatActivity {
+public class AddProfil extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 23;
     @BindView(R.id.iv_fotoprofil)
@@ -64,7 +64,7 @@ public class EditProfilActivity extends AppCompatActivity {
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
     private StorageReference storageReference = firebaseStorage.getReference();
     private Uri filePath;
-    private Context context = EditProfilActivity.this;
+    private Context context = AddProfil.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

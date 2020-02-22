@@ -27,7 +27,7 @@
         <activity android:name=".Profile.MyToko" />
         <activity android:name=".Profile.MyOrderActivity" />
         <activity
-            android:name=".Profile.EditProfilActivity"
+            android:name=".Profile.AddProfil"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Profile.AddToko"

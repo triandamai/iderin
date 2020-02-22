@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.pmo.iderin.Profile.EditProfilActivity;
+import com.pmo.iderin.Profile.AddProfil;
 import com.pmo.iderin.Profile.ManageAlamatActivity;
 import com.pmo.iderin.Profile.MyOrderActivity;
 import com.pmo.iderin.Profile.MyToko;
@@ -157,7 +157,7 @@ public class fragment_profil extends Fragment {
                 getActivity().finish();
                 break;
             case R.id.tv_btn_edit_profil:
-                startActivity(new Intent(getContext(), EditProfilActivity.class));
+                startActivity(new Intent(getContext(), AddProfil.class));
                 break;
         }
     }

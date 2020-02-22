@@ -25,7 +25,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.pmo.iderin.Profile.EditProfilActivity;
+import com.pmo.iderin.Profile.AddProfil;
 import com.pmo.iderin.models.profil_model;
 
 import java.util.Date;
@@ -103,7 +103,7 @@ public class Auth extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            startActivity(new Intent(context, EditProfilActivity.class));
+                                            startActivity(new Intent(context, AddProfil.class));
                                             finish();
                                         }
                                     });
