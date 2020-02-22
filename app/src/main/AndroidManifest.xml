@@ -13,9 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        tools:ignore="GoogleAppIndexingWarning"
-        android:name=".Helpers.OfflinePersistance">
-        <activity android:name=".Helpers.OfflinePersistance"></activity>
+        tools:ignore="GoogleAppIndexingWarning">
+<!--        <activity android:name=".Helpers.OfflinePersistance"></activity>-->
         <activity android:name=".Init">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

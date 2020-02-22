@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ly_btn_bottomsheet"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        android:background="#ffff"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_40"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pilih Aksi"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:layout_marginBottom="@dimen/dp_20"
+            />
+        <Button
+            android:id="@+id/btn_pick_kamera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:textColor="#ffff"
+            android:text="KAMERA"
+            android:background="@drawable/button_primary"/>
+        <Button
+            android:id="@+id/btn_pick_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hijau"
+            android:text="GALLERY"
+            android:background="@drawable/button_secondary"/>
+    </LinearLayout>
+
+</RelativeLayout>

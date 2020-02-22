@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pmo.iderin.Profile.AddProfil;
+import com.pmo.iderin.Profile.AddToko;
 import com.pmo.iderin.Profile.ManageAlamatActivity;
 import com.pmo.iderin.Profile.MyOrderActivity;
 import com.pmo.iderin.Profile.MyToko;
@@ -57,10 +58,13 @@ public class fragment_profil extends Fragment {
     TextView tvDetail;
     @BindView(R.id.ly_btn_manage_toko)
     LinearLayout lyBtnManageToko;
+    @BindView(R.id.tv_manage_toko)
+    TextView tvManageToko;
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private boolean hasToko = false;
 
 
     public fragment_profil() {
@@ -86,7 +90,33 @@ public class fragment_profil extends Fragment {
                              Bundle savedInstanceState) {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_profil, container, false);
         ButterKnife.bind(this, v);
+        getProfil();
+        cekToko();
         return v;
+    }
+
+    private void cekToko() {
+        databaseReference
+                .child(getResources().getString(R.string.CHILD_AKUN))
+                .child(getResources().getString(R.string.CHILD_AKUN_TOKO))
+                .child(firebaseUser.getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            hasToko = true;
+                            tvManageToko.setText("Managemen Toko");
+                        } else {
+                            tvManageToko.setText("Buka Toko");
+                            hasToko = false;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
 
@@ -99,7 +129,13 @@ public class fragment_profil extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            profil_model profil = new profil_model();
+                           profil_model profil = new profil_model();
+//                            profil.setNama(dataSnapshot.child("nama").getValue(String.class));
+//                            profil.setAlamat(dataSnapshot.child("alamat").getValue(String.class));
+//                            profil.setCreated_at(dataSnapshot.child("created_at").getValue(Long.class));
+//                            profil.setFoto(dataSnapshot.child("foto").getValue(String.class));
+//                            profil.setJenis_kelamin(dataSnapshot.child("jenis_kelamin").getValue(String.class));
+
                             profil = dataSnapshot.getValue(profil_model.class);
                             assert profil != null;
                             Picasso.get().load(profil.getFoto()).into(profileImage);
@@ -145,7 +181,11 @@ public class fragment_profil extends Fragment {
                 startActivity(new Intent(getContext(), ManageAlamatActivity.class));
                 break;
             case R.id.ly_btn_manage_toko:
-                startActivity(new Intent(getContext(), MyToko.class));
+                if(hasToko) {
+                    startActivity(new Intent(getContext(), MyToko.class));
+                }else {
+                    startActivity(new Intent(getContext(), AddToko.class));
+                }
                 break;
             case R.id.ly_btn_iderpay:
                 break;
