@@ -12,6 +12,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
+
 public class Init extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -23,6 +25,7 @@ public class Init extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init);
+        getTranparentStatusBar(this);
         if (firebaseUser != null) {
             new Handler().postDelayed(new Runnable() {
                 @Override
