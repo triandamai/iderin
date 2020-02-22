@@ -1,5 +1,6 @@
 package com.pmo.iderin.adapters;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -7,13 +8,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.pmo.iderin.models.order_state_model;
+
+import java.util.List;
 
 //menampilkan data order di mainactvity
 public class Adapter_order_state extends RecyclerView.Adapter<Adapter_order_state.MyViewHolder> {
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+    private Context context;
+    private List<order_state_model> list;
+
+    public Adapter_order_state(Context context,List<order_state_model> list){
+        this.context = context;
+        this.list = list;
+    }
 
     @NonNull
     @Override
@@ -28,7 +41,7 @@ public class Adapter_order_state extends RecyclerView.Adapter<Adapter_order_stat
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public MyViewHolder(@NonNull View itemView) {
