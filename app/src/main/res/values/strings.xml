@@ -4,6 +4,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="CHILD_AKUN">AKUN</string>
-    <string name="CHILD_PROFIL">PROFIL</string>
-    <string name="CHILD_ALAMAT">ALAMAT</string>
+    <string name="CHILD_AKUN_PROFIL">PROFIL</string>
+    <string name="CHILD_AKUN_ALAMAT">ALAMAT</string>
+    <string name="CHILD_AKUN_TOKO">TOKO</string>
+    <string name="CHILD_AKUN_IDERPAY">IDERPAY</string>
+    <string name="CHILD_AKUN_HISTORY">HISTORY</string>
+    <string name="CHILD_BARANG">GROCERY</string>
+    <string name="CHILD_BARANG_GAMBAR">GAMBAR</string>
+    <string name="CHILD_TRANSAKSI">TRANSAKSI</string>
+    <string name="CHILD_TRANSAKSI_DETAIL">DETAIL_TRANSAKSI</string>
+    <string name="CHILD_TRANSAKSI_PAYMENT">PAYMENT_V</string>
 </resources>

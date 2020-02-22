@@ -28,38 +28,55 @@
                 android:layout_height="200dp"
                 android:src="@drawable/undraw_male_avata"
                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Nama Lengkap"/>
             <EditText
                 android:id="@+id/et_nama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_input_auth"
                 android:hint="nama"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Username"/>
             <EditText
                 android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_input_auth"
                 android:hint="username"/>
-            <EditText
-                android:id="@+id/et_foto"
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="nohp"/>
+                android:textSize="20sp"
+                android:text="Jenis kelamin"/>
             <RadioGroup
                 android:id="@+id/rg_jk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <RadioButton
+                    android:id="@+id/rb_lk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="LAKI-LAKI"/>
                 <RadioButton
+                    android:id="@+id/rb_pr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PEREMPUAN"/>
             </RadioGroup>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="100dp"/>
             <Button
                 android:id="@+id/btn_simpan"
                 android:layout_width="match_parent"

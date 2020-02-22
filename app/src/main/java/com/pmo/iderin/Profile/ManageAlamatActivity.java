@@ -63,7 +63,7 @@ public class ManageAlamatActivity extends AppCompatActivity {
     public void getDataALamat(){
         databaseReference
                 .child(getResources().getString(R.string.CHILD_AKUN))
-                .child(getResources().getString(R.string.CHILD_ALAMAT))
+                .child(getResources().getString(R.string.CHILD_AKUN_ALAMAT))
                 .child(firebaseUser.getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override

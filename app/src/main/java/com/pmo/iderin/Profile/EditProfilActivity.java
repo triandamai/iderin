@@ -3,7 +3,6 @@ package com.pmo.iderin.Profile;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
@@ -53,8 +53,6 @@ public class EditProfilActivity extends AppCompatActivity {
     EditText etNama;
     @BindView(R.id.et_username)
     EditText etUsername;
-    @BindView(R.id.et_foto)
-    EditText etFoto;
     @BindView(R.id.rg_jk)
     RadioGroup rgJk;
     @BindView(R.id.btn_simpan)
@@ -74,6 +72,7 @@ public class EditProfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profil);
         ButterKnife.bind(this);
         getTranparentStatusBar(this);
+
     }
 
     private void selectImage(){
@@ -93,7 +92,7 @@ public class EditProfilActivity extends AppCompatActivity {
 
             StorageReference myref = storageReference
                     .child(getResources().getString(R.string.CHILD_AKUN))
-                    .child(getResources().getString(R.string.CHILD_PROFIL))
+                    .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
                     .child("images"+firebaseAuth.getCurrentUser().getUid());
             ivFotoprofil.setDrawingCacheEnabled(true);
             ivFotoprofil.buildDrawingCache();
@@ -120,16 +119,19 @@ public class EditProfilActivity extends AppCompatActivity {
 
                           //aksi tambah ke db
 
+                          final String value =
+                                  ((RadioButton)findViewById(rgJk.getCheckedRadioButtonId()))
+                                          .getText().toString();
                           profil_model profil = new profil_model();
                           profil.setFoto(donloadUri.toString());
                           profil.setAlamat("");
+                          profil.setJenis_kelamin(value);
                           profil.setNama(etNama.getText().toString());
                           profil.setUpdated_at(new Date().getTime());
-                          profil.setCreated_at(new Date().getTime());
                           profil.setUsername(etUsername.getText().toString());
                           databaseReference
                                   .child(getResources().getString(R.string.CHILD_AKUN))
-                                  .child(getResources().getString(R.string.CHILD_PROFIL))
+                                  .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
                                   .child(firebaseAuth.getCurrentUser().getUid())
                                   .setValue(profil)
                                   .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -147,6 +149,7 @@ public class EditProfilActivity extends AppCompatActivity {
                                   });
                       }else {
                           //gagal
+                          progressDialog.dismiss();
                       }
                 }
             });

@@ -25,6 +25,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.pmo.iderin.Profile.EditProfilActivity;
 import com.pmo.iderin.models.profil_model;
 
 import java.util.Date;
@@ -33,9 +34,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
-import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
 
 public class Auth extends AppCompatActivity {
     @BindView(R.id.btn_masuk)
@@ -99,13 +97,13 @@ public class Auth extends AppCompatActivity {
                             
                             databaseReference
                                     .child(getResources().getString(R.string.CHILD_AKUN))
-                                    .child(getResources().getString(R.string.CHILD_PROFIL))
+                                    .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
                                     .child(firebaseAuth.getUid())
                                     .setValue(profil)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            startActivity(new Intent(context,MainActivity.class));
+                                            startActivity(new Intent(context, EditProfilActivity.class));
                                             finish();
                                         }
                                     });

@@ -9,19 +9,29 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pmo.iderin.Profile.EditProfilActivity;
 import com.pmo.iderin.Profile.ManageAlamatActivity;
 import com.pmo.iderin.Profile.MyOrderActivity;
+import com.pmo.iderin.Profile.MyToko;
 import com.pmo.iderin.R;
 import com.pmo.iderin.Splash;
+import com.pmo.iderin.models.profil_model;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class fragment_profil extends Fragment {
@@ -39,9 +49,18 @@ public class fragment_profil extends Fragment {
     LinearLayout lyBtnLogout;
     @BindView(R.id.tv_btn_edit_profil)
     TextView tvBtnEditProfil;
+    @BindView(R.id.profile_image)
+    CircleImageView profileImage;
+    @BindView(R.id.tv_nama)
+    TextView tvNama;
+    @BindView(R.id.tv_detail)
+    TextView tvDetail;
+    @BindView(R.id.ly_btn_manage_toko)
+    LinearLayout lyBtnManageToko;
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
 
     public fragment_profil() {
@@ -71,6 +90,32 @@ public class fragment_profil extends Fragment {
     }
 
 
+    private void getProfil() {
+        databaseReference
+                .child(getResources().getString(R.string.CHILD_AKUN))
+                .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
+                .child(firebaseUser.getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            profil_model profil = new profil_model();
+                            profil = dataSnapshot.getValue(profil_model.class);
+                            assert profil != null;
+                            Picasso.get().load(profil.getFoto()).into(profileImage);
+                            tvNama.setText(profil.getNama());
+                            tvDetail.setText("+62" + profil.getNohp());
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -84,7 +129,13 @@ public class fragment_profil extends Fragment {
     }
 
 
-    @OnClick({R.id.ly_btn_myorder, R.id.ly_btn_manage_address, R.id.ly_btn_iderpay, R.id.ly_btn_help, R.id.ly_btn_logout,R.id.tv_btn_edit_profil})
+    @OnClick({R.id.ly_btn_myorder,
+            R.id.ly_btn_manage_toko,
+            R.id.ly_btn_manage_address,
+            R.id.ly_btn_iderpay,
+            R.id.ly_btn_help,
+            R.id.ly_btn_logout,
+            R.id.tv_btn_edit_profil})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_btn_myorder:
@@ -92,6 +143,9 @@ public class fragment_profil extends Fragment {
                 break;
             case R.id.ly_btn_manage_address:
                 startActivity(new Intent(getContext(), ManageAlamatActivity.class));
+                break;
+            case R.id.ly_btn_manage_toko:
+                startActivity(new Intent(getContext(), MyToko.class));
                 break;
             case R.id.ly_btn_iderpay:
                 break;
