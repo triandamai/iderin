@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-<!--        <activity android:name=".Helpers.OfflinePersistance"></activity>-->
+        <activity android:name=".Profile.Addbarang"></activity>
+        <!-- <activity android:name=".Helpers.OfflinePersistance"></activity> -->
         <activity android:name=".Init">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,7 +57,7 @@
         <activity android:name=".Activity_checkout" />
         <activity android:name=".Auth" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Splash"></activity>
+        <activity android:name=".Splash" />
     </application>
 
 </manifest>
