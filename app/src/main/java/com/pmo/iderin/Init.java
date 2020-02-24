@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class Init extends AppCompatActivity {
 
@@ -25,7 +25,7 @@ public class Init extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init);
-        getTranparentStatusBar(this);
+        getTransparentStatusBar(this);
         if (firebaseUser != null) {
             new Handler().postDelayed(new Runnable() {
                 @Override

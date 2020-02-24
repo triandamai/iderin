@@ -2,7 +2,6 @@ package com.pmo.iderin.Admin;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +9,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,9 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.pmo.iderin.Helpers.Alert;
 import com.pmo.iderin.R;
 import com.pmo.iderin.adapters.Adapter_kategori_admin;
 import com.pmo.iderin.models.kategori_model;
@@ -32,6 +30,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class KategoriActivity extends AppCompatActivity {
 
@@ -54,7 +54,7 @@ public class KategoriActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kategori);
         ButterKnife.bind(this);
-
+        getTransparentStatusBar(this);
         getData();
     }
 
@@ -78,7 +78,9 @@ public class KategoriActivity extends AppCompatActivity {
                         list.add(model);
                         //new Alert(context).toast(data.getKey().toString(),1);
                     }
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context,RecyclerView.VERTICAL,false);
                     adapter = new Adapter_kategori_admin(context,list);
+                    shimmerRecyclerKategori.setLayoutManager(layoutManager);
                     shimmerRecyclerKategori.setAdapter(adapter);
                 }
             }
@@ -87,6 +89,7 @@ public class KategoriActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
         });
     }
 

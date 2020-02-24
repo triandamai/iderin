@@ -1,6 +1,7 @@
 package com.pmo.iderin.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -66,7 +68,30 @@ public class Adapter_kategori_admin extends RecyclerView.Adapter<Adapter_kategor
         holder.tvBtnHapus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context,R.style.dialog)
+                        .setTitle("Hapus "+kategori_model.getNama()+"?")
+                        .setMessage("Lanjutkan menghapus?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                databaseReference
+                                        .child(context.getResources().getString(R.string.CHILD_BARANG))
+                                        .child(context.getResources().getString(R.string.CHILD_BARANG_KATEGORI))
+                                        .child(kategori_model.getId())
+                                        .removeValue();
+                                dialog.dismiss();
+                                dialog.cancel();
+                                notifyDataSetChanged();
+                            }
+                        }).setNegativeButton("BATAL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                             dialog.dismiss();
+                             dialog.cancel();
+                            }
+                        });
+                builder.create();
+                builder.show();
             }
         });
     }

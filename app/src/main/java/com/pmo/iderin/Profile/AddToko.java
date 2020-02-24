@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,7 +52,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class AddToko extends AppCompatActivity  implements BottomSheetTakePict.BottomSheetListener {
     private static final int PICK_IMAGE_GALLERY_REQUEST = 1;
@@ -88,7 +87,7 @@ public class AddToko extends AppCompatActivity  implements BottomSheetTakePict.B
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addtoko);
         ButterKnife.bind(this);
-        getTranparentStatusBar(this);
+        getTransparentStatusBar(this);
 
 
         Intent intent = getIntent();

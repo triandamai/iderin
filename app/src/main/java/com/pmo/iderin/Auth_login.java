@@ -72,7 +72,7 @@ public class Auth_login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_login);
         ButterKnife.bind(this);
-      //  getTranparentStatusBar(this);
+      //  getTransparentStatusBar(this);
         isLayoutNohp = true;
         lyNohp.setVisibility(View.VISIBLE);
         lyKode.setVisibility(View.GONE);

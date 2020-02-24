@@ -35,13 +35,9 @@ import com.google.firebase.storage.UploadTask;
 import com.mindorks.paracamera.Camera;
 import com.pmo.iderin.Helpers.Alert;
 import com.pmo.iderin.Helpers.BottomSheetTakePict;
-import com.pmo.iderin.Helpers.Kategori;
 import com.pmo.iderin.Helpers.Permissions;
-import com.pmo.iderin.MainActivity;
-import com.pmo.iderin.Profile.AddToko;
 import com.pmo.iderin.R;
 import com.pmo.iderin.models.kategori_model;
-import com.pmo.iderin.models.toko_model;
 import com.squareup.picasso.Picasso;
 import com.yalantis.ucrop.UCrop;
 
@@ -55,7 +51,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class FormKategori extends AppCompatActivity implements BottomSheetTakePict.BottomSheetListener {
     private static final int PICK_IMAGE_GALLERY_REQUEST = 1;
@@ -86,7 +82,7 @@ public class FormKategori extends AppCompatActivity implements BottomSheetTakePi
         setContentView(R.layout.activity_form_kategori);
         ButterKnife.bind(this);
 
-        getTranparentStatusBar(this);
+        getTransparentStatusBar(this);
 
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
@@ -164,8 +160,7 @@ public class FormKategori extends AppCompatActivity implements BottomSheetTakePi
                                             @Override
                                             public void run() {
                                                 progressDialog.dismiss();
-                                                startActivity(new Intent(context, KategoriActivity.class));
-                                                finish();
+                                                onBackPressed();
                                             }
                                         }, 1000);
                                     }

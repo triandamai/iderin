@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class Splash extends AppCompatActivity {
     @BindView(R.id.btn_masuk)
@@ -39,7 +39,7 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
-        getTranparentStatusBar(this);
+        getTransparentStatusBar(this);
         if (firebaseUser != null) {
             new Handler().postDelayed(new Runnable() {
                 @Override

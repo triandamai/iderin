@@ -53,7 +53,7 @@ public class Adapter_kategori extends RecyclerView.Adapter<Adapter_kategori.MyVi
         kategori_model kategori_model = list.get(position);
         holder.tvNama.setText(kategori_model.getNama());
         Picasso.get().load(kategori_model.getFoto()).into(holder.ivFotokategori);
-
+        
 
     }
 

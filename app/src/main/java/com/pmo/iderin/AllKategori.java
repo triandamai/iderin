@@ -4,14 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
-
-public class SearchActivity extends AppCompatActivity {
+public class AllKategori extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        getTransparentStatusBar(this);
+        setContentView(R.layout.activity_all_kategori);
     }
 }

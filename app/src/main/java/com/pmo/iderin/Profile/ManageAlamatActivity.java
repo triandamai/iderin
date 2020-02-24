@@ -30,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class ManageAlamatActivity extends AppCompatActivity {
 
@@ -55,7 +55,7 @@ public class ManageAlamatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_alamat);
         ButterKnife.bind(this);
-        getTranparentStatusBar(this);
+        getTransparentStatusBar(this);
         shimmerRecyclerAlamat.showShimmer();
         getDataALamat();
     }

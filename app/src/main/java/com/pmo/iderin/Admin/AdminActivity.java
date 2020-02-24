@@ -14,6 +14,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
+
 public class AdminActivity extends AppCompatActivity {
 
     @BindView(R.id.ly_manage_kategori)
@@ -30,6 +32,7 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         ButterKnife.bind(this);
+        getTransparentStatusBar(this);
     }
 
     @OnClick({R.id.ly_manage_kategori, R.id.ly_manage_barang, R.id.ly_manage_user})

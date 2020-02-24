@@ -25,13 +25,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Admin.KategoriActivity"></activity>
-        <activity android:name=".Admin.FormKategori" />
-        <activity android:name=".Admin.AdminActivity" />
+        <activity android:name=".AllKategori"></activity>
+        <activity
+            android:name=".Admin.KategoriActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity
+            android:name=".Admin.FormKategori"
+            tools:ignore="InnerclassSeparator" />
+        <activity
+            android:name=".Admin.AdminActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Auth_Register"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".Profile.Addbarang" /> <!-- <activity android:name=".Helpers.OfflinePersistance"></activity> -->
+        <activity
+            android:name=".Profile.Addbarang"
+            tools:ignore="InnerclassSeparator" /> <!-- <activity android:name=".Helpers.OfflinePersistance"></activity> -->
         <activity android:name=".Init">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pmo.iderin.R;
 import com.pmo.iderin.adapters.Adapter_kategori;
+import com.pmo.iderin.models.barang_model;
 import com.pmo.iderin.models.kategori_model;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
@@ -41,6 +44,7 @@ public class fragment_explore extends Fragment {
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private boolean hasToko = false;
     private List<kategori_model> listkategori = new ArrayList<>();
+    private List<barang_model> listbarang = new ArrayList<>();
     private Adapter_kategori adapter;
 
     public static fragment_explore newInstance(String param1, String param2) {
@@ -68,14 +72,43 @@ public class fragment_explore extends Fragment {
         shimmerRecyclerTerdekat.showShimmer();
         shimmerRecyclerTerlaris.showShimmer();
         getKategori();
+        getBarang();
         return v;
+    }
+
+    private void getBarang() {
+        databaseReference
+                .child(getResources().getString(R.string.CHILD_BARANG))
+                .child(getResources().getString(R.string.CHILD_BARANG_ALL))
+                .limitToFirst(6)
+                .orderByChild("created_at")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            listbarang.clear();
+                            barang_model barang_model = new barang_model();
+                            for (DataSnapshot data : dataSnapshot.getChildren()){
+                                barang_model = data.getValue(barang_model.class);
+                                listbarang.add(barang_model);
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
     }
 
     private void getKategori() {
         databaseReference.child(getResources().getString(R.string.CHILD_BARANG))
                 .child(getResources().getString(R.string.CHILD_BARANG_KATEGORI))
+                .limitToFirst(6)
                 .orderByChild("created_at")
-                .limitToLast(10)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -87,7 +120,9 @@ public class fragment_explore extends Fragment {
                                 assert model != null;
                                 listkategori.add(model);
                             }
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
                             adapter = new Adapter_kategori(getContext(),listkategori);
+                            shimmerRecyclerKategori.setLayoutManager(layoutManager);
                             shimmerRecyclerKategori.setAdapter(adapter);
                         }
                     }

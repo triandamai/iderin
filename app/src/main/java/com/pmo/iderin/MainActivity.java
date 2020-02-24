@@ -17,7 +17,7 @@ import me.ibrahimsn.lib.OnItemReselectedListener;
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
-import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class MainActivity extends AppCompatActivity implements OnItemReselectedListener, OnItemSelectedListener {
     @BindView(R.id.bottom)
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements OnItemReselectedL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        getTranparentStatusBar(this);
+        getTransparentStatusBar(this);
         bottom.setOnItemReselectedListener(this);
         bottom.setOnItemSelectedListener(this);
 

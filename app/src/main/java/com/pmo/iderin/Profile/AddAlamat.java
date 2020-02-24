@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.pmo.iderin.Helpers.windowManager.getTranparentStatusBar;
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class AddAlamat extends AppCompatActivity {
 
@@ -48,7 +48,7 @@ public class AddAlamat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_alamat);
         ButterKnife.bind(this);
-        getTranparentStatusBar(this);
+        getTransparentStatusBar(this);
 
         if(firebaseUser != null){
             Intent intent = getIntent();
