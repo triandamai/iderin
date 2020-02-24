@@ -1,6 +1,7 @@
 package com.pmo.iderin.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.pmo.iderin.R;
 import com.pmo.iderin.models.barang_model;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,7 +48,36 @@ public class Adapter_barang_toko extends RecyclerView.Adapter<Adapter_barang_tok
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         barang_model barang_model = list.get(position);
-        holder.tvNamaBarang.setText("");
+        holder.tvNamaBarang.setText(barang_model.getNama());
+        holder.tvHargaQty.setText("Rp."+barang_model.getHarga()+"Stok:"+barang_model.getStokasli());
+        Picasso.get().load(barang_model.getFoto()).into(holder.ivBarangGambar);
+        holder.tvBtnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        holder.btnTvHapus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context,R.style.dialog)
+                        .setTitle("Hapus?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).setNegativeButton("BATAL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.create();
+                builder.show();
+            }
+        });
+
     }
 
     @Override

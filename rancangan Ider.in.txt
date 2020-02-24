@@ -8,7 +8,7 @@
 			- deskripsi
 			- stokasli
 			- stoksementara
-			- harga
+			- foto
 	- gambar
 		- pushid(detail)
 			- url
