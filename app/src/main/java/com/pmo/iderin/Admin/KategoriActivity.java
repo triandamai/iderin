@@ -1,6 +1,7 @@
 package com.pmo.iderin.Admin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -19,11 +20,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.pmo.iderin.Helpers.Alert;
 import com.pmo.iderin.R;
 import com.pmo.iderin.adapters.Adapter_kategori_admin;
 import com.pmo.iderin.models.kategori_model;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -43,7 +46,7 @@ public class KategoriActivity extends AppCompatActivity {
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-    List<kategori_model> list;
+    List<kategori_model> list = new ArrayList<>();
     Adapter_kategori_admin adapter;
 
     @Override
@@ -59,14 +62,21 @@ public class KategoriActivity extends AppCompatActivity {
         shimmerRecyclerKategori.showShimmer();
         databaseReference
                 .child(getResources().getString(R.string.CHILD_BARANG))
-                .child(getResources().getString(R.string.CHILD_BARANG_KATEGORI)).addValueEventListener(new ValueEventListener() {
+                .child(getResources().getString(R.string.CHILD_BARANG_KATEGORI))
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+                    kategori_model model = new kategori_model();;
+                    shimmerRecyclerKategori.hideShimmer();
+                    list.clear();
                     for (DataSnapshot data: dataSnapshot.getChildren()){
-                        kategori_model model = data.getValue(kategori_model.class);
+
+                        model = data.getValue(kategori_model.class);
+                        model.setId(data.getKey());
                         assert model!= null;
                         list.add(model);
+                        //new Alert(context).toast(data.getKey().toString(),1);
                     }
                     adapter = new Adapter_kategori_admin(context,list);
                     shimmerRecyclerKategori.setAdapter(adapter);
@@ -86,6 +96,7 @@ public class KategoriActivity extends AppCompatActivity {
             case R.id.toolbar_kategori:
                 break;
             case R.id.btn_tambah:
+                startActivity(new Intent(context,FormKategori.class));
                 break;
         }
     }

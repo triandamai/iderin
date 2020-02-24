@@ -1,8 +1,12 @@
 package com.pmo.iderin.models;
 
 public class kategori_model{
-    String nama,foto;
+    String nama;
+    String foto;
+    String id;
     long created_at,updated_at;
+
+
 
     public kategori_model() {
     }
@@ -12,6 +16,22 @@ public class kategori_model{
         this.foto = foto;
         this.created_at = created_at;
         this.updated_at = updated_at;
+    }
+
+    public kategori_model(String nama, String foto, String id, long created_at, long updated_at) {
+        this.nama = nama;
+        this.foto = foto;
+        this.id = id;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNama() {

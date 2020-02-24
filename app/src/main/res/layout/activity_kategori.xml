@@ -11,7 +11,11 @@
         android:id="@+id/toolbar_kategori"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Input kategori"
+            />
     </androidx.appcompat.widget.Toolbar>
     <com.todkars.shimmer.ShimmerRecyclerView
         android:id="@+id/shimmer_recycler_kategori"

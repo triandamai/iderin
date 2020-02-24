@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pmo.iderin.Admin.AdminActivity;
 import com.pmo.iderin.Profile.AddProfil;
 import com.pmo.iderin.Profile.AddToko;
 import com.pmo.iderin.Profile.ManageAlamatActivity;
@@ -60,6 +61,8 @@ public class fragment_profil extends Fragment {
     LinearLayout lyBtnManageToko;
     @BindView(R.id.tv_manage_toko)
     TextView tvManageToko;
+    @BindView(R.id.ly_btn_admin)
+    LinearLayout lyBtnAdmin;
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -129,7 +132,7 @@ public class fragment_profil extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                           profil_model profil = new profil_model();
+                            profil_model profil = new profil_model();
 //                            profil.setNama(dataSnapshot.child("nama").getValue(String.class));
 //                            profil.setAlamat(dataSnapshot.child("alamat").getValue(String.class));
 //                            profil.setCreated_at(dataSnapshot.child("created_at").getValue(Long.class));
@@ -171,7 +174,8 @@ public class fragment_profil extends Fragment {
             R.id.ly_btn_iderpay,
             R.id.ly_btn_help,
             R.id.ly_btn_logout,
-            R.id.tv_btn_edit_profil})
+            R.id.tv_btn_edit_profil,
+    R.id.ly_btn_admin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_btn_myorder:
@@ -181,9 +185,9 @@ public class fragment_profil extends Fragment {
                 startActivity(new Intent(getContext(), ManageAlamatActivity.class));
                 break;
             case R.id.ly_btn_manage_toko:
-                if(hasToko) {
+                if (hasToko) {
                     startActivity(new Intent(getContext(), MyToko.class));
-                }else {
+                } else {
                     startActivity(new Intent(getContext(), AddToko.class));
                 }
                 break;
@@ -198,6 +202,9 @@ public class fragment_profil extends Fragment {
                 break;
             case R.id.tv_btn_edit_profil:
                 startActivity(new Intent(getContext(), AddProfil.class));
+                break;
+            case R.id.ly_btn_admin:
+                startActivity(new Intent(getContext(), AdminActivity.class));
                 break;
         }
     }
