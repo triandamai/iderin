@@ -35,7 +35,7 @@ public class Init extends AppCompatActivity {
                 }
             }, 200);
         } else {
-            startActivity(new Intent(context,Auth.class));
+            startActivity(new Intent(context, Auth_login.class));
             finish();
         }
     }

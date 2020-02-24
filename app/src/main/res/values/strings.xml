@@ -11,7 +11,11 @@
     <string name="CHILD_AKUN_HISTORY">HISTORY</string>
     <string name="CHILD_BARANG">GROCERY</string>
     <string name="CHILD_BARANG_GAMBAR">GAMBAR</string>
+    <string name="CHILD_BARANG_KATEGORI">KATEGORI</string>
     <string name="CHILD_TRANSAKSI">TRANSAKSI</string>
     <string name="CHILD_TRANSAKSI_DETAIL">DETAIL_TRANSAKSI</string>
     <string name="CHILD_TRANSAKSI_PAYMENT">PAYMENT_V</string>
+
+    <string name="LEVEL_ADMIN">ADMIN</string>
+    <string name="LEVEL_USER">USER</string>
 </resources>

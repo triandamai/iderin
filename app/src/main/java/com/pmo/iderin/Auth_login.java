@@ -23,8 +23,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.pmo.iderin.Helpers.Alert;
 import com.pmo.iderin.Profile.AddProfil;
 import com.pmo.iderin.models.profil_model;
 
@@ -35,7 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Auth extends AppCompatActivity {
+public class Auth_login extends AppCompatActivity {
     @BindView(R.id.btn_masuk)
     Button btnMasuk;
     @BindView(R.id.tv_toregister)
@@ -54,18 +58,19 @@ public class Auth extends AppCompatActivity {
     private boolean isLayoutNohp = true;
 
 
-    private Context context = Auth.this;
+    private Context context = Auth_login.this;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private String verificationid;
     private profil_model profil;
+    private  boolean isExist = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth);
+        setContentView(R.layout.activity_auth_login);
         ButterKnife.bind(this);
       //  getTranparentStatusBar(this);
         isLayoutNohp = true;
@@ -93,8 +98,8 @@ public class Auth extends AppCompatActivity {
                             profil.setNohp(etNohp.getText().toString());
                             profil.setCreated_at(new Date().getTime());
                             profil.setUpdated_at(new Date().getTime());
+                            profil.setLevel(getResources().getString(R.string.LEVEL_USER));
                             profil.setNama("Pengguna baru");
-                            
                             databaseReference
                                     .child(getResources().getString(R.string.CHILD_AKUN))
                                     .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
@@ -103,7 +108,7 @@ public class Auth extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            startActivity(new Intent(context, AddProfil.class));
+                                            startActivity(new Intent(context, MainActivity.class));
                                             finish();
                                         }
                                     });
@@ -138,21 +143,50 @@ public class Auth extends AppCompatActivity {
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
-            Auth.this.verificationid = s;
+            Auth_login.this.verificationid = s;
         }
 
 
     };
 
+    private boolean isnohpexist(){
+
+        databaseReference.child(getResources().getString(R.string.CHILD_AKUN))
+                .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
+                .orderByChild("nohp")
+                .startAt(etNohp.getText().toString())
+                .endAt(etNohp.getText().toString())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()) {
+                            isExist = true;
+                        }else {
+                            isExist = false;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        isExist = false;
+                    }
+                });
+        return isExist;
+    }
     @OnClick({R.id.btn_masuk, R.id.tv_toregister,R.id.btn_kode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_masuk:
                 if(!TextUtils.isEmpty(etNohp.getText().toString())){
-                    lyKode.setVisibility(View.VISIBLE);
-                    lyNohp.setVisibility(View.GONE);
-                    sendAuthenticationCode(etNohp.getText().toString());
-                    isLayoutNohp = false;
+                   if(isnohpexist()){
+                       lyKode.setVisibility(View.VISIBLE);
+                       lyNohp.setVisibility(View.GONE);
+                       sendAuthenticationCode(etNohp.getText().toString());
+                       isLayoutNohp = false;
+                   }else {
+                       //akun tidak ditemukan
+                        new Alert(context).toast("Akun tidak ada silahkan mendaftar",1);
+                   }
                 }else {
                     Toast.makeText(context,"Isi no hp!",Toast.LENGTH_LONG).show();
                 }

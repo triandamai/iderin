@@ -1,14 +1,14 @@
 package com.pmo.iderin.models;
 
 public class profil_model {
-    String uid,nama,username,nohp,alamat,foto,jenis_kelamin;
+    String uid,nama,username,nohp,alamat,foto,jenis_kelamin,level;
     long created_at,updated_at;
 
     public profil_model(){
 
     }
 
-    public profil_model(String uid, String nama, String username, String nohp, String alamat, String foto, String jenis_kelamin, long created_at, long updated_at) {
+    public profil_model(String uid, String nama, String username, String nohp, String alamat, String foto, String jenis_kelamin, String level, long created_at, long updated_at) {
         this.uid = uid;
         this.nama = nama;
         this.username = username;
@@ -16,8 +16,17 @@ public class profil_model {
         this.alamat = alamat;
         this.foto = foto;
         this.jenis_kelamin = jenis_kelamin;
+        this.level = level;
         this.created_at = created_at;
         this.updated_at = updated_at;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public String getUid() {

@@ -25,8 +25,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Profile.Addbarang"></activity>
-        <!-- <activity android:name=".Helpers.OfflinePersistance"></activity> -->
+        <activity android:name=".Admin.KategoriActivity"></activity>
+        <activity android:name=".Admin.FormKategori" />
+        <activity android:name=".Admin.AdminActivity" />
+        <activity
+            android:name=".Auth_Register"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".Profile.Addbarang" /> <!-- <activity android:name=".Helpers.OfflinePersistance"></activity> -->
         <activity android:name=".Init">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,7 +60,9 @@
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".Activity_checkout" />
-        <activity android:name=".Auth" />
+        <activity
+            android:name=".Auth_login"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Splash" />
     </application>
