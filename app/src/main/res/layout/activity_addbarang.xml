@@ -25,6 +25,15 @@
                 android:layout_height="wrap_content"
                 android:text="Nama Barang"/>
             <EditText
+                android:id="@+id/et_nama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kategori"/>
+            <EditText
                 android:id="@+id/et_kategori"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,13 +51,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama Barang"/>
+                android:text="Deskripsi"/>
             <EditText
                 android:id="@+id/et_deskripsi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Deskripsi"/>
             <Button
+                android:id="@+id/btn_simpan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_primary"
