@@ -65,6 +65,13 @@ public class Adapter_barang_toko extends RecyclerView.Adapter<Adapter_barang_tok
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                    databaseReference
+                                            .child(context.getResources().getString(R.string.CHILD_BARANG))
+                                            .child(context.getResources().getString(R.string.CHILD_BARANG_ALL))
+                                            .child(barang_model.getId())
+                                            .removeValue();
+                                    dialog.cancel();
+                                    dialog.dismiss();
 
                             }
                         }).setNegativeButton("BATAL", new DialogInterface.OnClickListener() {
