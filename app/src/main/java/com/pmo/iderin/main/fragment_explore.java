@@ -72,7 +72,7 @@ public class fragment_explore extends Fragment {
         shimmerRecyclerTerdekat.showShimmer();
         shimmerRecyclerTerlaris.showShimmer();
         getKategori();
-        getBarang();
+       // getBarang();
         return v;
     }
 

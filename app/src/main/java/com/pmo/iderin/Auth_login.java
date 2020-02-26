@@ -205,6 +205,7 @@ public class Auth_login extends AppCompatActivity {
                 }
                 break;
             case R.id.tv_toregister:
+                startActivity(new Intent(context,Auth_Register.class));
                 break;
         }
     }

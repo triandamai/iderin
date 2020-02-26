@@ -10,11 +10,12 @@
    <androidx.core.widget.NestedScrollView
        android:layout_width="match_parent"
        android:layout_height="match_parent">
-       <LinearLayout
+       <RelativeLayout
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="match_parent"
            android:orientation="vertical">
            <FrameLayout
+               android:id="@+id/fl_image"
                android:layout_width="match_parent"
                android:layout_height="200dp">
                <ImageView
@@ -29,11 +30,13 @@
                </androidx.appcompat.widget.Toolbar>
            </FrameLayout>
            <androidx.cardview.widget.CardView
+               android:id="@+id/cv_detail"
                android:layout_width="match_parent"
+               android:layout_below="@+id/fl_image"
                android:layout_marginTop="@dimen/dp_10"
                android:layout_marginStart="@dimen/dp_16"
                android:layout_marginEnd="@dimen/dp_16"
-               android:layout_height="100dp">
+               android:layout_height="wrap_content">
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
@@ -52,12 +55,19 @@
                        android:layout_height="1dp"
                        android:layout_marginTop="@dimen/dp_10"
                        android:layout_marginBottom="@dimen/dp_10"
-                       android:background="#969696"/>
+                       android:background="#DFC5C5C5"/>
+                   <Button
+                       android:id="@+id/btn_add"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/hijau"
+                       android:text="Tambah"
+                       android:background="@drawable/button_secondary"/>
                </LinearLayout>
            </androidx.cardview.widget.CardView>
            <com.todkars.shimmer.ShimmerRecyclerView
                android:id="@+id/shimmer_recycler_toko"
-               android:layout_below="@+id/toolbar_alamat"
+               android:layout_below="@+id/cv_detail"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="vertical"
@@ -67,6 +77,7 @@
                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                app:shimmer_recycler_layout="@layout/item_placeholder_alamat"
                app:shimmer_recycler_item_count="5" />
-       </LinearLayout>
+
+       </RelativeLayout>
    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

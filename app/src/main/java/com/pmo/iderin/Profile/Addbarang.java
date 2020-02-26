@@ -22,8 +22,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,17 +32,21 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mindorks.paracamera.Camera;
 import com.pmo.iderin.Helpers.Alert;
+import com.pmo.iderin.Helpers.BottomSheetTakeKategori;
 import com.pmo.iderin.Helpers.BottomSheetTakePict;
+import com.pmo.iderin.Helpers.Kategori;
 import com.pmo.iderin.Helpers.Permissions;
 import com.pmo.iderin.MainActivity;
 import com.pmo.iderin.R;
 import com.pmo.iderin.models.barang_model;
+import com.pmo.iderin.models.kategori_model;
 import com.squareup.picasso.Picasso;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -70,6 +72,7 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
     Button btnSimpan;
     @BindView(R.id.et_nama)
     EditText etNama;
+
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -78,8 +81,11 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
     private Context context = Addbarang.this;
     private Uri filePath;
     private String id = "";
+    private String idtoko = "";
+    private String idKategori = "";
     private boolean isEditMode = false;
     private Camera camera;
+    private kategori_model kategori_model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,13 +97,24 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
 
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
-
-            String nama = intent.getStringExtra("namatoko");
-            String alamat = intent.getStringExtra("alamattoko");
-
+            String foto = intent.getStringExtra("gambar");
+            String idkategori = intent.getStringExtra("idkategori");
+            String kategori = intent.getStringExtra("kategori");
+            String nama = intent.getStringExtra("nama");
+            String des = intent.getStringExtra("deskripsi");
+            String harga = intent.getStringExtra("harga");
+            String idb = intent.getStringExtra("id");
+            id = idb;
+            etNama.setText(nama);
+            etKategori.setText(kategori);
+            etDeskripsi.setText(des);
+            etHarga.setText(harga);
+            Picasso.get().load(foto).into(ivbarang);
+            idKategori = idkategori;
             isEditMode = true;
         } else {
             isEditMode = false;
+            id = databaseReference.push().getKey();
         }
     }
 
@@ -108,9 +125,9 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
             progressDialog.show();
 
             StorageReference myref = storageReference
-                    .child(getResources().getString(R.string.CHILD_AKUN))
-                    .child(getResources().getString(R.string.CHILD_AKUN_TOKO))
-                    .child("banner" + firebaseAuth.getCurrentUser().getUid());
+                    .child(getResources().getString(R.string.CHILD_BARANG))
+                    .child(getResources().getString(R.string.CHILD_BARANG_ALL))
+                    .child("banner" + id);
             ivbarang.setDrawingCacheEnabled(true);
             ivbarang.buildDrawingCache();
 
@@ -120,46 +137,42 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
             byte[] data = baos.toByteArray();
 
             UploadTask uploadTask = myref.putBytes(data);
-            Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-                    return myref.getDownloadUrl();
+            Task<Uri> uriTask = uploadTask.continueWithTask(task -> {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
                 }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        Uri donloadUri = task.getResult();
+                return myref.getDownloadUrl();
+            }).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Uri donloadUri = task.getResult();
 
-                        //aksi tambah ke db
-                        barang_model toko = new barang_model();
+                    //aksi tambah ke db
+                    barang_model toko = new barang_model();
+                    toko.setDeskripsi(etDeskripsi.getText().toString());
+                    toko.setFoto(donloadUri.toString());
+                    toko.setIdkategori(idKategori);
+                    toko.setIdtoko(firebaseUser.getUid());
+                    toko.setNama(etNama.getText().toString());
+                    toko.setCreated_at(new Date().getTime());
+                    toko.setUpdated_at(new Date().getTime());
+                    toko.setHarga(Double.parseDouble(etHarga.getText().toString()));
 
-
-                        databaseReference
-                                .child(getResources().getString(R.string.CHILD_AKUN))
-                                .child(getResources().getString(R.string.CHILD_AKUN_TOKO))
-                                .child(firebaseAuth.getCurrentUser().getUid())
-                                .setValue(toko)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        new Handler().postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                progressDialog.dismiss();
-                                                startActivity(new Intent(context, MainActivity.class));
-                                                finish();
-                                            }
-                                        }, 1000);
-                                    }
-                                });
-                    } else {
-                        //gagal
-                        progressDialog.dismiss();
-                    }
+                    databaseReference
+                            .child(getResources().getString(R.string.CHILD_BARANG))
+                            .child(getResources().getString(R.string.CHILD_BARANG_ALL))
+                            .child(id)
+                            .setValue(toko)
+                            .addOnCompleteListener(task1 -> new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.dismiss();
+                                    //startActivity(new Intent(context, MainActivity.class));
+                                    finish();
+                                }
+                            }, 1000));
+                } else {
+                    //gagal
+                    progressDialog.dismiss();
                 }
             });
         }
@@ -305,12 +318,34 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
     }
 
 
-    @OnClick({R.id.ivbarang, R.id.btn_simpan})
+
+
+    @OnClick({R.id.ivbarang, R.id.et_kategori, R.id.btn_simpan})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ivbarang:
                 BottomSheetTakePict bs = new BottomSheetTakePict();
                 bs.show(getSupportFragmentManager(), "Ambil Foto Konter");
+                break;
+            case R.id.et_kategori:
+                BottomSheetTakeKategori kat = new BottomSheetTakeKategori();
+                kat.setOnkategoriSelected(new Kategori() {
+                    @Override
+                    public void selectedKategori(kategori_model kategori) {
+                        kategori_model = kategori;
+                        idKategori = kategori.getId();
+                        etKategori.setText(kategori.getNama());
+                        kat.dismiss();
+
+                    }
+
+                    @Override
+                    public void addkategori(kategori_model kategori) {
+
+                    }
+                });
+                kat.show(getSupportFragmentManager(), "Ambil kategori");
+
                 break;
             case R.id.btn_simpan:
                 if (cekVal()) {

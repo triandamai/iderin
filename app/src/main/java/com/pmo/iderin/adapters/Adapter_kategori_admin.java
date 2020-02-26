@@ -1,7 +1,6 @@
 package com.pmo.iderin.adapters;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +29,7 @@ import butterknife.ButterKnife;
 public class Adapter_kategori_admin extends RecyclerView.Adapter<Adapter_kategori_admin.MyViewHolder> {
 
 
+
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -53,46 +53,32 @@ public class Adapter_kategori_admin extends RecyclerView.Adapter<Adapter_kategor
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         kategori_model kategori_model = list.get(position);
         holder.tvNamaKategori.setText(kategori_model.getNama());
+        holder.tvDeskripsi.setText(kategori_model.getDeskripsi());
         Picasso.get().load(kategori_model.getFoto()).into(holder.ivFotokategori);
 
-        holder.tvBtnEdir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity(new Intent(context, FormKategori.class)
-                .putExtra("id",kategori_model.getId())
-                .putExtra("nama",kategori_model.getNama())
-                .putExtra("foto",kategori_model.getFoto()));
-
-            }
-        });
-        holder.tvBtnHapus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context,R.style.dialog)
-                        .setTitle("Hapus "+kategori_model.getNama()+"?")
-                        .setMessage("Lanjutkan menghapus?")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                databaseReference
-                                        .child(context.getResources().getString(R.string.CHILD_BARANG))
-                                        .child(context.getResources().getString(R.string.CHILD_BARANG_KATEGORI))
-                                        .child(kategori_model.getId())
-                                        .removeValue();
-                                dialog.dismiss();
-                                dialog.cancel();
-                                notifyDataSetChanged();
-                            }
-                        }).setNegativeButton("BATAL", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                             dialog.dismiss();
-                             dialog.cancel();
-                            }
-                        });
-                builder.create();
-                builder.show();
-            }
+        holder.tvBtnEdir.setOnClickListener(v -> context.startActivity(new Intent(context, FormKategori.class)
+                .putExtra("id", kategori_model.getId())
+                .putExtra("nama", kategori_model.getNama())
+                .putExtra("foto", kategori_model.getFoto())));
+        holder.tvBtnHapus.setOnClickListener(v -> {
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context, R.style.dialog)
+                    .setTitle("Hapus " + kategori_model.getNama() + "?")
+                    .setMessage("Lanjutkan menghapus?")
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        databaseReference
+                                .child(context.getResources().getString(R.string.CHILD_BARANG))
+                                .child(context.getResources().getString(R.string.CHILD_BARANG_KATEGORI))
+                                .child(kategori_model.getId())
+                                .removeValue();
+                        dialog.dismiss();
+                        dialog.cancel();
+                        notifyDataSetChanged();
+                    }).setNegativeButton("BATAL", (dialog, which) -> {
+                        dialog.dismiss();
+                        dialog.cancel();
+                    });
+            builder.create();
+            builder.show();
         });
     }
 
@@ -100,7 +86,6 @@ public class Adapter_kategori_admin extends RecyclerView.Adapter<Adapter_kategor
     public int getItemCount() {
         return list.size();
     }
-
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -112,6 +97,9 @@ public class Adapter_kategori_admin extends RecyclerView.Adapter<Adapter_kategor
         TextView tvBtnEdir;
         @BindView(R.id.tv_btn_hapus)
         TextView tvBtnHapus;
+        @BindView(R.id.tv_deskripsi)
+        TextView tvDeskripsi;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

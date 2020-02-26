@@ -168,6 +168,7 @@ public class Auth_Register extends AppCompatActivity {
                 }
                 break;
             case R.id.tv_toregister:
+                finish();
                 break;
         }
     }

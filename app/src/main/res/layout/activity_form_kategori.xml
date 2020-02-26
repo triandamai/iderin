@@ -27,6 +27,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nama"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama kategori"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_deskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Deskripsi"/>
     </LinearLayout>
     <Button
         android:id="@+id/btn_simpan"

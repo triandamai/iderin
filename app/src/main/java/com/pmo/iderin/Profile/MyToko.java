@@ -1,11 +1,15 @@
 package com.pmo.iderin.Profile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +30,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
 
@@ -34,6 +39,12 @@ public class MyToko extends AppCompatActivity {
 
     @BindView(R.id.shimmer_recycler_toko)
     ShimmerRecyclerView shimmerRecyclerToko;
+    @BindView(R.id.fl_image)
+    FrameLayout flImage;
+    @BindView(R.id.btn_add)
+    Button btnAdd;
+    @BindView(R.id.cv_detail)
+    CardView cvDetail;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -47,16 +58,17 @@ public class MyToko extends AppCompatActivity {
         setContentView(R.layout.activity_my_toko);
         ButterKnife.bind(this);
         getTransparentStatusBar(this);
-        getBarangToko();
+         getBarangToko();
 
     }
 
     private void getBarangToko() {
         databaseReference
                 .child(getResources().getString(R.string.CHILD_BARANG))
-                .orderByChild("")
-                .startAt("")
-                .endAt("").addValueEventListener(new ValueEventListener() {
+                .child(getResources().getString(R.string.CHILD_BARANG_ALL))
+                .orderByChild("idtoko")
+                .equalTo(firebaseUser.getUid().toString())
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -65,6 +77,7 @@ public class MyToko extends AppCompatActivity {
                         barang_model barang_model = new barang_model();
                         for (DataSnapshot datas : dataSnapshot.getChildren()) {
                             barang_model = datas.getValue(barang_model.class);
+                            barang_model.setId(datas.getKey());
                             assert barang_model != null;
                             list.add(barang_model);
                         }
@@ -86,4 +99,14 @@ public class MyToko extends AppCompatActivity {
         });
     }
 
+    @OnClick({R.id.btn_add, R.id.cv_detail})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_add:
+                startActivity(new Intent(context,Addbarang.class));
+                break;
+            case R.id.cv_detail:
+                break;
+        }
+    }
 }

@@ -11,16 +11,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_alamat_home"/>
         <TextView
             android:id="@+id/tv_judul_alamat"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:text="Alamat Rumah"/>
     </LinearLayout>
     <TextView
@@ -29,7 +26,7 @@
         android:layout_height="wrap_content"
         android:maxLines="3"
         android:layout_margin="5dp"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="Jl.pinus 2 no 4 rt 02 rw no 8 Perumahan bumi tanjung elok purwokerto selatan banyumas"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,8 +49,8 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="hapus"
-            android:textColor="@color/hijau"
-            android:background="@drawable/button_secondary"/>
+            android:textColor="#ffff"
+            android:background="@drawable/button_danger"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -62,5 +59,5 @@
         android:layout_marginEnd="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
-        android:background="#B4B4B4"/>
+        android:background="#D2B4B4B4"/>
 </LinearLayout>

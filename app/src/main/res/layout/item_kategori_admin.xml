@@ -26,7 +26,16 @@
                 android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="@dimen/dp_10"
+                android:textSize="18sp"
                 android:textStyle="bold"
+                android:text="Nama kategori"/>
+            <TextView
+                android:id="@+id/tv_deskripsi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="@dimen/dp_10"
                 android:text="Nama kategori"/>
             <LinearLayout
                 android:layout_width="wrap_content"

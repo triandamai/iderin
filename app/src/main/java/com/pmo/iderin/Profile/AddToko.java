@@ -130,6 +130,7 @@ public class AddToko extends AppCompatActivity  implements BottomSheetTakePict.B
             Bitmap bitmap = ((BitmapDrawable) ivBtnPickImage.getDrawable()).getBitmap();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+
             byte[] data = baos.toByteArray();
 
             UploadTask uploadTask = myref.putBytes(data);

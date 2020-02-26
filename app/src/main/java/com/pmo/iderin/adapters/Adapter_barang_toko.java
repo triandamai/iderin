@@ -2,6 +2,7 @@ package com.pmo.iderin.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.pmo.iderin.Profile.Addbarang;
 import com.pmo.iderin.R;
 import com.pmo.iderin.models.barang_model;
 import com.squareup.picasso.Picasso;
@@ -32,6 +37,7 @@ public class Adapter_barang_toko extends RecyclerView.Adapter<Adapter_barang_tok
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private List<barang_model> list;
     private Context context;
+    private String namaKategori = "";
 
     public Adapter_barang_toko(Context context, List<barang_model> data) {
         this.context = context;
@@ -49,12 +55,40 @@ public class Adapter_barang_toko extends RecyclerView.Adapter<Adapter_barang_tok
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         barang_model barang_model = list.get(position);
         holder.tvNamaBarang.setText(barang_model.getNama());
-        holder.tvHargaQty.setText("Rp."+barang_model.getHarga()+"Stok:"+barang_model.getStokasli());
+        holder.tvHargaQty.setText("Rp."+barang_model.getHarga());
         Picasso.get().load(barang_model.getFoto()).into(holder.ivBarangGambar);
+        databaseReference
+                .child(context.getResources().getString(R.string.CHILD_BARANG))
+                .child(context.getResources().getString(R.string.CHILD_BARANG_KATEGORI))
+                .child(barang_model.getIdkategori().toString())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()){
+                            barang_model model = new barang_model();
+                            model = dataSnapshot.getValue(barang_model.class);
+                            assert model != null;
+                            namaKategori = model.getNama();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
         holder.tvBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                context.startActivity(new Intent(context, Addbarang.class)
+                        .putExtra("gambar",barang_model.getFoto())
+                        .putExtra("idkategori",barang_model.getIdkategori())
+                        .putExtra("kategori",namaKategori)
+                        .putExtra("nama",barang_model.getNama())
+                        .putExtra("deskripsi",barang_model.getDeskripsi())
+                        .putExtra("harga",barang_model.getHarga())
+                        .putExtra("id",barang_model.getId())
+                );
             }
         });
         holder.btnTvHapus.setOnClickListener(new View.OnClickListener() {

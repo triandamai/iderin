@@ -63,6 +63,8 @@ public class FormKategori extends AppCompatActivity implements BottomSheetTakePi
     EditText etNama;
     @BindView(R.id.btn_simpan)
     Button btnSimpan;
+    @BindView(R.id.et_deskripsi)
+    EditText etDeskripsi;
 
 
     private Context context = FormKategori.this;
@@ -72,7 +74,7 @@ public class FormKategori extends AppCompatActivity implements BottomSheetTakePi
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
     private StorageReference storageReference = firebaseStorage.getReference();
     private Uri filePath;
-    private String id ="";
+    private String id = "";
     private Camera camera;
     private boolean isEditMode = false;
 
@@ -125,50 +127,37 @@ public class FormKategori extends AppCompatActivity implements BottomSheetTakePi
             byte[] data = baos.toByteArray();
 
             UploadTask uploadTask = myref.putBytes(data);
-            Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-                    return myref.getDownloadUrl();
+            Task<Uri> uriTask = uploadTask.continueWithTask(task -> {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
                 }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        Uri donloadUri = task.getResult();
+                return myref.getDownloadUrl();
+            }).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Uri donloadUri = task.getResult();
 
-                        //aksi tambah ke db
+                    //aksi tambah ke db
 
-                        kategori_model k = new kategori_model();
-                        k.setNama(etNama.getText().toString());
-                        k.setFoto(donloadUri.toString());
-                        k.setCreated_at(new Date().getTime());
-                        k.setUpdated_at(new Date().getTime());
+                    kategori_model k = new kategori_model();
+                    k.setNama(etNama.getText().toString());
+                    k.setFoto(donloadUri.toString());
+                    k.setDeskripsi(etDeskripsi.getText().toString());
+                    k.setCreated_at(new Date().getTime());
+                    k.setUpdated_at(new Date().getTime());
 
 
-                        databaseReference
-                                .child(getResources().getString(R.string.CHILD_BARANG))
-                                .child(getResources().getString(R.string.CHILD_BARANG_KATEGORI))
-                                .child(id)
-                                .setValue(k)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        new Handler().postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                progressDialog.dismiss();
-                                                onBackPressed();
-                                            }
-                                        }, 1000);
-                                    }
-                                });
-                    } else {
-                        //gagal
-                        progressDialog.dismiss();
-                    }
+                    databaseReference
+                            .child(getResources().getString(R.string.CHILD_BARANG))
+                            .child(getResources().getString(R.string.CHILD_BARANG_KATEGORI))
+                            .child(id)
+                            .setValue(k)
+                            .addOnCompleteListener(task1 -> new Handler().postDelayed(() -> {
+                                progressDialog.dismiss();
+                                onBackPressed();
+                            }, 1000));
+                } else {
+                    //gagal
+                    progressDialog.dismiss();
                 }
             });
         }
