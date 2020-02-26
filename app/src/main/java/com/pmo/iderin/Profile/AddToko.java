@@ -95,8 +95,10 @@ public class AddToko extends AppCompatActivity  implements BottomSheetTakePict.B
 
             String nama = intent.getStringExtra("namatoko");
             String alamat = intent.getStringExtra("alamattoko");
+            String foto = intent.getStringExtra("foto");
             etAlamat.setText(alamat);
             etNamaToko.setText(nama);
+            Picasso.get().load(foto).into(ivBtnPickImage);
             isEditMode = true;
         } else {
             isEditMode = false;

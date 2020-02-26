@@ -39,6 +39,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
+
 public class Auth_login extends AppCompatActivity {
     @BindView(R.id.btn_masuk)
     Button btnMasuk;
@@ -71,6 +73,7 @@ public class Auth_login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_login);
+        getTransparentStatusBar(this);
         ButterKnife.bind(this);
       //  getTransparentStatusBar(this);
         isLayoutNohp = true;
@@ -88,35 +91,32 @@ public class Auth_login extends AppCompatActivity {
     public void signInwithPhoneNumber(PhoneAuthCredential phoneAuthCredential) {
         Toast.makeText(context, "Memverifikasi..", Toast.LENGTH_LONG).show();
         firebaseAuth.signInWithCredential(phoneAuthCredential)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
 
-                            Toast.makeText(context, "Berhasil", Toast.LENGTH_LONG).show();
-                            profil = new profil_model();
-                            profil.setNohp(etNohp.getText().toString());
-                            profil.setCreated_at(new Date().getTime());
-                            profil.setUpdated_at(new Date().getTime());
-                            profil.setLevel(getResources().getString(R.string.LEVEL_USER));
-                            profil.setNama("Pengguna baru");
-                            databaseReference
-                                    .child(getResources().getString(R.string.CHILD_AKUN))
-                                    .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
-                                    .child(firebaseAuth.getUid())
-                                    .setValue(profil)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            startActivity(new Intent(context, MainActivity.class));
-                                            finish();
-                                        }
-                                    });
-                        } else {
-                            Toast.makeText(context, "gagal" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                        }
-
+                        Toast.makeText(context, "Berhasil", Toast.LENGTH_LONG).show();
+                        profil = new profil_model();
+                        profil.setNohp(etNohp.getText().toString());
+                        profil.setCreated_at(new Date().getTime());
+                        profil.setUpdated_at(new Date().getTime());
+                        profil.setLevel(getResources().getString(R.string.LEVEL_USER));
+                        profil.setNama("Pengguna baru");
+                        databaseReference
+                                .child(getResources().getString(R.string.CHILD_AKUN))
+                                .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
+                                .child(firebaseAuth.getUid())
+                                .setValue(profil)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        startActivity(new Intent(context, MainActivity.class));
+                                        finish();
+                                    }
+                                });
+                    } else {
+                        Toast.makeText(context, "gagal" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
+
                 });
     }
     //Interface untuk listener apakah ada kode masuk atau tidak

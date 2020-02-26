@@ -19,6 +19,7 @@
                android:layout_width="match_parent"
                android:layout_height="200dp">
                <ImageView
+                   android:id="@+id/iv_toko"
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
                    android:scaleType="fitXY"
@@ -43,10 +44,12 @@
                    android:padding="16dp"
                    android:orientation="vertical">
                    <TextView
+                       android:id="@+id/tv_namatoko"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:text="Toko suka mundur"/>
                    <TextView
+                       android:id="@+id/tv_alamattoko"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:text="Jl.pinus 8 perumahan bumi tanjung elok"/>
@@ -56,13 +59,30 @@
                        android:layout_marginTop="@dimen/dp_10"
                        android:layout_marginBottom="@dimen/dp_10"
                        android:background="#DFC5C5C5"/>
-                   <Button
-                       android:id="@+id/btn_add"
+                   <LinearLayout
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       android:textColor="@color/hijau"
-                       android:text="Tambah"
-                       android:background="@drawable/button_secondary"/>
+                       android:weightSum="2"
+                       android:orientation="horizontal">
+                       <Button
+                           android:id="@+id/btn_edit_toko"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textColor="@color/hijau"
+                           android:layout_weight="1"
+                           android:text="Edit toko"
+                           android:layout_marginEnd="5dp"
+                           android:background="@drawable/button_secondary"/>
+                       <Button
+                           android:id="@+id/btn_add"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textColor="#ffff"
+                           android:layout_weight="1"
+                           android:text="Tambah Item"
+                           android:layout_marginStart="5dp"
+                           android:background="@drawable/button_primary"/>
+                   </LinearLayout>
                </LinearLayout>
            </androidx.cardview.widget.CardView>
            <com.todkars.shimmer.ShimmerRecyclerView

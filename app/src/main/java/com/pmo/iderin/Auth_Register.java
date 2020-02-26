@@ -32,7 +32,10 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.pmo.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class Auth_Register extends AppCompatActivity {
     @BindView(R.id.btn_masuk)
@@ -65,6 +68,9 @@ public class Auth_Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_register);
+
+        getTransparentStatusBar(this);
+        ButterKnife.bind(this);
         isLayoutNohp = true;
         lyNohp.setVisibility(View.VISIBLE);
         lyKode.setVisibility(View.GONE);
@@ -96,12 +102,9 @@ public class Auth_Register extends AppCompatActivity {
                                     .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
                                     .child(firebaseAuth.getUid())
                                     .setValue(profil)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            startActivity(new Intent(context, AddProfil.class));
-                                            finish();
-                                        }
+                                    .addOnSuccessListener(aVoid -> {
+                                        startActivity(new Intent(context, AddProfil.class));
+                                        finish();
                                     });
                         } else {
                             Toast.makeText(context, "gagal" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -110,9 +113,9 @@ public class Auth_Register extends AppCompatActivity {
                     }
                 });
     }
-    //Interface untuk listener apakah ada kode masuk atau tidak
+
     PhoneAuthProvider.OnVerificationStateChangedCallbacks callback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        //jika da kode dan terbaca akan otomatis memverifikasi
+
         @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
             String code = phoneAuthCredential.getSmsCode();
@@ -168,6 +171,7 @@ public class Auth_Register extends AppCompatActivity {
                 }
                 break;
             case R.id.tv_toregister:
+                startActivity(new Intent(context,Auth_login.class));
                 finish();
                 break;
         }

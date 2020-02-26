@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AllKategori"></activity>
+        <activity android:name=".Profile.Ideerpay"></activity>
+        <activity android:name=".AllKategori" />
         <activity
             android:name=".Admin.KategoriActivity"
             tools:ignore="InnerclassSeparator" />

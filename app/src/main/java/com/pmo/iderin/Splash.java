@@ -63,7 +63,8 @@ public class Splash extends AppCompatActivity {
                 finish();
                 break;
             case R.id.btn_daftar:
-
+                startActivity(new Intent(context,Auth_Register.class));
+                finish();
                 break;
         }
     }
