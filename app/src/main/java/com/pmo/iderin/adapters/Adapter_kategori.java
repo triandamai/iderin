@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.pmo.iderin.Admin.FormKategori;
+import com.pmo.iderin.AllKategori;
 import com.pmo.iderin.R;
 import com.pmo.iderin.models.kategori_model;
 import com.squareup.picasso.Picasso;
@@ -53,7 +54,9 @@ public class Adapter_kategori extends RecyclerView.Adapter<Adapter_kategori.MyVi
         kategori_model kategori_model = list.get(position);
         holder.tvNama.setText(kategori_model.getNama());
         Picasso.get().load(kategori_model.getFoto()).into(holder.ivFotokategori);
-        
+        holder.lyKategori.setOnClickListener(v -> {
+            context.startActivity(new Intent(context, AllKategori.class));
+        });
 
     }
 
@@ -64,6 +67,8 @@ public class Adapter_kategori extends RecyclerView.Adapter<Adapter_kategori.MyVi
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.ly_kategori)
+        LinearLayout lyKategori;
         @BindView(R.id.iv_fotokategori)
         ImageView ivFotokategori;
         @BindView(R.id.tv_nama)
