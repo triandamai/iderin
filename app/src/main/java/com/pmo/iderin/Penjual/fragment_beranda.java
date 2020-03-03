@@ -51,7 +51,7 @@ public class fragment_beranda extends Fragment {
         shimmerRecyclerBarang.showShimmer();
         databaseReference.child(getResources().getString(R.string.CHILD_BARANG))
                 .child(getResources().getString(R.string.CHILD_BARANG_ALL))
-                .orderByChild("")
+                .orderByChild("idpenjual")
                 .equalTo(firebaseUser.getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
