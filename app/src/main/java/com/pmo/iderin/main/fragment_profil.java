@@ -61,8 +61,7 @@ public class fragment_profil extends Fragment {
     LinearLayout lyBtnManageToko;
     @BindView(R.id.tv_manage_toko)
     TextView tvManageToko;
-    @BindView(R.id.ly_btn_admin)
-    LinearLayout lyBtnAdmin;
+
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -174,8 +173,7 @@ public class fragment_profil extends Fragment {
             R.id.ly_btn_iderpay,
             R.id.ly_btn_help,
             R.id.ly_btn_logout,
-            R.id.tv_btn_edit_profil,
-    R.id.ly_btn_admin})
+            R.id.tv_btn_edit_profil})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_btn_myorder:
@@ -203,9 +201,7 @@ public class fragment_profil extends Fragment {
             case R.id.tv_btn_edit_profil:
                 startActivity(new Intent(getContext(), AddProfil.class));
                 break;
-            case R.id.ly_btn_admin:
-                startActivity(new Intent(getContext(), AdminActivity.class));
-                break;
+
         }
     }
 }

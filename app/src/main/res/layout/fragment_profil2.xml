@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:text="Pesananku"/>
                 </LinearLayout>
-                
+
                 <View
                     android:layout_width="match_parent"
                     android:background="#E2A3A3A3"
