@@ -80,7 +80,7 @@ public class MyToko extends AppCompatActivity {
 
     private void listenTransaski(){
         databaseReference.child(getResources().getString(R.string.CHILD_TRANSAKSI))
-                .child()
+                .child("")
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

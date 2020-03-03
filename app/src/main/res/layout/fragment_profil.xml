@@ -94,52 +94,7 @@
                        android:layout_height="wrap_content"
                        android:text="Pesananku"/>
                </LinearLayout>
-               <LinearLayout
-                   android:id="@+id/ly_btn_admin"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginBottom="15dp"
-                   android:layout_marginTop="15dp"
-                   android:gravity="center_vertical"
-                   android:orientation="horizontal">
-                   <ImageView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginEnd="20dp"
-                       android:src="@drawable/ic_profil_myorder"/>
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="Admin page"/>
-               </LinearLayout>
-               <View
-                   android:layout_width="match_parent"
-                   android:background="#E2A3A3A3"
-                   android:layout_height="1dp"/>
-               <LinearLayout
-                   android:id="@+id/ly_btn_manage_toko"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginTop="15dp"
-                   android:gravity="center_vertical"
-                   android:layout_marginBottom="15dp"
-                   android:orientation="horizontal">
 
-                   <ImageView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginEnd="20dp"
-                       android:src="@drawable/ic_store" />
-                   <TextView
-                       android:id="@+id/tv_manage_toko"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="Toko saya"/>
-               </LinearLayout>
-               <View
-                   android:layout_width="match_parent"
-                   android:background="#E2A3A3A3"
-                   android:layout_height="1dp"/>
                <LinearLayout
                    android:id="@+id/ly_btn_manage_address"
                    android:layout_width="match_parent"
