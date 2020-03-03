@@ -25,7 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".DetailToko"></activity>
+        <activity android:name=".PenjualActivity"></activity>
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".DetailToko" />
         <activity android:name=".AllBarang" />
         <activity android:name=".Profile.Ideerpay" />
         <activity android:name=".AllKategori" />
