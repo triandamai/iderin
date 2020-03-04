@@ -25,12 +25,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Admin.ManageUser"></activity>
-        <activity android:name=".Admin.ManageBarang" />
+        <activity
+            android:name=".Admin.ManageUser"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Admin.ManageBarang"
+            tools:ignore="InnerclassSeparator" />
         <activity android:name=".PenjualActivity" />
         <activity android:name=".DetailToko" />
         <activity android:name=".AllBarang" />
-        <activity android:name=".Profile.Ideerpay" />
+        <activity android:name=".Profile.Ideerpay"
+            tools:ignore="InnerclassSeparator" />
         <activity android:name=".AllKategori" />
         <activity
             android:name=".Admin.KategoriActivity"
@@ -46,7 +50,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Profile.Addbarang"
-            tools:ignore="InnerclassSeparator" /> <!-- <activity android:name=".Helpers.OfflinePersistance"></activity> -->
+            tools:ignore="InnerclassSeparator" />
         <activity android:name=".Init">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,10 +61,14 @@
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Profile.AddAlamat" />
-        <activity android:name=".Profile.MyToko" />
-        <activity android:name=".Profile.MyOrderActivity" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".Profile.AddAlamat"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Profile.MyToko"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Profile.MyOrderActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Profile.AddProfil"
             tools:ignore="InnerclassSeparator" />
