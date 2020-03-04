@@ -91,6 +91,7 @@ public class fragment_beranda extends Fragment {
                             for (DataSnapshot data : dataSnapshot.getChildren()) {
                                 barang_model model = new barang_model();
                                 model = data.getValue(barang_model.class);
+                                model.setId(data.getKey());
                                 assert model != null;
                                 barang_modelList.add(model);
                                 adapter = new Adapter_barang_toko(getContext(), barang_modelList);

@@ -75,6 +75,7 @@ public class fragment_transaksi extends Fragment {
                             transaksi_model model = new transaksi_model();
                             for (DataSnapshot data : dataSnapshot.getChildren()) {
                                 model = data.getValue(transaksi_model.class);
+                                model.setId(data.getKey());
                                 assert model != null;
                                 transaksi_models.add(model);
                                 adapter_transaksi = new Adapter_transaksi(getContext(), transaksi_models);

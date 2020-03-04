@@ -24,13 +24,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_add_barang"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="@dimen/dp_20"
-                android:layout_alignParentBottom="true"/>
             <com.todkars.shimmer.ShimmerRecyclerView
                 android:id="@+id/shimmer_recycler_barang"
                 android:layout_below="@+id/cv_detail"

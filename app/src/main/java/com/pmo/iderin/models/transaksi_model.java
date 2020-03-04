@@ -11,11 +11,12 @@ public class transaksi_model {
     long created_at;
     long updated_at;
     long tanggal_bayar;
+    String id;
 
     public transaksi_model() {
     }
 
-    public transaksi_model(String idpembeli, String idtoko, Double jumlah, Double total, String status, String metode_pembayaran, long waktu_order, long created_at, long updated_at, long tanggal_bayar) {
+    public transaksi_model(String idpembeli, String idtoko, Double jumlah, Double total, String status, String metode_pembayaran, long waktu_order, long created_at, long updated_at, long tanggal_bayar, String id) {
         this.idpembeli = idpembeli;
         this.idtoko = idtoko;
         this.jumlah = jumlah;
@@ -26,6 +27,15 @@ public class transaksi_model {
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.tanggal_bayar = tanggal_bayar;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getIdpembeli() {
