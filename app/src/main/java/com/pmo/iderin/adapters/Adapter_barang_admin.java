@@ -47,7 +47,7 @@ public class Adapter_barang_admin extends RecyclerView.Adapter<Adapter_barang_ad
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_barang_toko, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.item_barang_admin, parent, false);
         return new MyViewHolder(v);
     }
 
@@ -57,26 +57,26 @@ public class Adapter_barang_admin extends RecyclerView.Adapter<Adapter_barang_ad
         holder.tvNamaBarang.setText(barang_model.getNama());
         holder.tvHargaQty.setText("Rp."+barang_model.getHarga());
         Picasso.get().load(barang_model.getFoto()).into(holder.ivBarangGambar);
-        databaseReference
-                .child(context.getResources().getString(R.string.CHILD_BARANG))
-                .child(context.getResources().getString(R.string.CHILD_BARANG_KATEGORI))
-                .child(barang_model.getIdkategori().toString())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()){
-                            barang_model model = new barang_model();
-                            model = dataSnapshot.getValue(barang_model.class);
-                            assert model != null;
-                            namaKategori = model.getNama();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+//        databaseReference
+//                .child(context.getResources().getString(R.string.CHILD_BARANG))
+//                .child(context.getResources().getString(R.string.CHILD_BARANG_KATEGORI))
+//                .child(barang_model.getIdkategori().toString())
+//                .addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        if (dataSnapshot.exists()){
+//                            barang_model model = new barang_model();
+//                            model = dataSnapshot.getValue(barang_model.class);
+//                            assert model != null;
+//                            namaKategori = model.getNama();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
         holder.tvBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

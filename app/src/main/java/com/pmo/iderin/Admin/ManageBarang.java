@@ -43,13 +43,14 @@ public class ManageBarang extends AppCompatActivity {
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-    List<barang_model> list = new ArrayList<>();
+    List<barang_model>  barang_modelList = new ArrayList<>();
     Adapter_barang_admin adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_barang);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Semua Barang");
         getBarang();
 
@@ -60,30 +61,30 @@ public class ManageBarang extends AppCompatActivity {
         databaseReference.child(getResources().getString(R.string.CHILD_BARANG))
                 .child(getResources().getString(R.string.CHILD_BARANG_ALL))
                 .orderByChild(getString(R.string.ORDERBY_CREATED))
+
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            list.clear();
-                            barang_model model = new barang_model();
-                            for (DataSnapshot data : dataSnapshot.getChildren()){
-
-                                model = dataSnapshot.getValue(barang_model.class);
-                                model.setId(dataSnapshot.getKey());
+                        if (dataSnapshot.exists()) {
+                            shimmerRecyclerBarang.hideShimmer();
+                            barang_modelList.clear();
+                            for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                barang_model model = new barang_model();
+                                model = data.getValue(barang_model.class);
+                                model.setId(data.getKey());
                                 assert model != null;
-                                list.add(model);
-                                adapter = new Adapter_barang_admin(context,list);
-                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context,RecyclerView.VERTICAL,false);
+                                barang_modelList.add(model);
+                                adapter = new Adapter_barang_admin(context, barang_modelList);
+                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
                                 shimmerRecyclerBarang.setLayoutManager(layoutManager);
                                 shimmerRecyclerBarang.setAdapter(adapter);
-
                             }
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        shimmerRecyclerBarang.hideShimmer();
                     }
                 });
     }
