@@ -42,8 +42,10 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(new Intent(context,KategoriActivity.class));
                 break;
             case R.id.ly_manage_barang:
+                startActivity(new Intent(context,ManageBarang.class));
                 break;
             case R.id.ly_manage_user:
+                startActivity(new Intent(context,ManageUser.class));
                 break;
         }
     }

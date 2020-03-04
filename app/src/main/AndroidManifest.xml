@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Admin.ManageBarang"></activity>
+        <activity android:name=".Admin.ManageUser"></activity>
+        <activity android:name=".Admin.ManageBarang" />
         <activity android:name=".PenjualActivity" />
         <activity android:name=".DetailToko" />
         <activity android:name=".AllBarang" />
