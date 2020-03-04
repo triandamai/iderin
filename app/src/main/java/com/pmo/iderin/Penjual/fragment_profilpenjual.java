@@ -60,7 +60,7 @@ public class fragment_profilpenjual extends Fragment {
                         if(dataSnapshot.exists()){
                             profil_model model = new profil_model();
                             model = dataSnapshot.getValue(profil_model.class);
-                            
+
 
                         }
                     }
