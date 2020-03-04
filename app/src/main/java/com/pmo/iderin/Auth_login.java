@@ -93,24 +93,75 @@ public class Auth_login extends AppCompatActivity {
         firebaseAuth.signInWithCredential(phoneAuthCredential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-
-                        Toast.makeText(context, "Berhasil", Toast.LENGTH_LONG).show();
-                        profil = new profil_model();
-                        profil.setNohp(etNohp.getText().toString());
-                        profil.setCreated_at(new Date().getTime());
-                        profil.setUpdated_at(new Date().getTime());
-                        profil.setLevel(getResources().getString(R.string.LEVEL_USER));
-                        profil.setNama("Pengguna baru");
-                        databaseReference
-                                .child(getResources().getString(R.string.CHILD_AKUN))
+                        databaseReference.child(getResources().getString(R.string.CHILD_AKUN))
                                 .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
-                                .child(firebaseAuth.getUid())
-                                .setValue(profil)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                .child(firebaseAuth.getCurrentUser().getUid())
+                                .addValueEventListener(new ValueEventListener() {
                                     @Override
-                                    public void onSuccess(Void aVoid) {
-                                        startActivity(new Intent(context, MainActivity.class));
-                                        finish();
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if(dataSnapshot.exists()){
+                                            profil_model model = new profil_model();
+                                            model = dataSnapshot.getValue(profil_model.class);
+                                            if(model.getLevel().toString().equalsIgnoreCase("ADMIN")){
+                                                profil = new profil_model();
+                                                profil.setNohp(etNohp.getText().toString());
+                                                profil.setCreated_at(new Date().getTime());
+                                                profil.setUpdated_at(new Date().getTime());
+                                                databaseReference
+                                                        .child(getResources().getString(R.string.CHILD_AKUN))
+                                                        .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
+                                                        .child(firebaseAuth.getUid())
+                                                        .setValue(profil)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                startActivity(new Intent(context, AdminActivity.class));
+                                                                finish();
+                                                            }
+                                                        });
+                                            }else if(model.getLevel().toString().equalsIgnoreCase("TOKO")) {
+                                                profil = new profil_model();
+                                                profil.setNohp(etNohp.getText().toString());
+                                                profil.setCreated_at(new Date().getTime());
+                                                profil.setUpdated_at(new Date().getTime());
+                                                databaseReference
+                                                        .child(getResources().getString(R.string.CHILD_AKUN))
+                                                        .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
+                                                        .child(firebaseAuth.getUid())
+                                                        .setValue(profil)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                startActivity(new Intent(context, PenjualActivity.class));
+                                                                finish();
+                                                            }
+                                                        });
+                                            }else if( model.getLevel().toString().equalsIgnoreCase("USER")){
+                                                profil = new profil_model();
+                                                profil.setNohp(etNohp.getText().toString());
+                                                profil.setCreated_at(new Date().getTime());
+                                                profil.setUpdated_at(new Date().getTime());
+                                                databaseReference
+                                                        .child(getResources().getString(R.string.CHILD_AKUN))
+                                                        .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
+                                                        .child(firebaseAuth.getUid())
+                                                        .setValue(profil)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                startActivity(new Intent(context, MainActivity.class));
+                                                                finish();
+                                                            }
+                                                        });
+                                            }else {
+
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                     }
                                 });
                     } else {

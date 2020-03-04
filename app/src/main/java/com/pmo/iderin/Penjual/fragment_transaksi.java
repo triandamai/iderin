@@ -42,7 +42,7 @@ public class fragment_transaksi extends Fragment {
 
     private void getTransaksi() {
         databaseReference.child(getResources().getString(R.string.CHILD_TRANSAKSI))
-                .orderByChild("")
+                .orderByChild(getResources().getString(R.string.ORDERBY_CHILD_TOKO))
                 .equalTo(firebaseUser.getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override

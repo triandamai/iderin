@@ -19,4 +19,5 @@
 
     <string name="LEVEL_ADMIN">ADMIN</string>
     <string name="LEVEL_USER">USER</string>
+    <string name="ORDERBY_CHILD_TOKO">idtoko</string>
 </resources>
