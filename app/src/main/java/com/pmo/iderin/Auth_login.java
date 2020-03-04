@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pmo.iderin.Admin.AdminActivity;
 import com.pmo.iderin.Helpers.Alert;
 import com.pmo.iderin.Profile.AddProfil;
 import com.pmo.iderin.models.profil_model;
@@ -105,7 +106,6 @@ public class Auth_login extends AppCompatActivity {
                                             if(model.getLevel().toString().equalsIgnoreCase("ADMIN")){
                                                 profil = new profil_model();
                                                 profil.setNohp(etNohp.getText().toString());
-                                                profil.setCreated_at(new Date().getTime());
                                                 profil.setUpdated_at(new Date().getTime());
                                                 databaseReference
                                                         .child(getResources().getString(R.string.CHILD_AKUN))
@@ -122,7 +122,6 @@ public class Auth_login extends AppCompatActivity {
                                             }else if(model.getLevel().toString().equalsIgnoreCase("TOKO")) {
                                                 profil = new profil_model();
                                                 profil.setNohp(etNohp.getText().toString());
-                                                profil.setCreated_at(new Date().getTime());
                                                 profil.setUpdated_at(new Date().getTime());
                                                 databaseReference
                                                         .child(getResources().getString(R.string.CHILD_AKUN))
@@ -139,7 +138,6 @@ public class Auth_login extends AppCompatActivity {
                                             }else if( model.getLevel().toString().equalsIgnoreCase("USER")){
                                                 profil = new profil_model();
                                                 profil.setNohp(etNohp.getText().toString());
-                                                profil.setCreated_at(new Date().getTime());
                                                 profil.setUpdated_at(new Date().getTime());
                                                 databaseReference
                                                         .child(getResources().getString(R.string.CHILD_AKUN))

@@ -54,7 +54,7 @@
 	- transaksi
 		- pushid
 			- idpembeli
-			- idpenjual
+			- idtoko
 			- jumlah
 			- harga
 			- total
