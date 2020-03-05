@@ -1,4 +1,6 @@
-<manifest xmlns:dist="http://schemas.android.com/apk/distribution"
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.toko">
 
     <dist:module
@@ -7,7 +9,12 @@
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>
+
         <dist:fusing dist:include="true" />
     </dist:module>
-</manifest>
 
+    <application>
+        <activity android:name=".AllToko"></activity>
+    </application>
+
+</manifest>

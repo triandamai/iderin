@@ -28,6 +28,10 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.MyView
     private Context context;
     private List<kategori_model> list = new ArrayList<>();
 
+    public AdapterKategori(Context context, List<kategori_model> list) {
+        this.context = context;
+        this.list = list;
+    }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,13 +42,14 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final kategori_model mode = list.get(position);
+        holder.tvNamaKategori.setText(mode.getNama());
         Picasso.get().load(mode.getFoto().toString())
                 .into(holder.ivKategori);
         holder.cvParent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent kebarang = new Intent();
-                kebarang.setClassName(BuildConfig.APPLICATION_ID, "com.barang.All");
+                kebarang.setClassName(context, "com.barang.All");
                 kebarang.putExtra(context.getString(R.string.INTENT_PUT_IDKATEGORI), mode.getId().toString());
                 context.startActivity(kebarang);
             }
