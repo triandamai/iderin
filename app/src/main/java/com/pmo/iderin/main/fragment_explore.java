@@ -22,9 +22,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pmo.iderin.R;
+import com.pmo.iderin.adapters.Adapter_barang;
 import com.pmo.iderin.adapters.Adapter_kategori;
 import com.pmo.iderin.models.barang_model;
 import com.pmo.iderin.models.kategori_model;
+import com.pmo.iderin.models.toko_model;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 import com.todkars.shimmer.ShimmerRecyclerView;
@@ -41,15 +43,16 @@ public class fragment_explore extends Fragment implements ImageListener {
     @BindView(R.id.shimmer_recycler_kategori)
     ShimmerRecyclerView shimmerRecyclerKategori;
     @BindView(R.id.shimmer_recycler_terlaris)
-//    ShimmerRecyclerView shimmerRecyclerTerlaris;
-//    @BindView(R.id.shimmer_recycler_terdekat)
-    ShimmerRecyclerView shimmerRecyclerTerdekat;
+    ShimmerRecyclerView shimmerRecyclerTerlaris;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.appbar)
     AppBarLayout appbar;
     @BindView(R.id.carouselView)
     CarouselView carouselView;
+    @BindView(R.id.shimmer_recycler_toko)
+    ShimmerRecyclerView shimmerRecyclerToko;
     // TODO: Rename parameter arguments, choose names that match
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -58,6 +61,7 @@ public class fragment_explore extends Fragment implements ImageListener {
     private List<kategori_model> listkategori = new ArrayList<>();
     private List<barang_model> listbarang = new ArrayList<>();
     private Adapter_kategori adapter;
+    private Adapter_barang adapter_barang;
     private int[] sampleImages = {R.drawable.bg_auth_jpg, R.drawable.bg_auth_jpg};
     private Unbinder unbinder;
 
@@ -83,13 +87,37 @@ public class fragment_explore extends Fragment implements ImageListener {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_explore, container, false);
         unbinder = ButterKnife.bind(this, v);
         shimmerRecyclerKategori.showShimmer();
-        shimmerRecyclerTerdekat.showShimmer();
-        ///shimmerRecyclerTerlaris.showShimmer();
+        shimmerRecyclerToko.showShimmer();
+        shimmerRecyclerTerlaris.showShimmer();
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(this);
         getKategori();
-         getBarang();
+        getBarang();
+        getToko();
         return v;
+    }
+
+    private void getToko() {
+        databaseReference.child(getContext().getResources().getString(R.string.CHILD_AKUN))
+                .child(getContext().getResources().getString(R.string.CHILD_AKUN_TOKO))
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()){
+                            for (DataSnapshot data : dataSnapshot.getChildren()){
+                                toko_model model = new toko_model();
+                                model = data.getValue(toko_model.class);
+                                assert model != null;
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     private void getBarang() {
@@ -107,6 +135,9 @@ public class fragment_explore extends Fragment implements ImageListener {
                             for (DataSnapshot data : dataSnapshot.getChildren()) {
                                 barang_model = data.getValue(barang_model.class);
                                 listbarang.add(barang_model);
+                                adapter_barang = new Adapter_barang(getContext(), listbarang);
+                                shimmerRecyclerTerlaris.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+                                shimmerRecyclerTerlaris.setAdapter(adapter_barang);
                             }
 
                         }
