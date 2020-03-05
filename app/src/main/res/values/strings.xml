@@ -21,4 +21,5 @@
     <string name="LEVEL_USER">USER</string>
     <string name="ORDERBY_CHILD_TOKO">idtoko</string>
     <string name="ORDERBY_CREATED">created_at</string>
+    <string name="CHILD_BARANG_SATUAN">SATUAN</string>
 </resources>

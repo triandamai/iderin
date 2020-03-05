@@ -8,7 +8,8 @@ public class barang_model {
 			idkategori,
 			 idtoko,
 			 deskripsi,
-            foto;
+            foto,
+    idsatuan;
     double harga;
     long created_at,updated_at;
 

@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pmo.iderin.Profile.AddProfil;
+import com.pmo.iderin.Profile.AddToko;
 import com.pmo.iderin.R;
 import com.pmo.iderin.adapters.Adapter_barang_toko;
 import com.pmo.iderin.models.profil_model;
@@ -50,6 +51,8 @@ public class fragment_profilpenjual extends Fragment {
     LinearLayout lyBtnHelp;
     @BindView(R.id.ly_btn_logout)
     LinearLayout lyBtnLogout;
+    @BindView(R.id.ly_btn_mytoko)
+    LinearLayout lyBtnMytoko;
     private Unbinder unbinder;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -89,7 +92,7 @@ public class fragment_profilpenjual extends Fragment {
                             model.setUid(dataSnapshot.getKey());
                             assert model != null;
                             tvNama.setText(model.getNama().toString());
-                            tvDetail.setText("+62"+model.getNohp());
+                            tvDetail.setText("+62" + model.getNohp());
                             Picasso.get().load(model.getFoto().toString()).into(profileImage);
                         }
                     }
@@ -101,7 +104,12 @@ public class fragment_profilpenjual extends Fragment {
                 });
     }
 
-    @OnClick({R.id.profile_image, R.id.tv_btn_edit_profil, R.id.ly_btn_manage_address, R.id.ly_btn_iderpay, R.id.ly_btn_help, R.id.ly_btn_logout})
+    @OnClick({R.id.profile_image,
+            R.id.ly_btn_mytoko,
+            R.id.tv_btn_edit_profil,
+            R.id.ly_btn_manage_address,
+            R.id.ly_btn_iderpay,
+            R.id.ly_btn_help, R.id.ly_btn_logout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.profile_image:
@@ -117,6 +125,10 @@ public class fragment_profilpenjual extends Fragment {
                 break;
             case R.id.ly_btn_logout:
                 break;
+            case R.id.ly_btn_mytoko:
+                startActivity(new Intent(getContext(), AddToko.class));
+                break;
+
         }
     }
 }

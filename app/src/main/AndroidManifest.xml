@@ -25,15 +25,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Admin.Satuan"></activity>
         <activity
             android:name=".Admin.ManageUser"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Admin.ManageBarang"
+        <activity
+            android:name=".Admin.ManageBarang"
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".PenjualActivity" />
         <activity android:name=".DetailToko" />
         <activity android:name=".AllBarang" />
-        <activity android:name=".Profile.Ideerpay"
+        <activity
+            android:name=".Profile.Ideerpay"
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".AllKategori" />
         <activity
@@ -63,11 +66,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".Profile.AddAlamat"
+        <activity
+            android:name=".Profile.AddAlamat"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Profile.MyToko"
+        <activity
+            android:name=".Profile.MyToko"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Profile.MyOrderActivity"
+        <activity
+            android:name=".Profile.MyOrderActivity"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Profile.AddProfil"

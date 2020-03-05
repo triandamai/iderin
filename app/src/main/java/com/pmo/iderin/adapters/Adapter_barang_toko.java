@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.pmo.iderin.Profile.Addbarang;
 import com.pmo.iderin.R;
 import com.pmo.iderin.models.barang_model;
+import com.pmo.iderin.models.satuan_model;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -55,7 +56,6 @@ public class Adapter_barang_toko extends RecyclerView.Adapter<Adapter_barang_tok
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         barang_model barang_model = list.get(position);
         holder.tvNamaBarang.setText(barang_model.getNama());
-        holder.tvHargaQty.setText("Rp."+barang_model.getHarga());
         Picasso.get().load(barang_model.getFoto()).into(holder.ivBarangGambar);
         databaseReference
                 .child(context.getResources().getString(R.string.CHILD_BARANG))
@@ -69,6 +69,23 @@ public class Adapter_barang_toko extends RecyclerView.Adapter<Adapter_barang_tok
                             model = dataSnapshot.getValue(barang_model.class);
                             assert model != null;
                             namaKategori = model.getNama();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+        databaseReference.child(context.getResources().getString(R.string.CHILD_BARANG))
+                .child(context.getResources().getString(R.string.CHILD_BARANG_SATUAN))
+                .child(barang_model.getIdsatuan())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()) {
+                            satuan_model model = dataSnapshot.getValue(satuan_model.class);
+                            holder.tvHargaQty.setText("Rp "+barang_model.getHarga() + "/" +model.getNama());
                         }
                     }
 

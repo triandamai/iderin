@@ -34,12 +34,14 @@ import com.mindorks.paracamera.Camera;
 import com.pmo.iderin.Helpers.Alert;
 import com.pmo.iderin.Helpers.BottomSheetTakeKategori;
 import com.pmo.iderin.Helpers.BottomSheetTakePict;
+import com.pmo.iderin.Helpers.BottomSheetTakeSatuan;
 import com.pmo.iderin.Helpers.Kategori;
 import com.pmo.iderin.Helpers.Permissions;
-import com.pmo.iderin.MainActivity;
+import com.pmo.iderin.Helpers.Satuan;
 import com.pmo.iderin.R;
 import com.pmo.iderin.models.barang_model;
 import com.pmo.iderin.models.kategori_model;
+import com.pmo.iderin.models.satuan_model;
 import com.squareup.picasso.Picasso;
 import com.yalantis.ucrop.UCrop;
 
@@ -72,6 +74,8 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
     Button btnSimpan;
     @BindView(R.id.et_nama)
     EditText etNama;
+    @BindView(R.id.et_satuan)
+    EditText etSatuan;
 
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -83,6 +87,7 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
     private String id = "";
     private String idtoko = "";
     private String idKategori = "";
+    private String idSatuan = "";
     private boolean isEditMode = false;
     private Camera camera;
     private kategori_model kategori_model;
@@ -155,6 +160,8 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
                     toko.setNama(etNama.getText().toString());
                     toko.setCreated_at(new Date().getTime());
                     toko.setUpdated_at(new Date().getTime());
+                    toko.setIdsatuan(idSatuan);
+
                     toko.setHarga(Double.parseDouble(etHarga.getText().toString()));
 
                     databaseReference
@@ -180,9 +187,9 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
 
     private boolean cekVal() {
         if (isEditMode) {
-            return !TextUtils.isEmpty(etDeskripsi.getText().toString()) || !TextUtils.isEmpty(etKategori.getText().toString()) || !TextUtils.isEmpty(etNama.getText().toString());
+            return !TextUtils.isEmpty(etDeskripsi.getText().toString()) || !TextUtils.isEmpty(etKategori.getText().toString()) || !TextUtils.isEmpty(etNama.getText().toString()) || !TextUtils.isEmpty(etSatuan.getText().toString());
         } else {
-            return !TextUtils.isEmpty(etDeskripsi.getText().toString()) || !TextUtils.isEmpty(etKategori.getText().toString()) || !TextUtils.isEmpty(etNama.getText().toString()) || filePath != null;
+            return !TextUtils.isEmpty(etDeskripsi.getText().toString()) || !TextUtils.isEmpty(etKategori.getText().toString()) || !TextUtils.isEmpty(etNama.getText().toString()) || !TextUtils.isEmpty(etSatuan.getText().toString()) || filePath != null;
         }
     }
 
@@ -318,9 +325,7 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
     }
 
 
-
-
-    @OnClick({R.id.ivbarang, R.id.et_kategori, R.id.btn_simpan})
+    @OnClick({R.id.ivbarang, R.id.et_kategori, R.id.btn_simpan,R.id.et_satuan})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ivbarang:
@@ -353,6 +358,25 @@ public class Addbarang extends AppCompatActivity implements BottomSheetTakePict.
                 } else {
                     new Alert(context).toast("Isi Semua Field", 1);
                 }
+                break;
+            case R.id.et_satuan:
+                BottomSheetTakeSatuan bts = new BottomSheetTakeSatuan();
+                bts.setOnSatuanSelected(new Satuan() {
+                    @Override
+                    public void selectedSatuan(satuan_model model) {
+                        etSatuan.setText(model.getNama());
+                        idSatuan = model.getIdsatuan();
+                        bts.dismiss();
+
+                    }
+
+                    @Override
+                    public void addSatuan(satuan_model model) {
+
+                    }
+                });
+                bts.show(getSupportFragmentManager(),"Ambil satuan");
+
                 break;
         }
     }

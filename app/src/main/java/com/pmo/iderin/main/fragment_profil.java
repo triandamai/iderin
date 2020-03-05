@@ -19,12 +19,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.pmo.iderin.Admin.AdminActivity;
 import com.pmo.iderin.Profile.AddProfil;
 import com.pmo.iderin.Profile.AddToko;
 import com.pmo.iderin.Profile.ManageAlamatActivity;
 import com.pmo.iderin.Profile.MyOrderActivity;
-import com.pmo.iderin.Profile.MyToko;
 import com.pmo.iderin.R;
 import com.pmo.iderin.Splash;
 import com.pmo.iderin.models.profil_model;
@@ -133,7 +131,6 @@ public class fragment_profil extends Fragment {
 
 
     @OnClick({R.id.ly_btn_myorder,
-
             R.id.ly_btn_manage_address,
             R.id.ly_btn_iderpay,
             R.id.ly_btn_help,
@@ -160,6 +157,9 @@ public class fragment_profil extends Fragment {
                 startActivity(new Intent(getContext(), AddProfil.class));
                 break;
 
+
         }
     }
+
+
 }

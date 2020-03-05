@@ -76,6 +76,7 @@
                android:paddingStart="16dp"
                android:paddingEnd="16dp"
                android:orientation="vertical">
+
                <LinearLayout
                    android:id="@+id/ly_btn_myorder"
                    android:layout_width="match_parent"
@@ -94,7 +95,10 @@
                        android:layout_height="wrap_content"
                        android:text="Pesananku"/>
                </LinearLayout>
-
+               <View
+                   android:layout_width="match_parent"
+                   android:background="#E2A3A3A3"
+                   android:layout_height="1dp"/>
                <LinearLayout
                    android:id="@+id/ly_btn_manage_address"
                    android:layout_width="match_parent"

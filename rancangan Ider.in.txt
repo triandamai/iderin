@@ -12,6 +12,13 @@
 	- gambar
 		- pushid(detail)
 			- url
+	- Satuan
+		- pushid
+			- nama satuan
+			- idsatuan
+			- deskripsi
+			- created_at
+			- updated_at
 
 - Akun
 	- profil
