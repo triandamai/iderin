@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.barang_model;
 import com.google.android.material.appbar.AppBarLayout;
@@ -52,13 +54,18 @@ public class All extends AppCompatActivity {
         shimmerRecyclerSemuabarang.showShimmer();
 
         Intent intent = getIntent();
-        if (intent.getStringExtra(getResources().getString(R.string.INTENT_PUT_IDKATEGORI)) == null) {
-            getAllBarang();
-        } else {
-            String idkategori = intent.getStringExtra(getResources().getString(R.string.INTENT_PUT_IDKATEGORI));
-            getBarangByKategori(idkategori);
-        }
 
+        if (intent.getExtras() != null) {
+            if (intent.getStringExtra(getResources().getString(R.string.INTENT_PUT_IDKATEGORI)) == null) {
+
+                getAllBarang();
+            } else {
+                String idkategori = intent.getStringExtra(getResources().getString(R.string.INTENT_PUT_IDKATEGORI));
+                getBarangByKategori(idkategori);
+            }
+        } else {
+            getAllBarang();
+        }
 
     }
 
@@ -66,7 +73,8 @@ public class All extends AppCompatActivity {
         databaseReference
                 .child(getString(R.string.CHILD_BARANG))
                 .child(getString(R.string.CHILD_BARANG_ALL))
-                .child(idkategori)
+                .orderByChild("idkategori")
+                .equalTo(idkategori)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -79,6 +87,8 @@ public class All extends AppCompatActivity {
                                 modelList.add(model);
                             }
                             adapter = new AdapterBarang(context, modelList);
+                            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 2);
+                            shimmerRecyclerSemuabarang.setLayoutManager(layoutManager);
                             shimmerRecyclerSemuabarang.setAdapter(adapter);
                         }
                     }
@@ -107,6 +117,8 @@ public class All extends AppCompatActivity {
 
                             }
                             adapter = new AdapterBarang(context, modelList);
+                            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 2);
+                            shimmerRecyclerSemuabarang.setLayoutManager(layoutManager);
                             shimmerRecyclerSemuabarang.setAdapter(adapter);
                         }
                     }

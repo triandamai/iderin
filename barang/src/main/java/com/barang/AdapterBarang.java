@@ -11,10 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.barang_model;
+import com.core.models.satuan_model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +54,27 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         barang_model model = list.get(position);
+        holder.tvBarangNama.setText(model.getNama().toString());
+        Picasso.get().load(model.getFoto().toString()).into(holder.ivBarangGambar);
+        databaseReference.child(context.getString(R.string.CHILD_BARANG))
+                .child(context.getString(R.string.CHILD_BARANG_SATUAN))
+                .child(model.getIdsatuan())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            satuan_model satuan = dataSnapshot.getValue(satuan_model.class);
+                            holder.tvBarangHargaStok.setText("Rp " + model.getHarga() + "/" + satuan.getNama());
+                        } else {
+                            holder.tvBarangHargaStok.setText("Rp " + model.getHarga() + "tidak ada satuan");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
     }
 
