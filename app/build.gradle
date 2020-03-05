@@ -53,7 +53,7 @@ dependencies {
 
     api 'com.github.ibrahimsn98:SmoothBottomBar:1.7'
     //TODO:: butterknife
-    implementation 'com.jakewharton:butterknife:10.2.1'
+    api 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     //TODO:: shimmer
     api 'androidx.cardview:cardview:1.0.0'

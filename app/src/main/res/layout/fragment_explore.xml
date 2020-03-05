@@ -57,6 +57,7 @@
                         android:textSize="@dimen/dp_20"
                         android:text="Kategori"/>
                     <TextView
+                        android:id="@+id/tv_btn_semua_kategori"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -90,6 +91,7 @@
                         android:layout_weight="1"
                         android:text="Paling banyak dicari"/>
                     <TextView
+                        android:id="@+id/tv_btn_semua_barang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -125,6 +127,7 @@
                         android:layout_weight="1"
                         android:text="Daftar Toko"/>
                     <TextView
+                        android:id="@+id/tv_btn_semuatoko"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
