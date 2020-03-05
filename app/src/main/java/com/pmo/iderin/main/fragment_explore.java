@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +25,8 @@ import com.pmo.iderin.R;
 import com.pmo.iderin.adapters.Adapter_kategori;
 import com.pmo.iderin.models.barang_model;
 import com.pmo.iderin.models.kategori_model;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
 import java.util.ArrayList;
@@ -29,15 +34,22 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
-public class fragment_explore extends Fragment {
+public class fragment_explore extends Fragment implements ImageListener {
     @BindView(R.id.shimmer_recycler_kategori)
     ShimmerRecyclerView shimmerRecyclerKategori;
     @BindView(R.id.shimmer_recycler_terlaris)
-    ShimmerRecyclerView shimmerRecyclerTerlaris;
-    @BindView(R.id.shimmer_recycler_terdekat)
+//    ShimmerRecyclerView shimmerRecyclerTerlaris;
+//    @BindView(R.id.shimmer_recycler_terdekat)
     ShimmerRecyclerView shimmerRecyclerTerdekat;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.appbar)
+    AppBarLayout appbar;
+    @BindView(R.id.carouselView)
+    CarouselView carouselView;
     // TODO: Rename parameter arguments, choose names that match
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -46,6 +58,8 @@ public class fragment_explore extends Fragment {
     private List<kategori_model> listkategori = new ArrayList<>();
     private List<barang_model> listbarang = new ArrayList<>();
     private Adapter_kategori adapter;
+    private int[] sampleImages = {R.drawable.bg_auth_jpg, R.drawable.bg_auth_jpg};
+    private Unbinder unbinder;
 
     public static fragment_explore newInstance(String param1, String param2) {
         fragment_explore fragment = new fragment_explore();
@@ -67,12 +81,14 @@ public class fragment_explore extends Fragment {
         // Inflate the layout for this fragment
 
         View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_explore, container, false);
-        ButterKnife.bind(this,v);
+        unbinder = ButterKnife.bind(this, v);
         shimmerRecyclerKategori.showShimmer();
         shimmerRecyclerTerdekat.showShimmer();
-        shimmerRecyclerTerlaris.showShimmer();
+        ///shimmerRecyclerTerlaris.showShimmer();
+        carouselView.setPageCount(sampleImages.length);
+        carouselView.setImageListener(this);
         getKategori();
-       // getBarang();
+         getBarang();
         return v;
     }
 
@@ -85,10 +101,10 @@ public class fragment_explore extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
+                        if (dataSnapshot.exists()) {
                             listbarang.clear();
                             barang_model barang_model = new barang_model();
-                            for (DataSnapshot data : dataSnapshot.getChildren()){
+                            for (DataSnapshot data : dataSnapshot.getChildren()) {
                                 barang_model = data.getValue(barang_model.class);
                                 listbarang.add(barang_model);
                             }
@@ -112,16 +128,16 @@ public class fragment_explore extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
+                        if (dataSnapshot.exists()) {
                             listkategori.clear();
                             kategori_model model = new kategori_model();
-                            for (DataSnapshot data : dataSnapshot.getChildren()){
+                            for (DataSnapshot data : dataSnapshot.getChildren()) {
                                 model = data.getValue(kategori_model.class);
                                 assert model != null;
                                 listkategori.add(model);
                             }
-                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
-                            adapter = new Adapter_kategori(getContext(),listkategori);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+                            adapter = new Adapter_kategori(getContext(), listkategori);
                             shimmerRecyclerKategori.setLayoutManager(layoutManager);
                             shimmerRecyclerKategori.setAdapter(adapter);
                         }
@@ -143,8 +159,12 @@ public class fragment_explore extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
+        unbinder.unbind();
     }
 
 
+    @Override
+    public void setImageForPosition(int position, ImageView imageView) {
+        imageView.setImageResource(sampleImages[position]);
+    }
 }
