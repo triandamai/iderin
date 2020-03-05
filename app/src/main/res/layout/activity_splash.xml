@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffff"
-    tools:context=".Splash">
+    tools:context="com.iderin.Splash">
 
     <LinearLayout
         android:layout_width="match_parent"

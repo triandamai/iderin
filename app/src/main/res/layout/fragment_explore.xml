@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/Theme.AppCompat.NoActionBar"
-    tools:context=".main.fragment_explore">
+    tools:context="com.iderin.main.fragment_explore">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"

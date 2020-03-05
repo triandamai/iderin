@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Penjual.fragment_profilpenjual">
+    tools:context="com.iderin.Penjual.fragment_profilpenjual">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

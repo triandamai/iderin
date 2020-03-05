@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Penjual.fragment_transaksi">
+    tools:context="com.iderin.Penjual.fragment_transaksi">
     <com.todkars.shimmer.ShimmerRecyclerView
         android:id="@+id/shimmer_recycler_transaksi"
         android:layout_below="@+id/cv_detail"

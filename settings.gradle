@@ -1,2 +1,7 @@
 include ':app'
 rootProject.name='Iderin'
+include ':transaksi'
+include ':iderpay'
+include ':core'
+include ':kategori'
+include ':barang'

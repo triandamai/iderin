@@ -22,4 +22,8 @@
     <string name="ORDERBY_CHILD_TOKO">idtoko</string>
     <string name="ORDERBY_CREATED">created_at</string>
     <string name="CHILD_BARANG_SATUAN">SATUAN</string>
+    <string name="title_transaksi">Transaksi</string>
+    <string name="title_iderpay">Iderpay</string>
+    <string name="title_kategori">Kategori</string>
+    <string name="title_barang">Semua Barang</string>
 </resources>

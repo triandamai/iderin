@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffff"
-    tools:context=".Profile.ManageAlamatActivity">
+    tools:context="com.iderin.Profile.ManageAlamatActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_alamat"
         android:layout_width="match_parent"

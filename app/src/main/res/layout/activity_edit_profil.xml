@@ -9,7 +9,7 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:background="#ffff"
-    tools:context=".Profile.AddProfil">
+    tools:context="com.iderin.Profile.AddProfil">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

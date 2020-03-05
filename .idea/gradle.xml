@@ -12,6 +12,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/barang" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/iderpay" />
+            <option value="$PROJECT_DIR$/kategori" />
+            <option value="$PROJECT_DIR$/transaksi" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

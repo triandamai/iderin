@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffff"
-    tools:context=".Auth_login">
+    tools:context="com.iderin.Auth_login">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

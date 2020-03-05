@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    compileOnly 'org.projectlombok:lombok:1.16.20'
+    annotationProcessor 'org.projectlombok:lombok:1.16.20'
+    //material
+    api 'com.google.android.material:material:1.1.0'
+
+    api 'com.squareup.picasso:picasso:2.71828'
+
+    api 'com.github.ibrahimsn98:SmoothBottomBar:1.7'
+
+    //TODO : https://github.com/janishar/ParaCamera
+    api 'com.mindorks:paracamera:0.2.2'
+    //TODO : https://github.com/Clans/FloatingActionButton
+    api 'com.github.clans:fab:1.6.4'
+
+
+}
+
+apply plugin: 'com.google.gms.google-services'

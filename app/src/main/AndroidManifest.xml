@@ -25,36 +25,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Admin.Satuan"></activity>
+        <activity android:name="com.iderin.Admin.Satuan"></activity>
         <activity
-            android:name=".Admin.ManageUser"
+            android:name="com.iderin.Admin.ManageUser"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Admin.ManageBarang"
+            android:name="com.iderin.Admin.ManageBarang"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".PenjualActivity" />
-        <activity android:name=".DetailToko" />
-        <activity android:name=".AllBarang" />
+        <activity android:name="com.iderin.PenjualActivity" />
+        <activity android:name="com.iderin.DetailToko" />
+        <activity android:name="com.iderin.AllBarang" />
         <activity
-            android:name=".Profile.Ideerpay"
+            android:name="com.iderin.Profile.Ideerpay"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".AllKategori" />
+        <activity android:name="com.iderin.AllKategori" />
         <activity
-            android:name=".Admin.KategoriActivity"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name=".Admin.FormKategori"
+            android:name="com.iderin.Admin.KategoriActivity"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Admin.AdminActivity"
+            android:name="com.iderin.Admin.FormKategori"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Auth_Register"
+            android:name="com.iderin.Admin.AdminActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity
+            android:name="com.iderin.Auth_Register"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Profile.Addbarang"
+            android:name="com.iderin.Profile.Addbarang"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Init">
+        <activity android:name="com.iderin.Init">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,33 +67,33 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Profile.AddAlamat"
+            android:name="com.iderin.Profile.AddAlamat"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Profile.MyToko"
+            android:name="com.iderin.Profile.MyToko"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Profile.MyOrderActivity"
+            android:name="com.iderin.Profile.MyOrderActivity"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Profile.AddProfil"
+            android:name="com.iderin.Profile.AddProfil"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Profile.AddToko"
+            android:name="com.iderin.Profile.AddToko"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Profile.ManageAlamatActivity"
+            android:name="com.iderin.Profile.ManageAlamatActivity"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Explore.TokoActivity"
+            android:name="com.iderin.Explore.TokoActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".Activity_checkout" />
+        <activity android:name="com.iderin.SearchActivity" />
+        <activity android:name="com.iderin.Activity_checkout" />
         <activity
-            android:name=".Auth_login"
+            android:name="com.iderin.Auth_login"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Splash" />
+        <activity android:name="com.iderin.MainActivity" />
+        <activity android:name="com.iderin.Splash" />
     </application>
 
 </manifest>
