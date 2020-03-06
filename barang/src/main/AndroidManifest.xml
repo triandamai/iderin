@@ -15,6 +15,8 @@
 
     <application>
         <activity android:name=".AllBarang"></activity>
+        <activity android:name=".Addbarang"></activity>
+
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.iderin.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class AdapterToko extends RecyclerView.Adapter<AdapterToko.MyViewHolder> 
         holder.tvJudulToko.setText(model.getNamatoko());
         holder.tvAlamatLengkap.setText(model.getAlamat());
         Picasso.get().load(model.getBanner_toko());
+        Log.e("IDERIN", "ada kok");
 
     }
 

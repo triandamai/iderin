@@ -15,9 +15,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.iderin.Helpers.windowManager;
 import com.pmo.iderin.BuildConfig;
 import com.pmo.iderin.R;
+
+import static com.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class Init extends AppCompatActivity {
 
@@ -30,8 +31,9 @@ public class Init extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init);
-        windowManager.getTransparentStatusBar(this);
 
+        getTransparentStatusBar(this);
+        //firebaseAuth.signOut();
         if (firebaseUser != null) {
           databaseReference.child(getResources().getString(R.string.CHILD_AKUN))
                   .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
@@ -53,7 +55,7 @@ public class Init extends AppCompatActivity {
                                   finish();
                               }else if(model.getLevel().toString().equalsIgnoreCase("TOKO")){
                                   Intent penjual = new Intent();
-                                  penjual.setClassName(BuildConfig.APPLICATION_ID, "com.penjual.Penjual");
+                                  penjual.setClassName(BuildConfig.APPLICATION_ID, "com.mitra.Mitra");
                                   startActivity(penjual);
                                   finish();
                               }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -111,7 +112,7 @@ public class Register extends AppCompatActivity {
                                     .setValue(profil)
                                     .addOnSuccessListener(aVoid -> {
                                         Intent profil = new Intent();
-                                        profil.setClassName(context, "com.profil.AddToko");
+                                        profil.setClassName(context, "com.profil.AddProfil");
                                         startActivity(profil);
                                         finish();
                                     });
@@ -178,6 +179,7 @@ public class Register extends AppCompatActivity {
 
                         @Override
                         public void onFinish() {
+                            waktu = 60;
                             tvTimer.setText("Kirim Ulang ?");
                             tvTimer.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -205,6 +207,7 @@ public class Register extends AppCompatActivity {
                     }
                 } catch (NullPointerException x) {
                     Toast.makeText(context, "Maaf gagal mengirim verifikasi", Toast.LENGTH_LONG).show();
+                    Log.e("IDERIN", x.getMessage());
                     x.printStackTrace();
                 }
                 break;
@@ -223,6 +226,7 @@ public class Register extends AppCompatActivity {
         } else {
             lyNohp.setVisibility(View.VISIBLE);
             lyKode.setVisibility(View.GONE);
+            waktu = 60;
             isLayoutNohp = true;
         }
     }

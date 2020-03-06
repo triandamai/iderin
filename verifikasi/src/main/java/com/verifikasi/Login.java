@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.core.models.profil_model;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,7 +32,6 @@ import com.iderin.Helpers.windowManager;
 import com.iderin.MainActivity;
 import com.pmo.iderin.BuildConfig;
 
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -107,63 +105,41 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         if (dataSnapshot.exists()) {
-                                            profil_model model = new profil_model();
-                                            model = dataSnapshot.getValue(profil_model.class);
-                                            if (model.getLevel().toString().equalsIgnoreCase("ADMIN")) {
-                                                profil = new profil_model();
-                                                profil.setNohp(etNohp.getText().toString());
-                                                profil.setUpdated_at(new Date().getTime());
-                                                databaseReference
-                                                        .child(getResources().getString(R.string.CHILD_AKUN))
-                                                        .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
-                                                        .child(firebaseAuth.getUid())
-                                                        .setValue(profil)
-                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void aVoid) {
-                                                                Intent admin = new Intent();
-                                                                admin.setClassName(BuildConfig.APPLICATION_ID, "com.admin.Admin");
-                                                                startActivity(admin);
-                                                                finish();
-                                                            }
-                                                        });
-                                            } else if (model.getLevel().toString().equalsIgnoreCase("TOKO")) {
-                                                profil = new profil_model();
-                                                profil.setNohp(etNohp.getText().toString());
-                                                profil.setUpdated_at(new Date().getTime());
-                                                databaseReference
-                                                        .child(getResources().getString(R.string.CHILD_AKUN))
-                                                        .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
-                                                        .child(firebaseAuth.getUid())
-                                                        .setValue(profil)
-                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void aVoid) {
-                                                                Intent penjual = new Intent();
-                                                                penjual.setClassName(BuildConfig.APPLICATION_ID, "com.penjual.Penjual");
-                                                                startActivity(penjual);
-                                                                finish();
-                                                            }
-                                                        });
-                                            } else if (model.getLevel().toString().equalsIgnoreCase("USER")) {
-                                                profil = new profil_model();
-                                                profil.setNohp(etNohp.getText().toString());
-                                                profil.setUpdated_at(new Date().getTime());
-                                                databaseReference
-                                                        .child(getResources().getString(R.string.CHILD_AKUN))
-                                                        .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
-                                                        .child(firebaseAuth.getUid())
-                                                        .setValue(profil)
-                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void aVoid) {
-                                                                startActivity(new Intent(context, MainActivity.class));
-                                                                finish();
-                                                            }
-                                                        });
-                                            } else {
+                                            try {
+                                                String level = dataSnapshot.child("level").getValue(String.class);
 
+                                                if (level.toString().equalsIgnoreCase("ADMIN")) {
+
+                                                    Intent admin = new Intent();
+                                                    admin.setClassName(BuildConfig.APPLICATION_ID, "com.admin.Admin");
+                                                    startActivity(admin);
+                                                    finish();
+
+                                                } else if (level.toString().equalsIgnoreCase("TOKO")) {
+
+                                                    Intent penjual = new Intent();
+                                                    penjual.setClassName(BuildConfig.APPLICATION_ID, "com.mitra.Mitra");
+                                                    startActivity(penjual);
+                                                    finish();
+
+                                                } else if (level.toString().equalsIgnoreCase("USER")) {
+
+                                                    startActivity(new Intent(context, MainActivity.class));
+                                                    finish();
+
+                                                } else {
+                                                    Intent penjual = new Intent();
+                                                    penjual.setClassName(BuildConfig.APPLICATION_ID, "com.profil.AddProfil");
+                                                    startActivity(penjual);
+                                                    finish();
+                                                }
+                                            } catch (NullPointerException e) {
+                                                Intent penjual = new Intent();
+                                                penjual.setClassName(BuildConfig.APPLICATION_ID, "com.profil.AddProfil");
+                                                startActivity(penjual);
+                                                finish();
                                             }
+
                                         }
                                     }
 
@@ -214,8 +190,7 @@ public class Login extends AppCompatActivity {
         databaseReference.child(getResources().getString(R.string.CHILD_AKUN))
                 .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
                 .orderByChild("nohp")
-                .startAt(etNohp.getText().toString())
-                .endAt(etNohp.getText().toString())
+                .equalTo(etNohp.getText().toString())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -260,6 +235,7 @@ public class Login extends AppCompatActivity {
 
                             @Override
                             public void onFinish() {
+                                waktu = 60;
                                 tvTimer.setText("Kirim Ulang ?");
                                 tvTimer.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -312,6 +288,7 @@ public class Login extends AppCompatActivity {
             lyNohp.setVisibility(View.VISIBLE);
             lyKode.setVisibility(View.GONE);
             isLayoutNohp = true;
+            waktu = 60;
         }
     }
 }

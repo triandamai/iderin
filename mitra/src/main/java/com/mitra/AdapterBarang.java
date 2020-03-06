@@ -1,4 +1,4 @@
-package com.penjual.Adapter;
+package com.mitra;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import co
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -63,7 +62,7 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()){
+                        if (dataSnapshot.exists()) {
                             barang_model model = new barang_model();
                             model = dataSnapshot.getValue(barang_model.class);
                             assert model != null;
@@ -82,9 +81,9 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()) {
+                        if (dataSnapshot.exists()) {
                             satuan_model model = dataSnapshot.getValue(satuan_model.class);
-                            holder.tvHargaQty.setText("Rp "+barang_model.getHarga() + "/" +model.getNama());
+                            holder.tvHargaQty.setText("Rp " + barang_model.getHarga() + "/" + model.getNama());
                         }
                     }
 
@@ -98,12 +97,12 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
             public void onClick(View v) {
                 Intent addbarang = new Intent();
                 addbarang.setClassName(context, "com.barang.Addbarang")
-                        .putExtra("gambar",barang_model.getFoto())
-                        .putExtra("idkategori",barang_model.getIdkategori())
-                        .putExtra("kategori",namaKategori)
-                        .putExtra("nama",barang_model.getNama())
-                        .putExtra("deskripsi",barang_model.getDeskripsi())
-                        .putExtra("harga",barang_model.getHarga())
+                        .putExtra("gambar", barang_model.getFoto())
+                        .putExtra("idkategori", barang_model.getIdkategori())
+                        .putExtra("kategori", namaKategori)
+                        .putExtra("nama", barang_model.getNama())
+                        .putExtra("deskripsi", barang_model.getDeskripsi())
+                        .putExtra("harga", barang_model.getHarga())
                         .putExtra("id", barang_model.getId());
                 context.startActivity(addbarang);
 
@@ -112,18 +111,18 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
         holder.btnTvHapus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context,R.style.dialog)
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context, R.style.dialog)
                         .setTitle("Hapus?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                    databaseReference
-                                            .child(context.getResources().getString(R.string.CHILD_BARANG))
-                                            .child(context.getResources().getString(R.string.CHILD_BARANG_ALL))
-                                            .child(barang_model.getId())
-                                            .removeValue();
-                                    dialog.cancel();
-                                    dialog.dismiss();
+                                databaseReference
+                                        .child(context.getResources().getString(R.string.CHILD_BARANG))
+                                        .child(context.getResources().getString(R.string.CHILD_BARANG_ALL))
+                                        .child(barang_model.getId())
+                                        .removeValue();
+                                dialog.cancel();
+                                dialog.dismiss();
 
                             }
                         }).setNegativeButton("BATAL", new DialogInterface.OnClickListener() {
@@ -155,9 +154,10 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
         TextView tvBtnEdit;
         @BindView(R.id.btn_tv_hapus)
         TextView btnTvHapus;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

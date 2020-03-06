@@ -30,10 +30,9 @@ android {
             ":kategori",
             ":barang",
             ":toko",
-            ":admin",
-            ":penjual",
-            ":authentication",
-            ":profil", ":verifikasi"]
+            ":admin"
+            ,
+            ":profil", ":verifikasi", ":mitra"]
 
 
 }

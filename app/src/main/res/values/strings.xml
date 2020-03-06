@@ -33,4 +33,5 @@
     <string name="CHILD_TRANSAKSI">TRANSAKSI</string>
     <string name="title_profil">Profil</string>
     <string name="title_verifikasi">Verifikasi akun</string>
+    <string name="title_mitra">Mitra</string>
 </resources>

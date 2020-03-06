@@ -15,6 +15,7 @@
 
     <application>
         <activity android:name=".AllKategori"></activity>
+
     </application>
 
 </manifest>

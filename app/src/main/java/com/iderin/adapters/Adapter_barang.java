@@ -1,6 +1,7 @@
 package com.iderin.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,16 @@ public class Adapter_barang extends RecyclerView.Adapter<Adapter_barang.MyViewHo
 
                     }
                 });
-
+        holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ketoko = new Intent();
+                ketoko.setClassName(context, "com.toko.Toko")
+                        .putExtra("idtoko", model.getIdtoko());
+                //   Log.e("IDERIN",model.getIdtoko());
+                context.startActivity(ketoko);
+            }
+        });
 
     }
 

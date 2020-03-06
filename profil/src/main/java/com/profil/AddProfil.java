@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -90,14 +91,6 @@ public class AddProfil extends AppCompatActivity  implements BottomSheetTakePict
 
     }
 
-    private void selectImage(){
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,
-                "select image from here.."),
-                PICK_IMAGE_GALLERY_REQUEST);
-    }
 
     private void upload(){
         if(filePath != null){
@@ -129,45 +122,50 @@ public class AddProfil extends AppCompatActivity  implements BottomSheetTakePict
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                      if(task.isSuccessful()){
-                          Uri donloadUri = task.getResult();
+                    if(task.isSuccessful()){
+                        Uri donloadUri = task.getResult();
 
-                          //aksi tambah ke db
+                        //aksi tambah ke db
 
-                          final String value =
-                                  ((RadioButton)findViewById(rgJk.getCheckedRadioButtonId()))
-                                          .getText().toString();
-                          profil_model profil = new profil_model();
-                          profil.setFoto(donloadUri.toString());
-                          profil.setAlamat("");
-                          profil.setJenis_kelamin(value);
-                          profil.setNama(etNama.getText().toString());
-                          profil.setUpdated_at(new Date().getTime());
-                          profil.setUsername(etUsername.getText().toString());
-                          databaseReference
-                                  .child(getResources().getString(R.string.CHILD_AKUN))
-                                  .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
-                                  .child(firebaseAuth.getCurrentUser().getUid())
-                                  .setValue(profil)
-                                  .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                      @Override
-                                      public void onComplete(@NonNull Task<Void> task) {
-                                            new Handler().postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    progressDialog.dismiss();
-                                                    startActivity(new Intent(context, MainActivity.class));
-                                                    finish();
-                                                }
-                                            },1000);
-                                      }
-                                  });
-                      }else {
-                          //gagal
-                          progressDialog.dismiss();
-                      }
+                        final String value =
+                                ((RadioButton)findViewById(rgJk.getCheckedRadioButtonId()))
+                                        .getText().toString();
+                        profil_model profil = new profil_model();
+                        profil.setFoto(donloadUri.toString());
+                        profil.setAlamat("ini alamat");
+                        profil.setNohp(firebaseAuth.getCurrentUser().getPhoneNumber());
+                        profil.setJenis_kelamin(value);
+                        profil.setNama(etNama.getText().toString());
+                        profil.setUpdated_at(new Date().getTime());
+                        profil.setCreated_at(new Date().getTime());
+                        profil.setLevel("USER");
+                        profil.setUsername(etUsername.getText().toString());
+                        databaseReference
+                                .child(getResources().getString(R.string.CHILD_AKUN))
+                                .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
+                                .child(firebaseAuth.getCurrentUser().getUid())
+                                .setValue(profil)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                progressDialog.dismiss();
+                                                startActivity(new Intent(context, MainActivity.class));
+                                                finish();
+                                            }
+                                        },1000);
+                                    }
+                                });
+                    }else {
+                        //gagal
+                        progressDialog.dismiss();
+                    }
                 }
             });
+        } else {
+            new Alert(context).toast("kosong", Toast.LENGTH_LONG);
         }
     }
 
@@ -205,7 +203,7 @@ public class AddProfil extends AppCompatActivity  implements BottomSheetTakePict
         String tujuan = String.valueOf(System.currentTimeMillis() % 1000);
         tujuan += ".jpg";
         UCrop uCrop = UCrop.of(uri, Uri.fromFile(new File(getCacheDir(), tujuan)));
-        uCrop.withAspectRatio(16, 9);
+        uCrop.withAspectRatio(16, 16);
         uCrop.withMaxResultSize(1600, 1600);
         uCrop.withOptions(getCropOption());
         uCrop.start(AddProfil.this);
@@ -287,6 +285,7 @@ public class AddProfil extends AppCompatActivity  implements BottomSheetTakePict
             Uri hasilCrop = UCrop.getOutput(Objects.requireNonNull(data));
             if (hasilCrop != null) {
                 ivFotoprofil.setImageURI(hasilCrop);
+                filePath = hasilCrop;
                 Picasso.get()
                         .load(hasilCrop)
                         .into(ivFotoprofil);

@@ -2,7 +2,7 @@ apply plugin: 'com.android.dynamic-feature'
 
 android {
     compileSdkVersion 29
-    
+
 
     defaultConfig {
         minSdkVersion 21
@@ -24,6 +24,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':app')
 
+    //TODO:: butterknife
     api 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 }
