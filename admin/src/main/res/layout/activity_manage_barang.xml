@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.iderin.Admin.ManageUser">
+    tools:context="com.admin.ManageBarang">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -25,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <com.todkars.shimmer.ShimmerRecyclerView
-                android:id="@+id/shimmer_recycler_user"
+                android:id="@+id/shimmer_recycler_barang"
+                android:layout_below="@+id/cv_detail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"

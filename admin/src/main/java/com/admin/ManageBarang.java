@@ -1,4 +1,4 @@
-package com.iderin.Admin;
+package com.admin;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.admin.Adapter.AdapterBarang;
 import com.core.models.barang_model;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,8 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.pmo.iderin.R;
-import com.iderin.adapters.Adapter_barang_admin;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class ManageBarang extends AppCompatActivity {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     List<barang_model>  barang_modelList = new ArrayList<>();
-    Adapter_barang_admin adapter;
+    AdapterBarang adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +71,7 @@ public class ManageBarang extends AppCompatActivity {
                                 model.setId(data.getKey());
                                 assert model != null;
                                 barang_modelList.add(model);
-                                adapter = new Adapter_barang_admin(context, barang_modelList);
+                                adapter = new AdapterBarang(context, barang_modelList);
                                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
                                 shimmerRecyclerBarang.setLayoutManager(layoutManager);
                                 shimmerRecyclerBarang.setAdapter(adapter);

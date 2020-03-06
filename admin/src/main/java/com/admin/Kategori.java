@@ -1,4 +1,4 @@
-package com.iderin.Admin;
+package com.admin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.admin.Adapter.AdapterKategori;
 import com.core.models.kategori_model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,8 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.pmo.iderin.R;
-import com.iderin.adapters.Adapter_kategori_admin;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ import butterknife.OnClick;
 
 import static com.iderin.Helpers.windowManager.getTransparentStatusBar;
 
-public class KategoriActivity extends AppCompatActivity {
+public class Kategori extends AppCompatActivity {
 
     @BindView(R.id.toolbar_kategori)
     Toolbar toolbarKategori;
@@ -42,12 +41,12 @@ public class KategoriActivity extends AppCompatActivity {
     @BindView(R.id.btn_tambah)
     Button btnTambah;
 
-    private Context context = KategoriActivity.this;
+    private Context context = Kategori.this;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     List<kategori_model> list = new ArrayList<>();
-    Adapter_kategori_admin adapter;
+    AdapterKategori adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +78,7 @@ public class KategoriActivity extends AppCompatActivity {
                         //new Alert(context).toast(data.getKey().toString(),1);
                     }
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context,RecyclerView.VERTICAL,false);
-                    adapter = new Adapter_kategori_admin(context,list);
+                    adapter = new AdapterKategori(context, list);
                     shimmerRecyclerKategori.setLayoutManager(layoutManager);
                     shimmerRecyclerKategori.setAdapter(adapter);
                 }

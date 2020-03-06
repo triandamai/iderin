@@ -75,7 +75,6 @@ public class Adapter_barang extends RecyclerView.Adapter<Adapter_barang.MyViewHo
 
                     }
                 });
-        
 
 
     }

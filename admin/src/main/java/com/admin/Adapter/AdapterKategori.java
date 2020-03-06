@@ -1,4 +1,4 @@
-package com.iderin.adapters;
+package com.admin.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,14 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.admin.FormKategori;
+import com.admin.R;
 import com.core.models.kategori_model;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.iderin.Admin.FormKategori;
-import com.pmo.iderin.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class Adapter_kategori_admin extends RecyclerView.Adapter<Adapter_kategori_admin.MyViewHolder> {
+public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.MyViewHolder> {
 
 
 
@@ -36,7 +36,7 @@ public class Adapter_kategori_admin extends RecyclerView.Adapter<Adapter_kategor
     private Context context;
     private List<kategori_model> list;
 
-    public Adapter_kategori_admin(Context context, List<kategori_model> kategori) {
+    public AdapterKategori(Context context, List<kategori_model> kategori) {
         this.context = context;
         this.list = kategori;
     }

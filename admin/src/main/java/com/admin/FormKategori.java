@@ -1,4 +1,4 @@
-package com.iderin.Admin;
+package com.admin;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -31,11 +31,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.mindorks.paracamera.Camera;
 import com.iderin.Helpers.Alert;
 import com.iderin.Helpers.BottomSheetTakePict;
 import com.iderin.Helpers.Permissions;
-import com.pmo.iderin.R;
+import com.mindorks.paracamera.Camera;
 import com.squareup.picasso.Picasso;
 import com.yalantis.ucrop.UCrop;
 

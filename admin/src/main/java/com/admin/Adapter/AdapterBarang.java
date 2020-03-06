@@ -1,4 +1,4 @@
-package com.iderin.adapters;
+package com.admin.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.admin.R;
 import com.core.models.barang_model;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +20,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.iderin.Profile.Addbarang;
-import com.pmo.iderin.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class Adapter_barang_admin extends RecyclerView.Adapter<Adapter_barang_admin.MyViewHolder> {
+public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHolder> {
 
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -36,7 +36,7 @@ public class Adapter_barang_admin extends RecyclerView.Adapter<Adapter_barang_ad
     private Context context;
     private String namaKategori = "";
 
-    public Adapter_barang_admin(Context context, List<barang_model> data) {
+    public AdapterBarang(Context context, List<barang_model> data) {
         this.context = context;
         this.list = data;
     }

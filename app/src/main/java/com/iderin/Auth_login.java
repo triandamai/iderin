@@ -26,9 +26,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.iderin.Admin.AdminActivity;
 import com.iderin.Helpers.Alert;
 import com.iderin.Helpers.windowManager;
+import com.pmo.iderin.BuildConfig;
 import com.pmo.iderin.R;
 
 import java.util.Date;
@@ -111,7 +111,9 @@ public class Auth_login extends AppCompatActivity {
                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override
                                                             public void onSuccess(Void aVoid) {
-                                                                startActivity(new Intent(context, AdminActivity.class));
+                                                                Intent admin = new Intent();
+                                                                admin.setClassName(BuildConfig.APPLICATION_ID, "com.admin.Admin");
+                                                                startActivity(admin);
                                                                 finish();
                                                             }
                                                         });

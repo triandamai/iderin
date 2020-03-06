@@ -1,11 +1,11 @@
 package com.iderin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.core.models.profil_model;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,8 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.iderin.Admin.AdminActivity;
 import com.iderin.Helpers.windowManager;
+import com.pmo.iderin.BuildConfig;
 import com.pmo.iderin.R;
 
 public class Init extends AppCompatActivity {
@@ -44,7 +44,9 @@ public class Init extends AppCompatActivity {
                               model = dataSnapshot.getValue(profil_model.class);
                               assert model != null;
                               if(model.getLevel().toString().equalsIgnoreCase("ADMIN")){
-                                  startActivity(new Intent(context, AdminActivity.class));
+                                  Intent admin = new Intent();
+                                  admin.setClassName(BuildConfig.APPLICATION_ID, "com.admin.Admin");
+                                  startActivity(admin);
                                   finish();
                               }else if(model.getLevel().toString().equalsIgnoreCase("USER")){
                                   startActivity(new Intent(context, MainActivity.class));

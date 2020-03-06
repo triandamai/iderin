@@ -1,4 +1,4 @@
-package com.iderin.Admin;
+package com.admin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,15 +8,13 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.pmo.iderin.R;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.iderin.Helpers.windowManager.getTransparentStatusBar;
 
-public class AdminActivity extends AppCompatActivity {
+public class Admin extends AppCompatActivity {
 
     @BindView(R.id.ly_manage_kategori)
     LinearLayout lyManageKategori;
@@ -25,7 +23,7 @@ public class AdminActivity extends AppCompatActivity {
     @BindView(R.id.ly_manage_user)
     LinearLayout lyManageUser;
 
-    private Context context = AdminActivity.this;
+    private Context context = Admin.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class AdminActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_manage_kategori:
-                startActivity(new Intent(context,KategoriActivity.class));
+                startActivity(new Intent(context, Kategori.class));
                 break;
             case R.id.ly_manage_barang:
                 startActivity(new Intent(context,ManageBarang.class));
