@@ -161,7 +161,7 @@ public class Register extends AppCompatActivity {
                     lyKode.setVisibility(View.VISIBLE);
                     lyNohp.setVisibility(View.GONE);
                     lyLogin.setVisibility(View.GONE);
-                    //  sendAuthenticationCode(etNohp.getText().toString());
+                    sendAuthenticationCode(etNohp.getText().toString());
                     isLayoutNohp = false;
                     new CountDownTimer(60000, 1000) {
 
