@@ -13,7 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/admin" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/auth" />
+            <option value="$PROJECT_DIR$/authentication" />
             <option value="$PROJECT_DIR$/barang" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/iderpay" />
@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/profil" />
             <option value="$PROJECT_DIR$/toko" />
             <option value="$PROJECT_DIR$/transaksi" />
+            <option value="$PROJECT_DIR$/verifikasi" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

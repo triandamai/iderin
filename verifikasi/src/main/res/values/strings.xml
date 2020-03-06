@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="CHILD_AKUN">AKUN</string>
+    <string name="CHILD_AKUN_PROFIL">PROFIL</string>
+    <string name="LEVEL_USER">USER</string>
+    <string name="CHILD_BARANG">GROCERY</string>
+    <string name="CHILD_BARANG_KATEGORI">KATEGORI</string>
+    <string name="CHILD_BARANG_ALL">ALL</string>
+    <string name="ORDERBY_CREATED">created_at</string>
+    <string name="ORDERBY_CHILD_TOKO">idtoko</string>
+    <string name="CHILD_TRANSAKSI">TRANSAKSI</string>
+    <string name="CHILD_AKUN_TOKO">TOKO</string>
+    <string name="CHILD_BARANG_SATUAN">SATUAN</string>
+    <string name="INTENT_PUT_IDKATEGORI">kategori</string>
+    <string name="CHILD_AKUN_ALAMAT">ALAMAT</string>
+</resources>

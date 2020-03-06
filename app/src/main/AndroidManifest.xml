@@ -25,7 +25,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <!--        <activity android:name="com.admin.Satuan"></activity>-->
         <activity android:name="com.iderin.DetailToko" />
         <!--        <activity-->
         <!--            android:name="com.profil.Ideerpay"-->
@@ -45,9 +44,9 @@
         <!--        <activity-->
         <!--            android:name="com.toko.MyToko"-->
         <!--            tools:ignore="InnerclassSeparator" />-->
-        <activity
-            android:name="com.iderin.Explore.TokoActivity"
-            tools:ignore="InnerclassSeparator" />
+        <!--        <activity-->
+        <!--            android:name="com.iderin.Explore.TokoActivity"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
         <activity android:name="com.iderin.SearchActivity" />
         <activity android:name="com.iderin.Splash" />
         <!--        <activity-->

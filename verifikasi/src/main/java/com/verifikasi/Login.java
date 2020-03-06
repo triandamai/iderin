@@ -1,13 +1,15 @@
-package com.auth;
+package com.verifikasi;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +55,12 @@ public class Login extends AppCompatActivity {
     LinearLayout lyKode;
     @BindView(R.id.btn_kode)
     Button btnKode;
+    @BindView(R.id.tv_timer)
+    TextView tvTimer;
+    @BindView(R.id.progress)
+    ProgressBar progress;
+    @BindView(R.id.ly_daftar)
+    LinearLayout lyDaftar;
 
     private boolean isLayoutNohp = true;
 
@@ -63,19 +71,21 @@ public class Login extends AppCompatActivity {
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private String verificationid;
     private profil_model profil;
-    private  boolean isExist = false;
+    private boolean isExist = false;
+    private int waktu = 60;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth_login);
+        setContentView(R.layout.activity_login);
         windowManager.getTransparentStatusBar(this);
         ButterKnife.bind(this);
-      //  getTransparentStatusBar(this);
+        //  getTransparentStatusBar(this);
         isLayoutNohp = true;
         lyNohp.setVisibility(View.VISIBLE);
         lyKode.setVisibility(View.GONE);
+
     }
 
 
@@ -96,10 +106,10 @@ public class Login extends AppCompatActivity {
                                 .addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        if(dataSnapshot.exists()){
+                                        if (dataSnapshot.exists()) {
                                             profil_model model = new profil_model();
                                             model = dataSnapshot.getValue(profil_model.class);
-                                            if(model.getLevel().toString().equalsIgnoreCase("ADMIN")){
+                                            if (model.getLevel().toString().equalsIgnoreCase("ADMIN")) {
                                                 profil = new profil_model();
                                                 profil.setNohp(etNohp.getText().toString());
                                                 profil.setUpdated_at(new Date().getTime());
@@ -117,7 +127,7 @@ public class Login extends AppCompatActivity {
                                                                 finish();
                                                             }
                                                         });
-                                            }else if(model.getLevel().toString().equalsIgnoreCase("TOKO")) {
+                                            } else if (model.getLevel().toString().equalsIgnoreCase("TOKO")) {
                                                 profil = new profil_model();
                                                 profil.setNohp(etNohp.getText().toString());
                                                 profil.setUpdated_at(new Date().getTime());
@@ -135,7 +145,7 @@ public class Login extends AppCompatActivity {
                                                                 finish();
                                                             }
                                                         });
-                                            }else if( model.getLevel().toString().equalsIgnoreCase("USER")){
+                                            } else if (model.getLevel().toString().equalsIgnoreCase("USER")) {
                                                 profil = new profil_model();
                                                 profil.setNohp(etNohp.getText().toString());
                                                 profil.setUpdated_at(new Date().getTime());
@@ -151,7 +161,7 @@ public class Login extends AppCompatActivity {
                                                                 finish();
                                                             }
                                                         });
-                                            }else {
+                                            } else {
 
                                             }
                                         }
@@ -168,6 +178,7 @@ public class Login extends AppCompatActivity {
 
                 });
     }
+
     //Interface untuk listener apakah ada kode masuk atau tidak
     PhoneAuthProvider.OnVerificationStateChangedCallbacks callback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         //jika da kode dan terbaca akan otomatis memverifikasi
@@ -198,7 +209,7 @@ public class Login extends AppCompatActivity {
 
     };
 
-    private boolean isnohpexist(){
+    private boolean isnohpexist() {
 
         databaseReference.child(getResources().getString(R.string.CHILD_AKUN))
                 .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
@@ -208,9 +219,9 @@ public class Login extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()) {
+                        if (dataSnapshot.exists()) {
                             isExist = true;
-                        }else {
+                        } else {
                             isExist = false;
                         }
                     }
@@ -222,23 +233,54 @@ public class Login extends AppCompatActivity {
                 });
         return isExist;
     }
-    @OnClick({R.id.btn_masuk, R.id.tv_toregister,R.id.btn_kode})
+
+    @OnClick({R.id.btn_masuk, R.id.tv_toregister, R.id.btn_kode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_masuk:
-                if(!TextUtils.isEmpty(etNohp.getText().toString())){
-                   if(isnohpexist()){
-                       lyKode.setVisibility(View.VISIBLE);
-                       lyNohp.setVisibility(View.GONE);
-                       sendAuthenticationCode(etNohp.getText().toString());
-                       isLayoutNohp = false;
-                   }else {
-                       //akun tidak ditemukan
-                        new Alert(context).toast("Akun tidak ada silahkan mendaftar",1);
-                   }
-                }else {
-                    Toast.makeText(context,"Isi no hp!",Toast.LENGTH_LONG).show();
+                if (!TextUtils.isEmpty(etNohp.getText().toString())) {
+                    if (isnohpexist()) {
+                        lyKode.setVisibility(View.VISIBLE);
+                        lyNohp.setVisibility(View.GONE);
+                        lyDaftar.setVisibility(View.GONE);
+                        sendAuthenticationCode(etNohp.getText().toString());
+                        isLayoutNohp = false;
+                        new CountDownTimer(60000, 1000) {
+
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                if (waktu == 60) {
+                                    tvTimer.setText("01 : 00");
+                                } else {
+                                    tvTimer.setText("00 : " + String.valueOf(waktu));
+                                }
+
+                                waktu--;
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                tvTimer.setText("Kirim Ulang ?");
+                                tvTimer.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        lyKode.setVisibility(View.GONE);
+                                        lyNohp.setVisibility(View.VISIBLE);
+                                        progress.setVisibility(View.GONE);
+                                        lyDaftar.setVisibility(View.VISIBLE);
+                                        isLayoutNohp = true;
+                                    }
+                                });
+                            }
+                        }.start();
+                    } else {
+                        //akun tidak ditemukan
+                        new Alert(context).toast("Akun tidak ada silahkan mendaftar", 1);
+                    }
+                } else {
+                    Toast.makeText(context, "Isi no hp!", Toast.LENGTH_LONG).show();
                 }
+
                 break;
             case R.id.btn_kode:
                 try {
@@ -247,9 +289,11 @@ public class Login extends AppCompatActivity {
                                 PhoneAuthProvider.getCredential(verificationid, etKode.getText().toString());
                         signInwithPhoneNumber(credential);
                         isLayoutNohp = false;
+
+
                     }
-                }catch (NullPointerException x){
-                    Toast.makeText(context,"Maaf gagal mengirim verifikasi",Toast.LENGTH_LONG).show();
+                } catch (NullPointerException x) {
+                    Toast.makeText(context, "Maaf gagal mengirim verifikasi", Toast.LENGTH_LONG).show();
                     x.printStackTrace();
                 }
                 break;
@@ -261,10 +305,10 @@ public class Login extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(isLayoutNohp){
+        if (isLayoutNohp) {
             finish();
             super.onBackPressed();
-        }else {
+        } else {
             lyNohp.setVisibility(View.VISIBLE);
             lyKode.setVisibility(View.GONE);
             isLayoutNohp = true;

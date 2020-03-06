@@ -1,11 +1,12 @@
 package com.iderin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.iderin.Helpers.windowManager;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.pmo.iderin.R;
+
+import static com.iderin.Helpers.windowManager.getTransparentStatusBar;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -13,6 +14,6 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        windowManager.getTransparentStatusBar(this);
+        getTransparentStatusBar(this);
     }
 }

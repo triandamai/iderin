@@ -1,13 +1,15 @@
-package com.auth;
+package com.verifikasi;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Register extends AppCompatActivity {
+
     @BindView(R.id.btn_masuk)
     Button btnMasuk;
     @BindView(R.id.tv_toregister)
@@ -49,6 +52,12 @@ public class Register extends AppCompatActivity {
     LinearLayout lyKode;
     @BindView(R.id.btn_kode)
     Button btnKode;
+    @BindView(R.id.progress)
+    ProgressBar progress;
+    @BindView(R.id.tv_timer)
+    TextView tvTimer;
+    @BindView(R.id.ly_login)
+    LinearLayout lyLogin;
 
     private boolean isLayoutNohp = true;
 
@@ -59,12 +68,12 @@ public class Register extends AppCompatActivity {
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private String verificationid;
     private profil_model profil;
-
+    private int waktu = 60;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth_register);
+        setContentView(R.layout.activity_register);
 
         windowManager.getTransparentStatusBar(this);
         ButterKnife.bind(this);
@@ -72,6 +81,7 @@ public class Register extends AppCompatActivity {
         lyNohp.setVisibility(View.VISIBLE);
         lyKode.setVisibility(View.GONE);
     }
+
     public void sendAuthenticationCode(String phonenumber) {
         Toast.makeText(context, "Mengirim", Toast.LENGTH_LONG).show();
         PhoneAuthProvider.getInstance().verifyPhoneNumber("+62" + phonenumber, 60, TimeUnit.SECONDS, this, callback);
@@ -143,17 +153,46 @@ public class Register extends AppCompatActivity {
     };
 
 
-    @OnClick({R.id.btn_masuk, R.id.tv_toregister,R.id.btn_kode})
+    @OnClick({R.id.btn_masuk, R.id.tv_toregister, R.id.btn_kode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_masuk:
-                if(!TextUtils.isEmpty(etNohp.getText().toString())){
+                if (!TextUtils.isEmpty(etNohp.getText().toString())) {
                     lyKode.setVisibility(View.VISIBLE);
                     lyNohp.setVisibility(View.GONE);
-                    sendAuthenticationCode(etNohp.getText().toString());
+                    lyLogin.setVisibility(View.GONE);
+                    //  sendAuthenticationCode(etNohp.getText().toString());
                     isLayoutNohp = false;
-                }else {
-                    Toast.makeText(context,"Isi no hp!",Toast.LENGTH_LONG).show();
+                    new CountDownTimer(60000, 1000) {
+
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            if (waktu == 60) {
+                                tvTimer.setText("01 : 00");
+                            } else {
+                                tvTimer.setText("00 : " + String.valueOf(waktu));
+                            }
+
+                            waktu--;
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            tvTimer.setText("Kirim Ulang ?");
+                            tvTimer.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    lyKode.setVisibility(View.GONE);
+                                    lyNohp.setVisibility(View.VISIBLE);
+                                    progress.setVisibility(View.GONE);
+                                    lyLogin.setVisibility(View.VISIBLE);
+                                    isLayoutNohp = true;
+                                }
+                            });
+                        }
+                    }.start();
+                } else {
+                    Toast.makeText(context, "Isi no hp!", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.btn_kode:
@@ -164,8 +203,8 @@ public class Register extends AppCompatActivity {
                         signInwithPhoneNumber(credential);
                         isLayoutNohp = false;
                     }
-                }catch (NullPointerException x){
-                    Toast.makeText(context,"Maaf gagal mengirim verifikasi",Toast.LENGTH_LONG).show();
+                } catch (NullPointerException x) {
+                    Toast.makeText(context, "Maaf gagal mengirim verifikasi", Toast.LENGTH_LONG).show();
                     x.printStackTrace();
                 }
                 break;
@@ -178,10 +217,10 @@ public class Register extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(isLayoutNohp){
+        if (isLayoutNohp) {
             finish();
             super.onBackPressed();
-        }else {
+        } else {
             lyNohp.setVisibility(View.VISIBLE);
             lyKode.setVisibility(View.GONE);
             isLayoutNohp = true;

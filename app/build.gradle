@@ -24,7 +24,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    dynamicFeatures = [":transaksi", ":iderpay", ":kategori", ":barang", ":toko", ":admin", ":penjual", ":auth", ":profil"]
+    dynamicFeatures = [
+            ":transaksi",
+            ":iderpay",
+            ":kategori",
+            ":barang",
+            ":toko",
+            ":admin",
+            ":penjual",
+            ":authentication",
+            ":profil", ":verifikasi"]
 
 
 }

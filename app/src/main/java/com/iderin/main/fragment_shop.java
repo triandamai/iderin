@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -23,8 +22,7 @@ public class fragment_shop extends Fragment {
     Toolbar toolbarAlamat;
     @BindView(R.id.shimmer_recycler_shop)
     ShimmerRecyclerView shimmerRecyclerShop;
-    @BindView(R.id.ly_kosong)
-    LinearLayout lyKosong;
+
 
     public fragment_shop() {
         // Required empty public constructor
@@ -45,13 +43,16 @@ public class fragment_shop extends Fragment {
 
     }
 
+    int c = 60;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_shop, container, false);
-        ButterKnife.bind(this,v);
+        ButterKnife.bind(this, v);
         shimmerRecyclerShop.showShimmer();
+
+
         return v;
     }
 
