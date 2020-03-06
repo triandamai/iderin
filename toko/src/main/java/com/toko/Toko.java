@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 import com.todkars.shimmer.ShimmerRecyclerView;
 import com.toko.Adapter.AdapterBarangUser;
 
@@ -75,8 +76,7 @@ public class Toko extends AppCompatActivity {
     private void getData(String idtoko) {
         databaseReference.child(getString(R.string.CHILD_AKUN))
                 .child(getString(R.string.CHILD_AKUN_TOKO))
-                .orderByChild("idtoko")
-                .equalTo(idtoko)
+                .child(idtoko)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -100,6 +100,7 @@ public class Toko extends AppCompatActivity {
     }
 
     private void setData(toko_model model) {
+        Picasso.get().load(model.getBanner_toko()).into(ivToko);
         tvNamatoko.setText(model.getNamatoko());
         tvAlamattoko.setText(model.getAlamat());
     }
