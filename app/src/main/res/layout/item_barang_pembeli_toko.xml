@@ -27,7 +27,15 @@
             android:layout_height="wrap_content"
             android:text="Nama Sayur"
             android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/tv_barang_namatoko"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Sayur"
+            android:textStyle="normal"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/tv_barang_harga_stok"
             android:layout_width="match_parent"

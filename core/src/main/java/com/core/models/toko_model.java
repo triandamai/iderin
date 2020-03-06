@@ -1,17 +1,26 @@
 package com.core.models;
 
 public class toko_model {
-    public String namatoko,banner_toko,foto_profil,alamat,geo_location;
+    public String namatoko, banner_toko, foto_profil, alamat, geo_location, id;
 
     public toko_model() {
     }
 
-    public toko_model(String namatoko, String banner_toko, String foto_profil, String alamat, String geo_location) {
+    public toko_model(String namatoko, String banner_toko, String foto_profil, String alamat, String geo_location, String id) {
         this.namatoko = namatoko;
         this.banner_toko = banner_toko;
         this.foto_profil = foto_profil;
         this.alamat = alamat;
         this.geo_location = geo_location;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNamatoko() {

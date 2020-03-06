@@ -1,4 +1,4 @@
-package com.toko;
+package com.iderin.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.toko_model;
+import com.pmo.iderin.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class AdapterToko extends RecyclerView.Adapter<AdapterToko.MyViewHolder> 
         TextView tvJudulToko;
         @BindView(R.id.tv_alamat_lengkap)
         TextView tvAlamatLengkap;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             unbinder = ButterKnife.bind(this, itemView);
