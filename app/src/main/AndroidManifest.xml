@@ -25,13 +25,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.admin.Satuan"></activity>
+        <!--        <activity android:name="com.admin.Satuan"></activity>-->
         <activity android:name="com.iderin.DetailToko" />
-        <activity android:name="com.iderin.AllBarang" />
-        <activity
-            android:name="com.iderin.Profile.Ideerpay"
-            tools:ignore="InnerclassSeparator" />
-        <activity android:name="com.iderin.AllKategori" />
+        <!--        <activity-->
+        <!--            android:name="com.profil.Ideerpay"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
         <activity android:name="com.iderin.Init">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,55 +42,54 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name="com.iderin.Profile.MyToko"
-            tools:ignore="InnerclassSeparator" />
+        <!--        <activity-->
+        <!--            android:name="com.toko.MyToko"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
         <activity
             android:name="com.iderin.Explore.TokoActivity"
             tools:ignore="InnerclassSeparator" />
         <activity android:name="com.iderin.SearchActivity" />
-        <activity android:name="com.iderin.Activity_checkout" />
         <activity android:name="com.iderin.Splash" />
-        <activity
-            android:name="com.iderin.Profile.AddAlamat"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.admin.Kategori"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.iderin.Profile.MyOrderActivity"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.iderin.Profile.AddProfil"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.admin.FormKategori"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.admin.Admin"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.iderin.Profile.AddToko"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.iderin.Profile.ManageAlamatActivity"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.iderin.Auth_Register"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="com.iderin.Profile.Addbarang"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.admin.ManageUser"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.admin.ManageBarang"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name="com.iderin.Auth_login"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.iderin.PenjualActivity" />
+        <!--        <activity-->
+        <!--            android:name="com.profil.AddAlamat"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.admin.Kategori"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.profil.MyOrder"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.profil.AddProfil"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.admin.FormKategori"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.admin.Admin"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.profil.AddToko"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.profil.AturAlamat"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.auth.Register"-->
+        <!--            android:windowSoftInputMode="adjustResize" />-->
+        <!--        <activity-->
+        <!--            android:name="com.barang.Addbarang"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.admin.ManageUser"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.admin.ManageBarang"-->
+        <!--            tools:ignore="InnerclassSeparator" />-->
+        <!--        <activity-->
+        <!--            android:name="com.auth.Login"-->
+        <!--            android:windowSoftInputMode="adjustResize" />-->
+        <!--        <activity android:name="com.penjual.Penjual" />-->
         <activity android:name="com.iderin.MainActivity" />
     </application>
 

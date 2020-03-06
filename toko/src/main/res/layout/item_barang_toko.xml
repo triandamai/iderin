@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="4">
+
+    <ImageView
+        android:id="@+id/iv_barang_gambar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_weight="1"
+        android:src="@drawable/bg_auth_jpg" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_nama_barang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Sayur"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_harga_qty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rp 2000 /Kg"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_btn_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:background="@color/hijau"
+                android:textColor="#ffff"
+                android:padding="@dimen/dp_10" />
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="5dp" />
+
+            <TextView
+                android:id="@+id/btn_tv_hapus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hapus"
+                android:background="#F10B0B"
+                android:textColor="#ffff"
+                android:padding="@dimen/dp_10" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

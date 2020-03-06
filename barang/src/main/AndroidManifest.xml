@@ -14,7 +14,7 @@
     </dist:module>
 
     <application>
-        <activity android:name=".All"></activity>
+        <activity android:name=".AllBarang"></activity>
     </application>
 
 </manifest>

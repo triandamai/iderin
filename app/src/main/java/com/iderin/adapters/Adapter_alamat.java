@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.alamat_model;
-import com.iderin.Profile.AddAlamat;
 import com.pmo.iderin.R;
 
 import java.util.ArrayList;
@@ -48,12 +47,14 @@ public class Adapter_alamat extends RecyclerView.Adapter<Adapter_alamat.MyViewHo
         holder.btnUbah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, AddAlamat.class)
+                Intent kealamat = new Intent();
+                kealamat.setClassName(context, "com.profil.AddAlamat")
                         .putExtra("namaalamat",alamat.getNamaalamat())
                         .putExtra("alamatlengkap",alamat.getAlamatlengkap())
                         .putExtra("lat",alamat.getLat())
                         .putExtra("lng",alamat.getLng())
-                        .putExtra("id",alamat.getId()));
+                        .putExtra("id", alamat.getId());
+                context.startActivity(kealamat);
             }
         });
     }

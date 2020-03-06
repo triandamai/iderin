@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.penjual.Fragment.fragment_beranda">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.appbar.AppBarLayout>
+        <RelativeLayout
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fab_add_barang"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="@dimen/dp_20"
+                        android:layout_alignParentBottom="true"/>
+                    <com.todkars.shimmer.ShimmerRecyclerView
+                        android:id="@+id/shimmer_recycler_barang"
+                        android:layout_below="@+id/cv_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:layout_marginStart="@dimen/dp_16"
+                        android:layout_marginEnd="@dimen/dp_16"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:shimmer_recycler_layout="@layout/item_placeholder_alamat"
+                        app:shimmer_recycler_item_count="5" />
+                </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

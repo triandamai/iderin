@@ -1,31 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Iderin</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="CHILD_AKUN">AKUN</string>
     <string name="CHILD_AKUN_PROFIL">PROFIL</string>
-    <string name="CHILD_AKUN_ALAMAT">ALAMAT</string>
-    <string name="CHILD_AKUN_TOKO">TOKO</string>
-    <string name="CHILD_AKUN_IDERPAY">IDERPAY</string>
-    <string name="CHILD_AKUN_HISTORY">HISTORY</string>
-    <string name="CHILD_BARANG">GROCERY</string>
-    <string name="CHILD_BARANG_ALL">ALL</string>
-    <string name="CHILD_BARANG_GAMBAR">GAMBAR</string>
-    <string name="CHILD_BARANG_KATEGORI">KATEGORI</string>
-    <string name="CHILD_TRANSAKSI">TRANSAKSI</string>
-    <string name="CHILD_TRANSAKSI_DETAIL">DETAIL_TRANSAKSI</string>
-    <string name="CHILD_TRANSAKSI_PAYMENT">PAYMENT_V</string>
-
-    <string name="LEVEL_ADMIN">ADMIN</string>
     <string name="LEVEL_USER">USER</string>
-    <string name="ORDERBY_CHILD_TOKO">idtoko</string>
+    <string name="CHILD_BARANG">GROCERY</string>
+    <string name="CHILD_BARANG_KATEGORI">KATEGORI</string>
+    <string name="CHILD_BARANG_ALL">ALL</string>
     <string name="ORDERBY_CREATED">created_at</string>
+    <string name="ORDERBY_CHILD_TOKO">idtoko</string>
+    <string name="CHILD_TRANSAKSI">TRANSAKSI</string>
+    <string name="CHILD_AKUN_TOKO">TOKO</string>
     <string name="CHILD_BARANG_SATUAN">SATUAN</string>
-    <string name="title_transaksi">Transaksi</string>
-    <string name="title_iderpay">Iderpay</string>
-    <string name="title_kategori">Kategori</string>
-    <string name="title_barang">Semua Barang</string>
     <string name="INTENT_PUT_IDKATEGORI">kategori</string>
-    <string name="title_toko">Toko User</string>
+    <string name="CHILD_AKUN_ALAMAT">ALAMAT</string>
 </resources>

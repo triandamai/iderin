@@ -20,9 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.iderin.Profile.AddProfil;
-import com.iderin.Profile.ManageAlamatActivity;
-import com.iderin.Profile.MyOrderActivity;
 import com.iderin.Splash;
 import com.pmo.iderin.R;
 import com.squareup.picasso.Picasso;
@@ -138,10 +135,14 @@ public class fragment_profil extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_btn_myorder:
-                startActivity(new Intent(getContext(), MyOrderActivity.class));
+                Intent order = new Intent();
+                order.setClassName(getContext(), "com.profil.MyOrder");
+                startActivity(order);
                 break;
             case R.id.ly_btn_manage_address:
-                startActivity(new Intent(getContext(), ManageAlamatActivity.class));
+                Intent alamat = new Intent();
+                alamat.setClassName(getContext(), "com.profil.AturAlamat");
+                startActivity(alamat);
                 break;
             case R.id.ly_btn_iderpay:
                 break;
@@ -153,7 +154,9 @@ public class fragment_profil extends Fragment {
                 getActivity().finish();
                 break;
             case R.id.tv_btn_edit_profil:
-                startActivity(new Intent(getContext(), AddProfil.class));
+                Intent profil = new Intent();
+                profil.setClassName(getContext(), "com.profil.AddProfil");
+                startActivity(profil);
                 break;
 
 

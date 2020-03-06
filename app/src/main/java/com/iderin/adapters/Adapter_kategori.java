@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.pmo.iderin.BuildConfig;
 import com.pmo.iderin.R;
 import com.squareup.picasso.Picasso;
 
@@ -56,7 +55,7 @@ public class Adapter_kategori extends RecyclerView.Adapter<Adapter_kategori.MyVi
         Picasso.get().load(kategori_model.getFoto()).into(holder.ivFotokategori);
         holder.lyKategori.setOnClickListener(v -> {
             Intent intent = new Intent();
-            intent.setClassName(BuildConfig.APPLICATION_ID, "com.barang.All");
+            intent.setClassName(context, "com.barang.AllBarang");
             intent.putExtra(context.getString(R.string.INTENT_PUT_IDKATEGORI), kategori_model.getId());
             context.startActivity(intent);
         });

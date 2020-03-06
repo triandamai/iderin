@@ -52,7 +52,9 @@ public class Init extends AppCompatActivity {
                                   startActivity(new Intent(context, MainActivity.class));
                                   finish();
                               }else if(model.getLevel().toString().equalsIgnoreCase("TOKO")){
-                                  startActivity(new Intent(context, PenjualActivity.class));
+                                  Intent penjual = new Intent();
+                                  penjual.setClassName(BuildConfig.APPLICATION_ID, "com.penjual.Penjual");
+                                  startActivity(penjual);
                                   finish();
                               }
                           }
@@ -66,7 +68,7 @@ public class Init extends AppCompatActivity {
 
 
         } else {
-            startActivity(new Intent(context, Auth_login.class));
+            startActivity(new Intent(context, Splash.class));
             finish();
         }
     }

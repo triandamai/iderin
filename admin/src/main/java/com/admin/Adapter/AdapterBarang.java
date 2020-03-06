@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.iderin.Profile.Addbarang;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -77,15 +76,16 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
         holder.tvBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, Addbarang.class)
+                Intent addbarang = new Intent();
+                addbarang.setClassName(context, "com.barang.Addbarang")
                         .putExtra("gambar",barang_model.getFoto())
                         .putExtra("idkategori",barang_model.getIdkategori())
                         .putExtra("kategori",namaKategori)
                         .putExtra("nama",barang_model.getNama())
                         .putExtra("deskripsi",barang_model.getDeskripsi())
                         .putExtra("harga",barang_model.getHarga())
-                        .putExtra("id",barang_model.getId())
-                );
+                        .putExtra("id", barang_model.getId());
+                context.startActivity(addbarang);
             }
         });
         holder.btnTvHapus.setOnClickListener(new View.OnClickListener() {

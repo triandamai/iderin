@@ -51,11 +51,15 @@ public class Splash extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_masuk:
-                startActivity(new Intent(context, Auth_login.class));
+                Intent login = new Intent();
+                login.setClassName(context, "com.auth.Login");
+                startActivity(login);
                 finish();
                 break;
             case R.id.btn_daftar:
-                startActivity(new Intent(context,Auth_Register.class));
+                Intent register = new Intent();
+                register.setClassName(context, "com.auth.Register");
+                startActivity(register);
                 finish();
                 break;
         }
