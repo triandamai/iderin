@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,7 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.barang_model;
+import com.core.models.cart_model;
+import com.core.models.satuan_model;
 import com.core.models.toko_model;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +33,7 @@ import com.todkars.shimmer.ShimmerRecyclerView;
 import com.toko.Adapter.AdapterBarangUser;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,12 +56,17 @@ public class Toko extends AppCompatActivity {
     CardView cvDetail;
     @BindView(R.id.shimmer_recycler_toko)
     ShimmerRecyclerView shimmerRecyclerToko;
+    @BindView(R.id.tv_jml_keranjang)
+    TextView tvJmlKeranjang;
+    @BindView(R.id.cv_to_cart)
+    CardView cvToCart;
     private Context context = Toko.this;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private List<barang_model> barang_models = new ArrayList<>();
     private AdapterBarangUser adapter;
+    private KirimkeBottomSheet kirimkeBottomSheet;
 
 
     @Override
@@ -64,13 +75,35 @@ public class Toko extends AppCompatActivity {
         setContentView(R.layout.activity_toko);
         ButterKnife.bind(this);
         getTransparentStatusBar(this);
-        Intent intent = getIntent();
 
+        cvToCart.setVisibility(View.GONE);
+
+        Intent intent = getIntent();
         if (intent.getExtras() != null) {
             String idtoko = intent.getStringExtra("idtoko");
             Log.e("IDERIN", idtoko);
             getData(idtoko);
+            getCart(idtoko);
         }
+    }
+
+    private void getCart(String id) {
+        databaseReference.child(getString(R.string.CHILD_ORDER))
+                .child(getString(R.string.CHILD_ORDER_CART))
+                .child(firebaseUser.getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            cvToCart.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     private void getData(String idtoko) {
@@ -123,7 +156,43 @@ public class Toko extends AppCompatActivity {
                                 barang_models.add(model);
 
                             }
-                            adapter = new AdapterBarangUser(context, barang_models);
+                            adapter = new AdapterBarangUser(context, barang_models, new AdapterBarangUser.onAdapterBaranglistener() {
+                                @Override
+                                public void onItemClick(barang_model model, int pos) {
+                                    Log.e("IDERIN", "" + model.getIdsatuan());
+                                    BottomSheetBarangClicked bs = new BottomSheetBarangClicked();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(getString(R.string.BUNDLE_NAMA_BARANG), model.getNama());
+                                    bundle.putString(getString(R.string.BUNDLE_ID_BARANG), model.getId());
+                                    bundle.putInt(getString(R.string.BUNDLE_POSISI), pos);
+                                    bundle.putDouble(getString(R.string.BUNDLE_HARGA), model.getHarga());
+                                    bundle.putString(getString(R.string.BUNDLE_ID_SATUAN), model.getIdsatuan());
+                                    bs.setArguments(bundle);
+
+                                    bs.setOnBottomSheetListener(new BottomSheetBarangClicked.BottomSheetListener() {
+                                        @Override
+                                        public void onOptionClick(int jml, barang_model model, int pos, double total) {
+                                            cart_model modelcart = new cart_model();
+                                            modelcart.setIdPembeli(firebaseUser.getUid());
+                                            modelcart.setStatus("Belum bayar");
+                                            modelcart.setTanggal(String.valueOf(new Date().getTime()));
+                                            modelcart.setTimestamp(new Date().getTime());
+                                            modelcart.setTotal(total);
+                                            databaseReference.child(getString(R.string.CHILD_ORDER))
+                                                    .child(getString(R.string.CHILD_ORDER_CART))
+                                                    .child(firebaseUser.getUid())
+                                                    .setValue(modelcart)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            
+                                                        }
+                                                    });
+                                        }
+                                    });
+                                    bs.show(getSupportFragmentManager(), "pick jml");
+                                }
+                            });
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
                             shimmerRecyclerToko.setLayoutManager(layoutManager);
                             shimmerRecyclerToko.setAdapter(adapter);
@@ -137,4 +206,11 @@ public class Toko extends AppCompatActivity {
                 });
     }
 
+    public void setKirimkeBottom(KirimkeBottomSheet kirimkeBottom) {
+        this.kirimkeBottomSheet = kirimkeBottom;
+    }
+
+    public interface KirimkeBottomSheet {
+        void passingData(barang_model model_barang, satuan_model model_satuan);
+    }
 }

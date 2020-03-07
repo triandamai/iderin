@@ -1,8 +1,6 @@
 package com.toko.Adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.barang_model;
 import com.core.models.satuan_model;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,10 +35,17 @@ public class AdapterBarangUser extends RecyclerView.Adapter<AdapterBarangUser.My
     private List<barang_model> list;
     private Context context;
     private String namaKategori = "";
+    satuan_model model_satuan = new satuan_model();
+    private onAdapterBaranglistener onAdapterBaranglistener;
 
-    public AdapterBarangUser(Context context, List<barang_model> data) {
+    public interface onAdapterBaranglistener {
+        void onItemClick(barang_model model, int pos);
+    }
+
+    public AdapterBarangUser(Context context, List<barang_model> data, onAdapterBaranglistener onAdapterBaranglistener) {
         this.context = context;
         this.list = data;
+        this.onAdapterBaranglistener = onAdapterBaranglistener;
     }
 
     @NonNull
@@ -53,19 +57,22 @@ public class AdapterBarangUser extends RecyclerView.Adapter<AdapterBarangUser.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        barang_model barang_model = list.get(position);
-        holder.tvNamaBarang.setText(barang_model.getNama());
-        Picasso.get().load(barang_model.getFoto()).into(holder.ivBarangGambar);
+        barang_model model_barang = list.get(position);
+
+
+        holder.tvNamaBarang.setText(model_barang.getNama());
+        Picasso.get().load(model_barang.getFoto()).into(holder.ivBarangGambar);
         databaseReference
                 .child(context.getResources().getString(R.string.CHILD_BARANG))
                 .child(context.getResources().getString(R.string.CHILD_BARANG_KATEGORI))
-                .child(barang_model.getIdkategori().toString())
+                .child(model_barang.getIdkategori().toString())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             barang_model model = new barang_model();
                             model = dataSnapshot.getValue(barang_model.class);
+                            model.setId(dataSnapshot.getKey());
                             assert model != null;
                             namaKategori = model.getNama();
                         }
@@ -76,15 +83,24 @@ public class AdapterBarangUser extends RecyclerView.Adapter<AdapterBarangUser.My
 
                     }
                 });
+
         databaseReference.child(context.getResources().getString(R.string.CHILD_BARANG))
                 .child(context.getResources().getString(R.string.CHILD_BARANG_SATUAN))
-                .child(barang_model.getIdsatuan())
+                .child(model_barang.getIdsatuan())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            satuan_model model = dataSnapshot.getValue(satuan_model.class);
-                            holder.tvHargaQty.setText("Rp " + barang_model.getHarga() + "/" + model.getNama());
+                            model_satuan = dataSnapshot.getValue(satuan_model.class);
+                            model_satuan.setIdsatuan(dataSnapshot.getKey());
+                            holder.tvHargaQty.setText("Rp " + model_barang.getHarga() + "/" + model_satuan.getNama());
+                            holder.tvBtnEdit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    onAdapterBaranglistener.onItemClick(model_barang, position);
+                                }
+                            });
                         }
                     }
 
@@ -93,48 +109,8 @@ public class AdapterBarangUser extends RecyclerView.Adapter<AdapterBarangUser.My
 
                     }
                 });
-        holder.tvBtnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent addbarang = new Intent();
-                addbarang.setClassName(context, "com.barang.Addbarang")
-                        .putExtra("gambar", barang_model.getFoto())
-                        .putExtra("idkategori", barang_model.getIdkategori())
-                        .putExtra("kategori", namaKategori)
-                        .putExtra("nama", barang_model.getNama())
-                        .putExtra("deskripsi", barang_model.getDeskripsi())
-                        .putExtra("harga", barang_model.getHarga())
-                        .putExtra("id", barang_model.getId());
-                context.startActivity(addbarang);
-            }
-        });
-        holder.btnTvHapus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context, R.style.dialog)
-                        .setTitle("Hapus?")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                databaseReference
-                                        .child(context.getResources().getString(R.string.CHILD_BARANG))
-                                        .child(context.getResources().getString(R.string.CHILD_BARANG_ALL))
-                                        .child(barang_model.getId())
-                                        .removeValue();
-                                dialog.cancel();
-                                dialog.dismiss();
 
-                            }
-                        }).setNegativeButton("BATAL", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                builder.create();
-                builder.show();
-            }
-        });
+
 
     }
 
@@ -152,8 +128,7 @@ public class AdapterBarangUser extends RecyclerView.Adapter<AdapterBarangUser.My
         TextView tvHargaQty;
         @BindView(R.id.tv_btn_edit)
         TextView tvBtnEdit;
-        @BindView(R.id.btn_tv_hapus)
-        TextView btnTvHapus;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

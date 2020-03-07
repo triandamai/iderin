@@ -47,23 +47,14 @@
                 android:id="@+id/tv_btn_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit"
-                android:background="@color/hijau"
+                android:text="Tambah"
+                android:background="@drawable/button_primary"
                 android:textColor="#ffff"
                 android:padding="@dimen/dp_10" />
 
             <View
                 android:layout_width="5dp"
                 android:layout_height="5dp" />
-
-            <TextView
-                android:id="@+id/btn_tv_hapus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hapus"
-                android:background="#F10B0B"
-                android:textColor="#ffff"
-                android:padding="@dimen/dp_10" />
         </LinearLayout>
     </LinearLayout>
 

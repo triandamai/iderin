@@ -39,6 +39,7 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
     private Context context;
     private String namaKategori = "";
 
+
     public AdapterBarang(Context context, List<barang_model> data) {
         this.context = context;
         this.list = data;
@@ -155,9 +156,12 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
         @BindView(R.id.btn_tv_hapus)
         TextView btnTvHapus;
 
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
     }
+
 }

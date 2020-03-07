@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_btn_bottomsheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/dp_20"
+    android:paddingEnd="@dimen/dp_20"
+    android:background="#ffff"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_40"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jumlah pesanan"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/keterangan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Barang"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:layout_marginBottom="@dimen/dp_20" />
+
+    <LinearLayout
+        android:id="@+id/ly_qty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_min"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/background"
+            android:textAlignment="center"
+            android:text="-"
+            android:layout_weight="1"
+            android:padding="@dimen/dp_10"
+            android:textSize="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@drawable/button_primary" />
+
+        <TextView
+            android:id="@+id/btn_jml"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hijau"
+            android:textStyle="bold"
+            android:text="1"
+            android:textAlignment="center"
+            android:padding="@dimen/dp_10"
+            android:textSize="@dimen/dp_20"
+            android:layout_weight="1"
+            android:background="@drawable/button_secondary" />
+
+        <TextView
+            android:id="@+id/btn_add"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/background"
+            android:text="+"
+            android:textAlignment="center"
+            android:textSize="@dimen/dp_20"
+            android:padding="@dimen/dp_10"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:background="@drawable/button_primary" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <LinearLayout
+        android:id="@+id/ly_satuanberat"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/btn_250"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/hijau"
+            android:text="250 gram"
+            android:padding="@dimen/dp_10"
+            android:layout_weight="1"
+            android:textSize="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@drawable/button_secondary" />
+
+        <TextView
+            android:id="@+id/btn_500"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/hijau"
+            android:text="500 gram"
+            android:padding="@dimen/dp_10"
+            android:layout_weight="1"
+            android:textSize="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@drawable/button_secondary" />
+
+        <TextView
+            android:id="@+id/btn_750"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/hijau"
+            android:text="750 gram"
+            android:padding="@dimen/dp_10"
+            android:layout_weight="1"
+            android:textSize="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@drawable/button_secondary" />
+
+        <TextView
+            android:id="@+id/btn_1000"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/hijau"
+            android:text="1000 gram"
+            android:padding="@dimen/dp_10"
+            android:layout_weight="1"
+            android:textSize="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@drawable/button_secondary" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/dp_20"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_title_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:textSize="@dimen/dp_20"
+            android:textStyle="bold"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="start" />
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp 2000"
+            android:textSize="@dimen/dp_20"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/btn_tambahkan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/background"
+        android:background="@drawable/button_primary"
+        android:padding="15dp"
+        android:textAlignment="center"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="Tambahkan" />
+
+    <TextView
+        android:id="@+id/btn_batal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Batal"
+        android:padding="15dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textColor="@color/background"
+        android:textAlignment="center"
+        android:background="@drawable/button_danger" />
+
+</LinearLayout>

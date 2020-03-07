@@ -58,27 +58,34 @@
 			
 
 - Order
+	- cart
+		- uid
+			- idbarang
+			- tanggal 
+			- idpembeli
+			- status("selesai","belumbayar")
+			- total
+	- detailcart
+		- uid
+			- idbarang
+			- jumlah
+			- satuan
+			
+
 	- transaksi
 		- pushid
+			- idkeranjang
 			- idpembeli
-			- idtoko
-			- jumlah
-			- harga
-			- total
-			- status
+			- status("diterima","ditolak","stok habis","selesai")
 			- metode_pembayaran
-			- waktu_order
-			- waktu_dirubah
-			- pelunasan_pada
-
-	- detail_order
-		- idtransaksi
+			- tanggal
+			- idpenjual
+			- 
+		- pushid(idkeranjang)
 			- idbarang
+			- jumlah
+			- satuan
 	
-	- virtual_payments
-		- idtransaksi
-			
-			
 		
 		
 			
