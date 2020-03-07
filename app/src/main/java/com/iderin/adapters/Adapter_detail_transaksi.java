@@ -1,18 +1,17 @@
 package com.iderin.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.core.models.toko_model;
-import com.core.models.transaksi_model;
+import com.core.models.barang_model;
+import com.core.models.detail_cart_model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -20,8 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.iderin.DetailTransaksi;
 import com.pmo.iderin.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,43 +28,45 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class Adapter_transaksi extends RecyclerView.Adapter<Adapter_transaksi.MyViewHolder> {
-
+public class Adapter_detail_transaksi extends RecyclerView.Adapter<Adapter_detail_transaksi.MyViewHolder> {
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-    private List<transaksi_model> list = new ArrayList<>();
+
+    private List<detail_cart_model> list = new ArrayList<>();
     private Context context;
 
-    public Adapter_transaksi(Context context, List<transaksi_model> models) {
+    public Adapter_detail_transaksi(Context context, List<detail_cart_model> list) {
+        this.list = list;
         this.context = context;
-        this.list = models;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_transaksi, parent, false);
-
+        View v = LayoutInflater.from(context).inflate(R.layout.item_detail_transaksi, parent, false);
         return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        transaksi_model model = list.get(position);
-        holder.tvTransaksi.setText("kode : " + model.getIdtransaksi());
-        holder.tvMetode.setText(model.getMetode_pembayaran());
-        databaseReference.child(context.getString(R.string.CHILD_AKUN))
-                .child(context.getString(R.string.CHILD_AKUN_TOKO))
-                .child(model.getIdpenjual())
+        detail_cart_model model = list.get(position);
+
+        databaseReference.child(context.getString(R.string.CHILD_BARANG))
+                .child(context.getString(R.string.CHILD_BARANG_ALL))
+                .child(model.getIdBarang())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            toko_model toko = new toko_model();
-                            toko = dataSnapshot.getValue(toko_model.class);
-                            holder.tvPenjual.setText(toko.getNamatoko());
+                            barang_model barang = new barang_model();
+                            barang = dataSnapshot.getValue(barang_model.class);
+                            holder.tvNama.setText(barang.getNama());
+                            holder.tvHarga.setText(String.valueOf(barang.getHarga()));
+                            Picasso.get().load(barang.getFoto()).into(holder.ivGambarbarang);
+
+
                         }
                     }
 
@@ -74,13 +75,7 @@ public class Adapter_transaksi extends RecyclerView.Adapter<Adapter_transaksi.My
 
                     }
                 });
-        holder.lyParent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity(new Intent(context, DetailTransaksi.class).putExtra("idtransaksi", model.getIdtransaksi()));
-            }
-        });
-
+        holder.tvSubtotal.setText("Rp " + model.getSubtotal());
 
     }
 
@@ -90,14 +85,14 @@ public class Adapter_transaksi extends RecyclerView.Adapter<Adapter_transaksi.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_transaksi)
-        TextView tvTransaksi;
-        @BindView(R.id.tv_penjual)
-        TextView tvPenjual;
-        @BindView(R.id.tv_metode)
-        TextView tvMetode;
-        @BindView(R.id.ly_parent)
-        LinearLayout lyParent;
+        @BindView(R.id.iv_gambarbarang)
+        ImageView ivGambarbarang;
+        @BindView(R.id.tv_nama)
+        TextView tvNama;
+        @BindView(R.id.tv_harga)
+        TextView tvHarga;
+        @BindView(R.id.tv_subtotal)
+        TextView tvSubtotal;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

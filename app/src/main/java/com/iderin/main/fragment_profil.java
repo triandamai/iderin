@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.iderin.Splash;
+import com.pmo.iderin.BuildConfig;
 import com.pmo.iderin.R;
 import com.squareup.picasso.Picasso;
 
@@ -101,7 +102,7 @@ public class fragment_profil extends Fragment {
                             assert profil != null;
                             Picasso.get().load(profil.getFoto()).into(profileImage);
                             tvNama.setText(profil.getNama());
-                            tvDetail.setText("+62" + profil.getNohp());
+                            tvDetail.setText(profil.getNohp());
 
                         }
                     }
@@ -145,6 +146,9 @@ public class fragment_profil extends Fragment {
                 startActivity(alamat);
                 break;
             case R.id.ly_btn_iderpay:
+                Intent keiderpay = new Intent();
+                keiderpay.setClassName(BuildConfig.APPLICATION_ID, "com.iderpay.Iderpay");
+                startActivity(keiderpay);
                 break;
             case R.id.ly_btn_help:
                 break;
