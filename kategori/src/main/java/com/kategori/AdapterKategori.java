@@ -49,7 +49,7 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.MyView
             @Override
             public void onClick(View v) {
                 Intent kebarang = new Intent();
-                kebarang.setClassName(context, "com.barang.All");
+                kebarang.setClassName(context, "com.barang.AllBarang");
                 kebarang.putExtra(context.getString(R.string.INTENT_PUT_IDKATEGORI), mode.getId().toString());
                 context.startActivity(kebarang);
             }

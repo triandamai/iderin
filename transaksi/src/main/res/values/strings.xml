@@ -22,4 +22,26 @@
     <string name="BUNDLE_HARGA">harga</string>
     <string name="CHILD_ORDER_DETAIL_CART">DETAIL</string>
     <string name="CHILD_IDERPAY">IDERPAY</string>
+    <string name="app_name">Iderin</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="CHILD_AKUN_IDERPAY">IDERPAY</string>
+    <string name="CHILD_AKUN_HISTORY">HISTORY</string>
+    <string name="CHILD_BARANG_GAMBAR">GAMBAR</string>
+    <string name="CHILD_TRANSAKSI_DETAIL">DETAIL_TRANSAKSI</string>
+    <string name="CHILD_TRANSAKSI_PAYMENT">PAYMENT_V</string>
+
+    <string name="LEVEL_ADMIN">ADMIN</string>
+    <string name="title_transaksi">Transaksi</string>
+    <string name="title_iderpay">Iderpay</string>
+    <string name="title_kategori">Kategori</string>
+    <string name="title_barang">Semua Barang</string>
+    <string name="title_toko">Toko User</string>
+    <string name="title_admin">Admin Page</string>
+    <string name="title_penjual">Penjual</string>
+    <string name="title_auth">Auth</string>
+    <string name="title_profil">Profil</string>
+    <string name="title_verifikasi">Verifikasi akun</string>
+    <string name="title_mitra">Mitra</string>
 </resources>

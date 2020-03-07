@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.iderin.Helpers.Alert;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +40,7 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
     private BottomSheetListener mBottomSheetListener;
     private double saldo = 0;
     private double saldosementara = 0;
+    private double total = 0;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -48,6 +51,12 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bottom_sheet_pickitem, container, false);
         unbinder = ButterKnife.bind(this, view);
+        Bundle bundle = new Bundle();
+        if (bundle == null) {
+            double tot = bundle.getDouble("total");
+            total = tot;
+        }
+
 
         databaseReference.child(getString(R.string.CHILD_AKUN))
                 .child(getString(R.string.CHILD_IDERPAY))
@@ -59,8 +68,6 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
                             saldo = dataSnapshot.getValue(double.class);
                             saldosementara = dataSnapshot.getValue(double.class);
                             tvSaldo.setText("Rp " + String.valueOf(saldo));
-
-
                         } else {
                             saldo = 0;
                             saldosementara = 0;
@@ -92,14 +99,15 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_tunai:
+                mBottomSheetListener.onOptionClick(1);
                 break;
             case R.id.ly_btn_bottomsheet:
                 if (saldo == 0) {
-
-                } else if (saldo <= 0) {
-
+                    new Alert(getContext()).toast("Saldo tidak cukup", Toast.LENGTH_LONG);
+                } else if (saldo < total) {
+                    new Alert(getContext()).toast("Saldo tidak cukup", Toast.LENGTH_LONG);
                 } else {
-                    mBottomSheetListener.onOptionClick(0);
+                    mBottomSheetListener.onOptionClick(2);
                 }
                 break;
         }
@@ -107,7 +115,6 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
 
     public interface BottomSheetListener {
         void onOptionClick(int tipebayar);
-
         void onCancel();
     }
 

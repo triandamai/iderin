@@ -73,7 +73,7 @@ public class fragment_transaksi extends Fragment {
                             transaksi_model model = new transaksi_model();
                             for (DataSnapshot data : dataSnapshot.getChildren()) {
                                 model = data.getValue(transaksi_model.class);
-                                model.setId(data.getKey());
+                                model.setIdtransaksi(data.getKey());
                                 assert model != null;
                                 transaksi_models.add(model);
                                 adapter_transaksi = new AdapterTransaksi(getContext(), transaksi_models);
@@ -101,7 +101,7 @@ public class fragment_transaksi extends Fragment {
                         transaksi_model model = new transaksi_model();
                         model = dataSnapshot.getValue(transaksi_model.class);
                         assert model != null;
-                        if (model.getIdtoko().toString().equalsIgnoreCase(firebaseUser.getUid())) {
+                        if (model.getIdpenjual().toString().equalsIgnoreCase(firebaseUser.getUid())) {
                             new Alert(getContext());
                         }
                     }

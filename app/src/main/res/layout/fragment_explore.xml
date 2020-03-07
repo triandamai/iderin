@@ -114,42 +114,7 @@
                     app:shimmer_recycler_layout="@layout/item_placeholder_barang"
                     app:spanCount="2"
                     app:shimmer_recycler_item_count="3" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_30"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/dp_20"
-                        android:layout_weight="1"
-                        android:text="Daftar Toko"/>
-                    <TextView
-                        android:id="@+id/tv_btn_semuatoko"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textAlignment="textEnd"
-                        android:layout_gravity="right"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/dp_16"
-                        android:text="Lihat Semua"
-                        tools:ignore="RtlCompat" />
-                </LinearLayout>
 
-                <com.todkars.shimmer.ShimmerRecyclerView
-                    android:id="@+id/shimmer_recycler_toko"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    tools:listitem="@layout/item_placeholder_barang"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:shimmer_recycler_layout="@layout/item_placeholder_barang"
-                    app:spanCount="2"
-                    app:shimmer_recycler_item_count="3" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

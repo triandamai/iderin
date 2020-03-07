@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 import com.transaksi.R;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AdapterItemCart extends RecyclerView.Adapter<AdapterItemCart.MyViewHolder> {
+
 
 
     private List<detail_cart_model> list = new ArrayList<>();
@@ -63,6 +66,7 @@ public class AdapterItemCart extends RecyclerView.Adapter<AdapterItemCart.MyView
                             barang = dataSnapshot.getValue(barang_model.class);
                             holder.tvNama.setText(barang.getNama());
                             holder.tvHarga.setText(String.valueOf(barang.getHarga()));
+                            Picasso.get().load(barang.getFoto()).into(holder.ivGambarbarang);
 
 
                         }
@@ -82,16 +86,12 @@ public class AdapterItemCart extends RecyclerView.Adapter<AdapterItemCart.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.iv_gambarbarang)
+        ImageView ivGambarbarang;
         @BindView(R.id.tv_nama)
         TextView tvNama;
         @BindView(R.id.tv_harga)
         TextView tvHarga;
-        @BindView(R.id.tv_min)
-        TextView tvMin;
-        @BindView(R.id.tv_jml)
-        TextView tvJml;
-        @BindView(R.id.tv_add)
-        TextView tvAdd;
         @BindView(R.id.tv_subtotal)
         TextView tvSubtotal;
 

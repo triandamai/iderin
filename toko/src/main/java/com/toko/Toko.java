@@ -181,6 +181,7 @@ public class Toko extends AppCompatActivity {
                                             modelcart.setStatus("Belum bayar");
                                             modelcart.setTanggal(String.valueOf(new Date().getTime()));
                                             modelcart.setTimestamp(new Date().getTime());
+                                            modelcart.setIdpenjual(model.getIdtoko());
                                             modelcart.setTotal(total);
                                             databaseReference.child(getString(R.string.CHILD_ORDER))
                                                     .child(getString(R.string.CHILD_ORDER_CART))

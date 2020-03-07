@@ -63,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:textSize="@dimen/dp_20"
+                        android:textSize="16sp"
                         android:text="Total Pemesanan" />
 
                     <TextView
@@ -73,7 +73,7 @@
                         android:layout_alignParentEnd="true"
                         android:textStyle="bold"
                         android:layout_gravity="end"
-                        android:textSize="@dimen/dp_20"
+                        android:textSize="16sp"
                         android:text="RP 50000" />
                 </RelativeLayout>
 
@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:textSize="@dimen/dp_20"
+                        android:textSize="12dp"
                         android:text="Total Pembayaran" />
 
                     <TextView
@@ -97,7 +97,7 @@
                         android:layout_alignParentEnd="true"
                         android:textStyle="bold"
                         android:layout_gravity="end"
-                        android:textSize="@dimen/dp_20"
+                        android:textSize="12dp"
                         android:text="RP 50000" />
                 </RelativeLayout>
 
@@ -114,6 +114,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:textStyle="bold"
+                        android:textSize="@dimen/dp_20"
                         android:text="Metode Pembayaran" />
 
                     <ImageView

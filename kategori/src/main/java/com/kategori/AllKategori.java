@@ -7,6 +7,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.kategori_model;
 import com.google.android.material.appbar.AppBarLayout;
@@ -67,6 +69,8 @@ public class AllKategori extends AppCompatActivity {
                                 list.add(model);
 
                                 adapter = new AdapterKategori(context, list);
+                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 2);
+                                shimmerRecyclerSemuakategori.setLayoutManager(layoutManager);
                                 shimmerRecyclerSemuakategori.setAdapter(adapter);
                             }
                         }

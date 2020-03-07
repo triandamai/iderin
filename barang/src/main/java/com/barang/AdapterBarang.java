@@ -1,6 +1,7 @@
 package com.barang;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import butterknife.Unbinder;
 public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHolder> {
 
 
+
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -56,6 +58,21 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
         barang_model model = list.get(position);
         holder.tvBarangNama.setText(model.getNama().toString());
         Picasso.get().load(model.getFoto().toString()).into(holder.ivBarangGambar);
+        holder.tvLihat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ketoko = new Intent();
+                ketoko.setClassName(context, "com.toko.Toko")
+                        .putExtra("idtoko", model.getIdtoko());
+                context.startActivity(ketoko);
+            }
+        });
+//        holder.ivBarangGambar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//               Log.e("IDERIN","gamau");
+//            }
+//        });
         databaseReference.child(context.getString(R.string.CHILD_BARANG))
                 .child(context.getString(R.string.CHILD_BARANG_SATUAN))
                 .child(model.getIdsatuan())
@@ -90,12 +107,12 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
         TextView tvBarangNama;
         @BindView(R.id.tv_barang_harga_stok)
         TextView tvBarangHargaStok;
-        @BindView(R.id.add)
-        TextView add;
+        @BindView(R.id.tv_lihat)
+        TextView tvLihat;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            unbinder = ButterKnife.bind(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

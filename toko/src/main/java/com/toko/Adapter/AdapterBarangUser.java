@@ -62,6 +62,7 @@ public class AdapterBarangUser extends RecyclerView.Adapter<AdapterBarangUser.My
 
         holder.tvNamaBarang.setText(model_barang.getNama());
         Picasso.get().load(model_barang.getFoto()).into(holder.ivBarangGambar);
+
         databaseReference
                 .child(context.getResources().getString(R.string.CHILD_BARANG))
                 .child(context.getResources().getString(R.string.CHILD_BARANG_KATEGORI))

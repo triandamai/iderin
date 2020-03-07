@@ -10,6 +10,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:minWidth="100dp"
+        android:maxWidth="100dp"
         android:scaleType="fitXY"
         android:layout_margin="@dimen/dp_10"
         android:layout_weight="1"
