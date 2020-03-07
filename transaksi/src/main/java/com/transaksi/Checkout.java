@@ -60,6 +60,7 @@ public class Checkout extends AppCompatActivity {
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private double total = 0;
+    cart_model cartmodel = new cart_model();
 
     private List<detail_cart_model> list = new ArrayList<>();
     private AdapterItemCart adapterItemCart;
@@ -82,7 +83,7 @@ public class Checkout extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            cart_model cartmodel = new cart_model();
+
                             cartmodel = dataSnapshot.getValue(cart_model.class);
                             cartmodel.setIdcart(dataSnapshot.getKey());
 
@@ -138,6 +139,9 @@ public class Checkout extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.rl_metode:
                 BottomSheetBarangClicked bs = new BottomSheetBarangClicked();
+                Bundle bundle = new Bundle();
+                bundle.putDouble("total", cartmodel.getTotal());
+
                 bs.setOnBottomSheetListener(new BottomSheetBarangClicked.BottomSheetListener() {
                     @Override
                     public void onOptionClick(int tipebayar) {
