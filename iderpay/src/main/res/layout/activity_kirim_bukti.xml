@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KirimBukti">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/sp_16"
+            android:layout_marginEnd="@dimen/sp_16"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_bukti"
+                android:layout_marginStart="@dimen/sp_16"
+                android:layout_marginEnd="@dimen/sp_16"
+                android:layout_width="match_parent"
+                android:src="@drawable/bg_auth_jpg"
+                android:layout_marginBottom="@dimen/dp_30"
+                android:layout_height="200dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dp_20"
+                android:textStyle="bold"
+                android:text="Nominal" />
+
+            <EditText
+                android:id="@+id/et_nominal"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:inputType="number"
+                android:hint="Masukkan jumlah saldo"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SIMPAN"
+                android:textColor="#ffff"
+                android:background="@drawable/button_primary" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

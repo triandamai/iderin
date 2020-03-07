@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.iderpay">
 
     <dist:module
@@ -13,8 +14,12 @@
         <dist:fusing dist:include="true" />
     </dist:module>
 
-    <application>
-        <activity android:name=".Iderpay"></activity>
+    <application
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:replace="android:theme">
+        <activity android:name=".KirimBukti"></activity>
+        <activity android:name=".TopUp" />
+        <activity android:name=".Iderpay" />
     </application>
 
 </manifest>
