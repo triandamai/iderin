@@ -98,6 +98,7 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 barang_model = dataSnapshot.getValue(com.core.models.barang_model.class);
+                                barang_model.setId(dataSnapshot.getKey());
                             }
 
                         }
@@ -114,8 +115,8 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
-                                satuan_model model = dataSnapshot.getValue(com.core.models.satuan_model.class);
-                                if (model.getNama().toString().equalsIgnoreCase("ikat") || model.getNama().toString().equalsIgnoreCase("bungkus")) {
+                                satuan_model = dataSnapshot.getValue(com.core.models.satuan_model.class);
+                                if (satuan_model.getNama().toString().equalsIgnoreCase("ikat") || satuan_model.getNama().toString().equalsIgnoreCase("bungkus")) {
                                     lySatuanberat.setVisibility(View.GONE);
                                     lyQty.setVisibility(View.VISIBLE);
                                     isSatuanBerat = false;
@@ -162,7 +163,7 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
                 btn750.setTextColor(getContext().getResources().getColor(R.color.hijau));
                 btn1000.setBackground(getContext().getResources().getDrawable(R.drawable.button_secondary));
                 btn1000.setTextColor(getContext().getResources().getColor(R.color.hijau));
-                hargaTotal = hargaAsli / 4;
+                hargaTotal = hargaAsli * 0.25;
                 tvTotal.setText("Rp " + hargaTotal);
                 break;
             case R.id.btn_500:
@@ -174,7 +175,7 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
                 btn750.setTextColor(getContext().getResources().getColor(R.color.hijau));
                 btn1000.setBackground(getContext().getResources().getDrawable(R.drawable.button_secondary));
                 btn1000.setTextColor(getContext().getResources().getColor(R.color.hijau));
-                hargaTotal = hargaAsli / 2;
+                hargaTotal = hargaAsli * 0.5;
                 tvTotal.setText("Rp " + Math.round(hargaTotal));
                 break;
             case R.id.btn_750:
@@ -187,7 +188,7 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
                 btn1000.setBackground(getContext().getResources().getDrawable(R.drawable.button_secondary));
                 btn1000.setTextColor(getContext().getResources().getColor(R.color.hijau));
 
-                hargaTotal = hargaAsli * 2 / 3;
+                hargaTotal = hargaAsli * 0.75;
                 tvTotal.setText("Rp " + Math.round(hargaTotal));
                 break;
             case R.id.btn_1000:
@@ -262,7 +263,9 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
     }
 
     public interface BottomSheetListener {
-        void onOptionClick(int jml, barang_model model, int pos, double total);
+        void onOptionClick(String satuan, int jml, barang_model model, int pos, double total);
+
+        void onCancel();
     }
 
     @OnClick({R.id.btn_min, R.id.btn_jml, R.id.btn_add, R.id.btn_250, R.id.btn_500, R.id.btn_750, R.id.btn_1000, R.id.btn_tambahkan, R.id.btn_batal})
@@ -289,7 +292,7 @@ public class BottomSheetBarangClicked extends BottomSheetDialogFragment {
                 pilihBerat(250, R.id.btn_1000);
                 break;
             case R.id.btn_tambahkan:
-                mBottomSheetListener.onOptionClick(jmlQTY, barang_model, posisi, hargaTotal);
+                mBottomSheetListener.onOptionClick(satuan_model.getNama(), jmlQTY, barang_model, posisi, hargaTotal);
                 break;
             case R.id.btn_batal:
                 break;

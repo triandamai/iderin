@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.barang_model;
 import com.core.models.cart_model;
+import com.core.models.detail_cart_model;
 import com.core.models.satuan_model;
 import com.core.models.toko_model;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +39,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.iderin.Helpers.windowManager.getTransparentStatusBar;
 
@@ -67,6 +69,7 @@ public class Toko extends AppCompatActivity {
     private List<barang_model> barang_models = new ArrayList<>();
     private AdapterBarangUser adapter;
     private KirimkeBottomSheet kirimkeBottomSheet;
+    private double total = 0;
 
 
     @Override
@@ -152,6 +155,7 @@ public class Toko extends AppCompatActivity {
                             barang_model model = new barang_model();
                             for (DataSnapshot data : dataSnapshot.getChildren()) {
                                 model = data.getValue(barang_model.class);
+                                model.setId(data.getKey());
                                 assert model != null;
                                 barang_models.add(model);
 
@@ -159,7 +163,7 @@ public class Toko extends AppCompatActivity {
                             adapter = new AdapterBarangUser(context, barang_models, new AdapterBarangUser.onAdapterBaranglistener() {
                                 @Override
                                 public void onItemClick(barang_model model, int pos) {
-                                    Log.e("IDERIN", "" + model.getIdsatuan());
+                                    Log.e("IDERIN", "" + model.getId());
                                     BottomSheetBarangClicked bs = new BottomSheetBarangClicked();
                                     Bundle bundle = new Bundle();
                                     bundle.putString(getString(R.string.BUNDLE_NAMA_BARANG), model.getNama());
@@ -171,7 +175,7 @@ public class Toko extends AppCompatActivity {
 
                                     bs.setOnBottomSheetListener(new BottomSheetBarangClicked.BottomSheetListener() {
                                         @Override
-                                        public void onOptionClick(int jml, barang_model model, int pos, double total) {
+                                        public void onOptionClick(String satuan, int jml, barang_model mod, int pos, double total) {
                                             cart_model modelcart = new cart_model();
                                             modelcart.setIdPembeli(firebaseUser.getUid());
                                             modelcart.setStatus("Belum bayar");
@@ -185,9 +189,25 @@ public class Toko extends AppCompatActivity {
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
-                                                            
+                                                            detail_cart_model detailcart = new detail_cart_model();
+                                                            detailcart.setIdBarang(mod.getId());
+                                                            detailcart.setIddetail(firebaseUser.getUid());
+                                                            detailcart.setJml(jml);
+                                                            detailcart.setSatuan(satuan);
+                                                            detailcart.setSubtotal(total);
+                                                            databaseReference.child(getString(R.string.CHILD_ORDER))
+                                                                    .child(getString(R.string.CHILD_ORDER_DETAIL_CART))
+                                                                    .child(firebaseUser.getUid())
+                                                                    .child(mod.getId())
+                                                                    .setValue(detailcart);
                                                         }
                                                     });
+                                            bs.dismiss();
+                                        }
+
+                                        @Override
+                                        public void onCancel() {
+                                            bs.dismiss();
                                         }
                                     });
                                     bs.show(getSupportFragmentManager(), "pick jml");
@@ -208,6 +228,19 @@ public class Toko extends AppCompatActivity {
 
     public void setKirimkeBottom(KirimkeBottomSheet kirimkeBottom) {
         this.kirimkeBottomSheet = kirimkeBottom;
+    }
+
+    @OnClick({R.id.cv_detail, R.id.cv_to_cart})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.cv_detail:
+                break;
+            case R.id.cv_to_cart:
+                Intent intent = new Intent();
+                intent.setClassName(context, "com.transaksi.Checkout");
+                startActivity(intent);
+                break;
+        }
     }
 
     public interface KirimkeBottomSheet {

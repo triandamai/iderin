@@ -8,4 +8,5 @@ public class detail_cart_model {
     String idBarang;
     int jml;
     String satuan;
+    double subtotal;
 }

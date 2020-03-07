@@ -1,0 +1,103 @@
+package com.transaksi.Adapters;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.core.models.barang_model;
+import com.core.models.detail_cart_model;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.transaksi.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class AdapterItemCart extends RecyclerView.Adapter<AdapterItemCart.MyViewHolder> {
+
+
+    private List<detail_cart_model> list = new ArrayList<>();
+    private Context context;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
+    public AdapterItemCart(Context context, List<detail_cart_model> list) {
+        this.context = context;
+        this.list = list;
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.item_detail_cart, parent, false);
+        return new MyViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        detail_cart_model model = list.get(position);
+
+        databaseReference.child(context.getString(R.string.CHILD_BARANG))
+                .child(context.getString(R.string.CHILD_BARANG_ALL))
+                .child(model.getIdBarang())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            barang_model barang = new barang_model();
+                            barang = dataSnapshot.getValue(barang_model.class);
+                            holder.tvNama.setText(barang.getNama());
+                            holder.tvHarga.setText(String.valueOf(barang.getHarga()));
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+        holder.tvSubtotal.setText("Rp " + model.getSubtotal());
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_nama)
+        TextView tvNama;
+        @BindView(R.id.tv_harga)
+        TextView tvHarga;
+        @BindView(R.id.tv_min)
+        TextView tvMin;
+        @BindView(R.id.tv_jml)
+        TextView tvJml;
+        @BindView(R.id.tv_add)
+        TextView tvAdd;
+        @BindView(R.id.tv_subtotal)
+        TextView tvSubtotal;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+}

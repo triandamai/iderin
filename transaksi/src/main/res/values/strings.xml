@@ -13,4 +13,13 @@
     <string name="CHILD_BARANG_SATUAN">SATUAN</string>
     <string name="INTENT_PUT_IDKATEGORI">kategori</string>
     <string name="CHILD_AKUN_ALAMAT">ALAMAT</string>
+    <string name="CHILD_ORDER">ORDER</string>
+    <string name="CHILD_ORDER_CART">CART</string>
+    <string name="BUNDLE_NAMA_BARANG">namabarang</string>
+    <string name="BUNDLE_ID_BARANG">idbarang</string>
+    <string name="BUNDLE_POSISI">posisi</string>
+    <string name="BUNDLE_ID_SATUAN">satuan</string>
+    <string name="BUNDLE_HARGA">harga</string>
+    <string name="CHILD_ORDER_DETAIL_CART">DETAIL</string>
+    <string name="CHILD_IDERPAY">IDERPAY</string>
 </resources>

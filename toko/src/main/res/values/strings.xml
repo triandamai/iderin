@@ -20,4 +20,5 @@
     <string name="BUNDLE_POSISI">posisi</string>
     <string name="BUNDLE_ID_SATUAN">satuan</string>
     <string name="BUNDLE_HARGA">harga</string>
+    <string name="CHILD_ORDER_DETAIL_CART">DETAIL</string>
 </resources>
