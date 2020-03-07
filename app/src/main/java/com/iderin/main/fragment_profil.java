@@ -137,7 +137,7 @@ public class fragment_profil extends Fragment {
         switch (view.getId()) {
             case R.id.ly_btn_myorder:
                 Intent order = new Intent();
-                order.setClassName(getContext(), "com.profil.MyOrder");
+                order.setClassName(getContext(), "com.profil.AddToko");
                 startActivity(order);
                 break;
             case R.id.ly_btn_manage_address:

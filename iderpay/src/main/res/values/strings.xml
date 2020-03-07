@@ -47,4 +47,5 @@
     <string name="title_verifikasi">Verifikasi akun</string>
     <string name="title_mitra">Mitra</string>
     <string name="text_penjelasan"><![CDATA[1. Masukkan Kartu ATM \n2. Pilih Transxaksi Lainnya>Transfer>Bank Lain \n3. Masukkan rekening 640 3131 3562 212 Atas Nama Trian damai > Pilih Nominal\n4. Kirim Bukt Transfer]]></string>
+    <string name="CHILD_BUKTI">BUKTI_TOPUP</string>
 </resources>

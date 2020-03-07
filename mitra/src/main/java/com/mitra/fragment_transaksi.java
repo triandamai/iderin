@@ -1,6 +1,7 @@
 package com.mitra;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.iderin.Helpers.Alert;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
 import java.util.ArrayList;
@@ -63,12 +63,14 @@ public class fragment_transaksi extends Fragment {
 
     private void getTransaksi() {
         databaseReference.child(getResources().getString(R.string.CHILD_TRANSAKSI))
-                .orderByChild(getResources().getString(R.string.ORDERBY_CHILD_TOKO))
+                .child(getResources().getString(R.string.CHILD_TRANSAKSI))
+                .orderByChild("idpenjual")
                 .equalTo(firebaseUser.getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
+                            Log.e("IDERIN", "ada");
                             transaksi_models.clear();
                             transaksi_model model = new transaksi_model();
                             for (DataSnapshot data : dataSnapshot.getChildren()) {
@@ -76,12 +78,15 @@ public class fragment_transaksi extends Fragment {
                                 model.setIdtransaksi(data.getKey());
                                 assert model != null;
                                 transaksi_models.add(model);
-                                adapter_transaksi = new AdapterTransaksi(getContext(), transaksi_models);
-                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-                                shimmerRecyclerTransaksi.setLayoutManager(layoutManager);
-                                shimmerRecyclerTransaksi.setAdapter(adapter_transaksi);
+
 
                             }
+                            adapter_transaksi = new AdapterTransaksi(getContext(), transaksi_models);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+                            shimmerRecyclerTransaksi.setLayoutManager(layoutManager);
+                            shimmerRecyclerTransaksi.setAdapter(adapter_transaksi);
+                        } else {
+                            Log.e("IDERIN", "tidak ada");
                         }
                     }
 
@@ -101,9 +106,7 @@ public class fragment_transaksi extends Fragment {
                         transaksi_model model = new transaksi_model();
                         model = dataSnapshot.getValue(transaksi_model.class);
                         assert model != null;
-                        if (model.getIdpenjual().toString().equalsIgnoreCase(firebaseUser.getUid())) {
-                            new Alert(getContext());
-                        }
+
                     }
 
                     @Override

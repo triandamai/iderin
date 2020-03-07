@@ -24,13 +24,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
-import com.core.models.barang_model;
+import com.core.models.top_up_model;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.iderin.Helpers.Alert;
@@ -42,7 +43,6 @@ import com.yalantis.ucrop.UCrop;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -65,14 +65,17 @@ public class KirimBukti extends AppCompatActivity {
     EditText etNominal;
     @BindView(R.id.btn_upload)
     Button btnUpload;
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+    private StorageReference storageReference = firebaseStorage.getReference();
 
     private Context context = KirimBukti.this;
     private Uri filePath;
     private boolean isEditMode = false;
     private Camera camera;
+    private String id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,15 +113,14 @@ public class KirimBukti extends AppCompatActivity {
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
-
+            id = databaseReference.push().getKey();
             StorageReference myref = storageReference
-                    .child(getResources().getString(R.string.CHILD_BARANG))
-                    .child(getResources().getString(R.string.CHILD_BARANG_ALL))
-                    .child("banner" + id);
-            ivbarang.setDrawingCacheEnabled(true);
-            ivbarang.buildDrawingCache();
+                    .child("topup")
+                    .child("bukti" + id);
+            ivBukti.setDrawingCacheEnabled(true);
+            ivBukti.buildDrawingCache();
 
-            Bitmap bitmap = ((BitmapDrawable) ivbarang.getDrawable()).getBitmap();
+            Bitmap bitmap = ((BitmapDrawable) ivBukti.getDrawable()).getBitmap();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
             byte[] data = baos.toByteArray();
@@ -133,24 +135,16 @@ public class KirimBukti extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Uri donloadUri = task.getResult();
 
-                    //aksi tambah ke db
-                    barang_model toko = new barang_model();
-                    toko.setDeskripsi(etDeskripsi.getText().toString());
-                    toko.setFoto(donloadUri.toString());
-                    toko.setIdkategori(idKategori);
-                    toko.setIdtoko(firebaseUser.getUid());
-                    toko.setNama(etNama.getText().toString());
-                    toko.setCreated_at(new Date().getTime());
-                    toko.setUpdated_at(new Date().getTime());
-                    toko.setIdsatuan(idSatuan);
-
-                    toko.setHarga(Double.parseDouble(etHarga.getText().toString()));
+                    top_up_model topup = new top_up_model();
+                    topup.setBuktitransfer(donloadUri.toString());
+                    topup.setIdUser(firebaseUser.getUid());
+                    topup.setNominal(Double.parseDouble(etNominal.getText().toString()));
+                    topup.setStatus("menunggu");
 
                     databaseReference
-                            .child(getResources().getString(R.string.CHILD_BARANG))
-                            .child(getResources().getString(R.string.CHILD_BARANG_ALL))
+                            .child(getResources().getString(R.string.CHILD_BUKTI))
                             .child(id)
-                            .setValue(toko)
+                            .setValue(topup)
                             .addOnCompleteListener(task1 -> new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
