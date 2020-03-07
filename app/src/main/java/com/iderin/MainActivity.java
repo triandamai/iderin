@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 
 import com.iderin.Helpers.windowManager;
 import com.iderin.main.fragment_explore;
-import com.iderin.main.fragment_inbox;
 import com.iderin.main.fragment_profil;
 import com.iderin.main.fragment_shop;
 import com.pmo.iderin.R;
@@ -57,11 +56,12 @@ public class MainActivity extends AppCompatActivity implements OnItemReselectedL
             case 1:
                 fragment = new fragment_shop();
 
+
                 break;
+//            case 2:
+//                fragment = new fragment_shop();
+//                break;
             case 2:
-                fragment = new fragment_inbox();
-                break;
-            case 3:
                 fragment = new fragment_profil();
                 break;
 
@@ -78,12 +78,14 @@ public class MainActivity extends AppCompatActivity implements OnItemReselectedL
                 fragment = new fragment_explore();
                 break;
             case 1:
-                fragment = new fragment_inbox();
-                break;
-            case 2:
                 fragment = new fragment_shop();
+
+
                 break;
-            case 3:
+//            case 2:
+//                fragment = new fragment_shop();
+//                break;
+            case 2:
                 fragment = new fragment_profil();
                 break;
 

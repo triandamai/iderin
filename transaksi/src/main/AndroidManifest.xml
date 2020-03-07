@@ -14,7 +14,7 @@
     </dist:module>
 
     <application>
-        <activity android:name=".Checkout"></activity>
+        <activity android:name=".Checkout" />
     </application>
 
 </manifest>

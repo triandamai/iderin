@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.transaksi_model;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.iderin.adapters.Adapter_transaksi;
 import com.pmo.iderin.R;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
@@ -36,7 +39,7 @@ public class fragment_shop extends Fragment {
     ShimmerRecyclerView shimmerRecyclerShop;
 
     private List<transaksi_model> list = new ArrayList<>();
-
+    private Adapter_transaksi adapter;
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -90,6 +93,10 @@ public class fragment_shop extends Fragment {
                                 assert transaksiModel != null;
                                 list.add(transaksiModel);
                             }
+                            adapter = new Adapter_transaksi(getContext(), list);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+                            shimmerRecyclerShop.setLayoutManager(layoutManager);
+                            shimmerRecyclerShop.setAdapter(adapter);
                         }
                     }
 

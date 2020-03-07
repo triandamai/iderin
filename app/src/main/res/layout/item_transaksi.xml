@@ -3,46 +3,54 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:background="#ffff"
-    android:layout_height="match_parent"
+    android:id="@+id/ly_parent"
+    android:layout_marginStart="@dimen/sp_16"
+    android:layout_marginEnd="@dimen/sp_16"
+    android:layout_height="wrap_content"
     android:paddingBottom="5dp">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/bg_auth_jpg" />
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_judul_toko"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="Alamat Rumah" />
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_alamat_lengkap"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_transaksi"
+            android:layout_gravity="start"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="3"
-            android:layout_margin="5dp"
-            android:textSize="16sp"
-            android:text="Jl.pinus 2 no 4 rt 02 rw no 8 Perumahan bumi tanjung elok purwokerto selatan banyumas" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Alamat Rumah" />
 
+        <TextView
+            android:id="@+id/tv_penjual"
+            android:layout_gravity="start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Penjual" />
+
+        <TextView
+            android:id="@+id/tv_metode"
+            android:layout_gravity="start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Penjual" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/sp_16"
+            android:background="@drawable/button_primary"
+            android:textColor="#ffff"
+            android:text="Status" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
