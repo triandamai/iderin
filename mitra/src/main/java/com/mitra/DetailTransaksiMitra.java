@@ -1,9 +1,10 @@
-package com.iderin;
+package com.mitra;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.iderin.adapters.Adapter_detail_transaksi;
-import com.pmo.iderin.R;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
 import java.util.ArrayList;
@@ -31,8 +31,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class DetailTransaksi extends AppCompatActivity {
+public class DetailTransaksiMitra extends AppCompatActivity {
+
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -46,20 +48,25 @@ public class DetailTransaksi extends AppCompatActivity {
     TextView tvTotal;
     @BindView(R.id.tv_status)
     TextView tvStatus;
+    @BindView(R.id.tv_btn_selesai)
+    TextView tvBtnSelesai;
+
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private String idtransaksi = "";
     private List<detail_cart_model> list = new ArrayList<>();
-    private Context context = DetailTransaksi.this;
+    private Context context = DetailTransaksiMitra.this;
     private Adapter_detail_transaksi adapter;
+    private int status = 1; //1 == dipesan 2 = fiterima 3 = selesa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_transaksi);
+        setContentView(com.mitra.R.layout.activity_detail_transasksi_mitra);
         ButterKnife.bind(this);
+
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             idtransaksi = intent.getStringExtra("idtransaksi");
@@ -72,8 +79,8 @@ public class DetailTransaksi extends AppCompatActivity {
     }
 
     private void getItemTransaksi() {
-        databaseReference.child(getString(R.string.CHILD_TRANSAKSI))
-                .child(getString(R.string.CHILD_TRANSAKSI_DETAIL))
+        databaseReference.child(getString(com.pmo.iderin.R.string.CHILD_TRANSAKSI))
+                .child(getString(com.pmo.iderin.R.string.CHILD_TRANSAKSI_DETAIL))
                 .child(idtransaksi)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -101,17 +108,30 @@ public class DetailTransaksi extends AppCompatActivity {
     }
 
     private void getDataTrans() {
-        databaseReference.child(getString(R.string.CHILD_TRANSAKSI))
-                .child(getString(R.string.CHILD_TRANSAKSI))
+        databaseReference.child(getString(com.pmo.iderin.R.string.CHILD_TRANSAKSI))
+                .child(getString(com.pmo.iderin.R.string.CHILD_TRANSAKSI))
                 .child(idtransaksi)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             transaksi_model trmodel = dataSnapshot.getValue(transaksi_model.class);
-                            tvTotal.setText("Total Pembayaran Rp " + trmodel.getTotal());
-                            tvMetodePembayaran.setText("Metode pembayaran" + trmodel.getMetode_pembayaran());
-                            tvStatus.setText(trmodel.getStatus());
+                            tvTotal.setText("Total Pembayaran =  Rp " + trmodel.getTotal());
+                            tvMetodePembayaran.setText("Metode pembayaran = " + trmodel.getMetode_pembayaran());
+
+                            if (trmodel.getStatus().toString().equalsIgnoreCase("dipesan")) {
+                                tvStatus.setText("Pesanan Baru");
+                                status = 1;
+                                tvBtnSelesai.setText("Proses Pesananan");
+                            } else if (trmodel.getStatus().toString().equalsIgnoreCase("diterima")) {
+                                tvStatus.setText("Sedang Diprooses");
+                                tvBtnSelesai.setText("Selesaikan Pesanan");
+                                status = 2;
+                            } else if (trmodel.getStatus().toString().equalsIgnoreCase("selesai")) {
+                                tvStatus.setText("Selesai");
+                                tvBtnSelesai.setVisibility(View.GONE);
+                                status = 3;
+                            }
                         }
                     }
 
@@ -123,4 +143,27 @@ public class DetailTransaksi extends AppCompatActivity {
     }
 
 
+    @OnClick({R.id.tv_btn_selesai})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_btn_selesai:
+                if (status == 1) {
+                    Log.e("IDERIN", "status 1");
+                    databaseReference.child(getString(R.string.CHILD_TRANSAKSI))
+                            .child(getString(R.string.CHILD_TRANSAKSI))
+                            .child(idtransaksi)
+                            .child("status")
+                            .setValue("diterima");
+                    status = 2;
+                } else if (status == 2) {
+                    Log.e("IDERIN", "2");
+                    startActivity(new Intent(context, Selesaikan_Transaksi.class));
+
+                } else if (status == 3) {
+
+                }
+                break;
+
+        }
+    }
 }

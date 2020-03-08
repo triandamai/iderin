@@ -51,6 +51,8 @@ public class AllBarang extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_barang);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Semua Sayuran");
         shimmerRecyclerSemuabarang.showShimmer();
 
         Intent intent = getIntent();

@@ -8,11 +8,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.transaksi_model;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -36,6 +39,10 @@ public class fragment_transaksi extends Fragment {
 
     @BindView(R.id.shimmer_recycler_transaksi)
     ShimmerRecyclerView shimmerRecyclerTransaksi;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.appbar)
+    AppBarLayout appbar;
     private Unbinder unbinder;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -55,6 +62,11 @@ public class fragment_transaksi extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_transaksi, container, false);
         unbinder = ButterKnife.bind(this, v);
+
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Transaksi");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Transaksi masuk");
+
         shimmerRecyclerTransaksi.showShimmer();
         getTransaksi();
         listenTransaksi();

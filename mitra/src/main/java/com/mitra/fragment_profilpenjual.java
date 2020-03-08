@@ -112,7 +112,7 @@ public class fragment_profilpenjual extends Fragment {
                 break;
             case R.id.tv_btn_edit_profil:
                 Intent addprofil = new Intent();
-                addprofil.setClassName(getContext(), "com.profil.AddProfil");
+                addprofil.setClassName(getContext(), "com.toko.MyToko");
                 getContext().startActivity(addprofil);
 
                 break;

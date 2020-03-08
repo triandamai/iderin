@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,8 +34,8 @@ import butterknife.ButterKnife;
 
 public class fragment_shop extends Fragment {
 
-    @BindView(R.id.toolbar_alamat)
-    Toolbar toolbarAlamat;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.shimmer_recycler_shop)
     ShimmerRecyclerView shimmerRecyclerShop;
 
@@ -70,6 +71,10 @@ public class fragment_shop extends Fragment {
         // Inflate the layout for this fragment
         View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_shop, container, false);
         ButterKnife.bind(this, v);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pesanan");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Daftar Pesanan Anda");
+
         shimmerRecyclerShop.showShimmer();
         getTransaksi();
 

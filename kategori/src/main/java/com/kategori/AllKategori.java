@@ -49,6 +49,8 @@ public class AllKategori extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_kategori);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Semua Kategori");
         getAllKategori();
     }
 

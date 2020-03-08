@@ -81,12 +81,12 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/sp_16"
-        android:layout_marginStart="5dp"
-        android:text="Hapus"
-        android:textColor="#ffff"
-        android:background="@drawable/button_danger" />
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:padding="@dimen/sp_16"-->
+    <!--        android:layout_marginStart="5dp"-->
+    <!--        android:text="Hapus"-->
+    <!--        android:textColor="#ffff"-->
+    <!--        android:background="@drawable/button_danger" />-->
 </LinearLayout>

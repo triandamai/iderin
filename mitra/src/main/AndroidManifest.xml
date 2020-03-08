@@ -14,7 +14,9 @@
     </dist:module>
 
     <application>
-        <activity android:name=".Mitra"></activity>
+        <activity android:name=".Selesaikan_Transaksi"></activity>
+        <activity android:name=".DetailTransaksiMitra" />
+        <activity android:name=".Mitra" />
     </application>
 
 </manifest>

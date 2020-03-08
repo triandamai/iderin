@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:background="#ffff"
     android:id="@+id/ly_parent"
-    android:layout_marginStart="@dimen/sp_16"
-    android:layout_marginEnd="@dimen/sp_16"
     android:layout_height="wrap_content"
     android:paddingBottom="5dp">
 

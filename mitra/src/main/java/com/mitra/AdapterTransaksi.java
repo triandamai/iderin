@@ -1,6 +1,7 @@
 package com.mitra;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,10 +40,11 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         transaksi_model transaksiModel = transaksi_models.get(position);
         holder.tvTransaksi.setText("KOde:" + transaksiModel.getMetode_pembayaran());
+
         holder.lyParent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                context.startActivity(new Intent(context, DetailTransaksiMitra.class).putExtra("idtransaksi", transaksiModel.getIdtransaksi()));
             }
         });
     }
