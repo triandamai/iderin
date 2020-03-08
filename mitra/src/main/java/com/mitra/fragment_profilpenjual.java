@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pmo.iderin.BuildConfig;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -54,6 +55,7 @@ public class fragment_profilpenjual extends Fragment {
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private AdapterBarang adapter;
+    private onProfilListener listener;
 
 
     public fragment_profilpenjual() {
@@ -88,7 +90,7 @@ public class fragment_profilpenjual extends Fragment {
                             model.setUid(dataSnapshot.getKey());
                             assert model != null;
                             tvNama.setText(model.getNama().toString());
-                            tvDetail.setText("+62" + model.getNohp());
+                            tvDetail.setText( model.getNohp());
                             Picasso.get().load(model.getFoto().toString()).into(profileImage);
                         }
                     }
@@ -117,12 +119,19 @@ public class fragment_profilpenjual extends Fragment {
 
                 break;
             case R.id.ly_btn_manage_address:
+                Intent alamat = new Intent();
+                alamat.setClassName(getContext(), "com.profil.AturAlamat");
+                startActivity(alamat);
                 break;
             case R.id.ly_btn_iderpay:
+                Intent keiderpay = new Intent();
+                keiderpay.setClassName(BuildConfig.APPLICATION_ID, "com.iderpay.Iderpay");
+                startActivity(keiderpay);
                 break;
             case R.id.ly_btn_help:
                 break;
             case R.id.ly_btn_logout:
+                listener.onSignout();
                 break;
             case R.id.ly_btn_mytoko:
                 Intent addtoko = new Intent();
@@ -131,5 +140,11 @@ public class fragment_profilpenjual extends Fragment {
                 break;
 
         }
+    }
+    public void setOnProfillistener(onProfilListener lis){
+        this.listener= lis;
+    }
+    public interface onProfilListener{
+        void onSignout();
     }
 }

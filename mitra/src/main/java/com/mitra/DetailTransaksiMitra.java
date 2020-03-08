@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.iderin.Helpers.Alert;
 import com.iderin.adapters.Adapter_detail_transaksi;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
@@ -158,9 +160,9 @@ public class DetailTransaksiMitra extends AppCompatActivity {
                 } else if (status == 2) {
                     Log.e("IDERIN", "2");
                     startActivity(new Intent(context, Selesaikan_Transaksi.class));
-
+                    finish();
                 } else if (status == 3) {
-
+                    new Alert(context).toast("Pesanan sudah selesai", Toast.LENGTH_LONG);
                 }
                 break;
 

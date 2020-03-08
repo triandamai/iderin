@@ -12,6 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.models.transaksi_model;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,9 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.MyVi
     private Context context;
     private List<transaksi_model> transaksi_models = new ArrayList<>();
 
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     public AdapterTransaksi(Context context, List<transaksi_model> data) {
         this.context = context;
         this.transaksi_models = data;
@@ -39,7 +46,10 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         transaksi_model transaksiModel = transaksi_models.get(position);
-        holder.tvTransaksi.setText("KOde:" + transaksiModel.getMetode_pembayaran());
+        holder.tvTransaksi.setText("Kode:" + transaksiModel.getMetode_pembayaran());
+//        databaseReference.child(context.getString(R.string.CHILD_AKUN))
+//                .child(context.getString(R.string.CHILD_AKUN_PROFIL))
+//                .child(transaksiModel.)
 
         holder.lyParent.setOnClickListener(new View.OnClickListener() {
             @Override

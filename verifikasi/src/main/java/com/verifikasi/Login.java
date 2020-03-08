@@ -190,7 +190,7 @@ public class Login extends AppCompatActivity {
         databaseReference.child(getResources().getString(R.string.CHILD_AKUN))
                 .child(getResources().getString(R.string.CHILD_AKUN_PROFIL))
                 .orderByChild("nohp")
-                .equalTo(etNohp.getText().toString())
+                .equalTo("+62"+etNohp.getText().toString())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -56,6 +56,7 @@ public class Adapter_transaksi extends RecyclerView.Adapter<Adapter_transaksi.My
         transaksi_model model = list.get(position);
         holder.tvTransaksi.setText("kode : " + model.getIdtransaksi());
         holder.tvMetode.setText(model.getMetode_pembayaran());
+
         databaseReference.child(context.getString(R.string.CHILD_AKUN))
                 .child(context.getString(R.string.CHILD_AKUN_TOKO))
                 .child(model.getIdpenjual())
