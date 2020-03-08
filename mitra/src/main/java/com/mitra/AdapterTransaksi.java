@@ -11,11 +11,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.core.models.profil_model;
 import com.core.models.transaksi_model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +51,29 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         transaksi_model transaksiModel = transaksi_models.get(position);
         holder.tvTransaksi.setText("Kode:" + transaksiModel.getMetode_pembayaran());
-//        databaseReference.child(context.getString(R.string.CHILD_AKUN))
-//                .child(context.getString(R.string.CHILD_AKUN_PROFIL))
-//                .child(transaksiModel.)
 
+        databaseReference.child(context.getString(R.string.CHILD_AKUN))
+                .child(context.getString(R.string.CHILD_AKUN_PROFIL))
+                .child(transaksiModel.getIdpembeli()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    profil_model model = dataSnapshot.getValue(profil_model.class);
+                    assert model != null;
+                    holder.tvPenjual.setText(model.getNama());
+
+
+                }else {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        holder.tvMetode.setText("Rp "+transaksiModel.getTotal());
         holder.lyParent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
