@@ -50,21 +50,16 @@ public class fragment_explore extends Fragment implements ImageListener {
     ShimmerRecyclerView shimmerRecyclerKategori;
     @BindView(R.id.shimmer_recycler_terlaris)
     ShimmerRecyclerView shimmerRecyclerTerlaris;
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.appbar)
     AppBarLayout appbar;
     @BindView(R.id.carouselView)
     CarouselView carouselView;
-    //    @BindView(R.id.shimmer_recycler_toko)
-//    ShimmerRecyclerView shimmerRecyclerToko;
     @BindView(R.id.tv_btn_semua_kategori)
     TextView tvBtnSemuaKategori;
     @BindView(R.id.tv_btn_semua_barang)
-//    TextView tvBtnSemuaBarang;
-//    @BindView(R.id.tv_btn_semuatoko)
-            TextView tvBtnSemuatoko;
+    TextView tvBtnSemuatoko;
     // TODO: Rename parameter arguments, choose names that match
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

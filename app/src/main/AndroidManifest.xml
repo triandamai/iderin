@@ -27,7 +27,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="com.iderin.DetailTransaksi"></activity>
         <activity android:name="com.iderin.DetailToko" /> <!-- <activity -->
-  
+
         <activity android:name="com.iderin.Init">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
