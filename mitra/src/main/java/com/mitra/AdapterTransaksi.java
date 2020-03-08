@@ -45,6 +45,7 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.MyVi
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(context, DetailTransaksiMitra.class).putExtra("idtransaksi", transaksiModel.getIdtransaksi()));
+                
             }
         });
     }
